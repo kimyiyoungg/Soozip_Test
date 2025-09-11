@@ -14,12 +14,12 @@
 }
 
 html, body, #root {
-  height: 100%;
+  /* height: 100%; */
   margin: 0;
   display: flex;
   justify-content: center; /* 가로 중앙 */
   align-items: center;     /* 세로 중앙 */
-  background: #eee;      /* 확인용 (나중에 지워도 됨) */
+  background: #eee;    /*  확인용 (나중에 지워도 됨) */
 }
 
 a {
