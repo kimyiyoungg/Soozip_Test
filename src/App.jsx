@@ -4,6 +4,8 @@ import { useState } from 'react'
 
 import './App.css'
 import StylingTypePage from './StylingTypePage'
+import TestResultPage from './TestResultPage'
+import StylingInfoPage from './StylingInfoPage'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -31,7 +33,9 @@ function App() {
         Click on the Vite and React logos to learn more
       </p> */}
       <div className="App">
-        <StylingTypePage/>
+        {/* <StylingTypePage/> */}
+        {/* <TestResultPage/> */}
+        <StylingInfoPage/>
       </div>
     </>
   )
