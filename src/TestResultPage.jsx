@@ -1,4 +1,9 @@
+import { useNavigate } from "react-router-dom";
+
 export default function TestResultPage() {
+  
+  const navigate = useNavigate();
+
   return (
     <div
       style={{
@@ -76,14 +81,14 @@ export default function TestResultPage() {
         
 
         {/* 이미지 저장 / 테스트 공유 */}
-        <div style={{ display: "flex", justifyContent: "center", flexDirection: "column", gap: 5, marginBottom: 20 }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: 5, marginBottom: 20 }}>
           <p
             style={{
               fontSize: 16,
               fontWeight: 700,
               color: "#000",
               cursor: "pointer",
-              margin: 0
+              margin: 0,
             }}
             onClick={() => alert("이미지 저장 기능 준비 중입니다")}
             onMouseEnter={(e) => (e.currentTarget.style.color = "#555")}
@@ -206,6 +211,7 @@ export default function TestResultPage() {
             justifyContent: "center",
             cursor: "pointer",
           }}
+          onClick={() => navigate("/room-counsult")}
         >
           <p style={{ fontSize: 16, color: "#fff" }}>홈스타일링 상담 알아보기</p>
         </div>
@@ -213,8 +219,6 @@ export default function TestResultPage() {
     </div>
   );
 }
-
-
 
 
 // // 자리 박은 버전

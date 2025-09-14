@@ -10,8 +10,8 @@ export default function App() {
   const navigate = useNavigate();
   
   return (
-
     <div>
-      <RoomConsult/></div>
+      <TestResultPage/>
+    </div> 
   );
 }
