@@ -69,7 +69,7 @@ export default function StylingInfoPage() {
             >
             {/* 이미지: 왼쪽에 기울어지도록 position 조정 */}
             <img
-                src="img_3285-1.png"
+                src="src/assets/bear3.png"
                 style={{
                 width: 91.14,
                 height: 91.14,
@@ -101,7 +101,7 @@ export default function StylingInfoPage() {
         </p>
         {/* 이미지 */}
         <img
-          src="image-3.png"
+          src="src/assets/image 3.png"
           style={{
             width: 322,
             height: 211,
@@ -227,9 +227,12 @@ export default function StylingInfoPage() {
         </svg>
 
         {/* 상담톡 */}
-        <p style={{ fontSize: 16, textAlign: "center", color: "#2f2f2f", marginTop: 20 }}>
-          <u>1:1 상담톡 연결하기</u> ▶
-        </p>
+        <a href="https://open.kakao.com/o/sHCcxOnh">
+          <p style={{ fontSize: 16, textAlign: "center", color: "#2f2f2f", marginTop: 20 }}>
+            <u>1:1 상담톡 연결하기</u> ▶
+          </p>
+        </a>
+        
       </div>
     </div>
   );
