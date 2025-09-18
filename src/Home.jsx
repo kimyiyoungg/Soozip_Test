@@ -24,6 +24,7 @@ export default function Home() {
           나의 집꾸 스타일은?
         </p>
         <p style={{ fontSize: 20, fontWeight: 600, color: "#000" }}>
+          
           내가 어떤 공간을 좋아하는지 알아보세요.
         </p>
       </div>
