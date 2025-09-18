@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom"; // ✅ 추가
-import Home from './Home';
+;
 export default function RoombtiTest() {
   const [selected, setSelected] = useState(null); // 선택 상태 저장
 
@@ -51,7 +51,7 @@ export default function RoombtiTest() {
         }}
       />
     <svg
-      onClick={() => navigate("/Home")}
+      onClick={() => navigate("/TestResult")}
       style={{ cursor: "pointer", position: "absolute", left: "365.5px", top: "67.5px" }}
       width={14}
       height={16}
@@ -67,12 +67,13 @@ export default function RoombtiTest() {
     </svg>
 
       <svg
+      onClick={() => navigate("/")}
         width={14}
         height={16}
         viewBox="0 0 14 16"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        style={{ position: "absolute", left: "38.5px", top: "67.5px" }}
+        style={{ cursor: "pointer", position: "absolute", left: "38.5px", top: "67.5px" }}
         preserveAspectRatio="none"
       >
         <path

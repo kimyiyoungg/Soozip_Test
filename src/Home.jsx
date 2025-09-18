@@ -30,7 +30,7 @@ export default function Home() {
       </div>
 
       <img
-        src="src/assets/IMG_3285 1.png"
+        src="src/assets/bear3.png"
         alt="main"
         style={{
           width: 250,
