@@ -1,5 +1,12 @@
+
+import { useState } from "react";
+import { useNavigate } from "react-router-dom"; // ✅ 추가
+
+
 export default function RoomCounsult() {
-  return (
+ const [selected, setSelected] = useState(null); // 선택 상태 저장
+ const navigate = useNavigate(); 
+ return (
     <div
       style={{
         width: 408,
@@ -28,7 +35,7 @@ export default function RoomCounsult() {
       </div>
 
       {/* 이미지 */}
-      <img
+       <img
         src="src/assets/image 3.png"
         alt="상담"
         style={{
@@ -66,7 +73,7 @@ export default function RoomCounsult() {
             background: "#d9d9d9",
           }}
         />
-      </div>
+      </div> 
 
       {/* 카드 리스트 */}
       <div
@@ -80,9 +87,14 @@ export default function RoomCounsult() {
       >
         {/* 카드 1 */}
         <div
+          onClick={() => {
+    setSelected(1);
+    window.location.href = "https://open.kakao.com/o/sHCcxOnh"; // 원하는 사이트 주소
+  }}
           style={{
             background: "#fff",
-            border: "1px solid #ddd9d9",
+            border: `2px solid ${selected === 1 ? "#fe6a0f" : "#ddd9d9"}`,
+            cursor: "pointer",
             borderRadius: 12,
             padding: "1rem",
             display: "flex",
@@ -100,11 +112,16 @@ export default function RoomCounsult() {
         </div>
 
         {/* 카드 2 */}
-        <div
+        <div onClick={() => {
+    setSelected(2);
+    window.location.href = "https://www.instagram.com/soozip.01/"; // 원하는 사이트 주소
+  }}
           style={{
             background: "#fff",
-            border: "1px solid #ddd9d9",
+            border: `2px solid ${selected === 2 ? "#fe6a0f" : "#ddd9d9"}`,
+            cursor: "pointer",
             borderRadius: 12,
+
             padding: "1rem",
             display: "flex",
             justifyContent: "space-between",
@@ -121,10 +138,15 @@ export default function RoomCounsult() {
         </div>
 
         {/* 카드 3 */}
-        <div
+        <div onClick={() => {
+    setSelected(3);
+    navigate("/styling-info")
+  }} 
+       
           style={{
             background: "#fff",
-            border: "1px solid #ddd9d9",
+           border: `2px solid ${selected === 3 ? "#fe6a0f" : "#ddd9d9"}`,
+            cursor: "pointer",
             borderRadius: 12,
             padding: "1rem",
             display: "flex",
