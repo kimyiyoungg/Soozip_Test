@@ -140,7 +140,7 @@ export default function RoomCounsult() {
         {/* 카드 3 */}
         <div onClick={() => {
     setSelected(3);
-    navigate("/styling-info")
+    navigate("/styling-type")
   }} 
        
           style={{

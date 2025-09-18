@@ -1,8 +1,22 @@
 #root {
-  max-width: 1280px;
+  /* PC에서는 408px 고정 */
+  max-width: 408px;
   margin: 0 auto;
-  padding: 2rem;
   text-align: center;
+  background: #fbf2d5; /* 기존 inline 배경색 옮김 */
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* 모바일 (세로/가로 둘 다) → 꽉 차지만 여백 */
+@media screen and (max-width: 768px) {
+  #root {
+    max-width: 100vw;
+    width: 100vw;
+  /*padding: 0 16px; 좌우 여백*/
+    box-sizing: border-box;
+  }
 }
 
 .logo {

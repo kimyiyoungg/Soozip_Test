@@ -6,20 +6,45 @@ export default function StylingTypePage() {
 
     <div
       style={{
-        // width: 408,
+        width: 408,
         // minHeight: 852,
-        width: "100%",         // 기기에 맞게 가로 폭 자동
-        maxWidth: 408,         // PC에서도 모바일처럼 보이게 제한
-        height: "100dvh",      // 기기 높이 100% (주소창 대응)
+        // width: "100%",         // 기기에 맞게 가로 폭 자동
+        // maxWidth: 408,         // PC에서도 모바일처럼 보이게 제한
+        // height: "100dvh",      // 기기 높이 100% (주소창 대응)
+        // background: "#fbf2d5",
+        // padding: "40px 20px",
+        // display: "flex",
+        // overflow: "hidden",    // 스크롤 제거
+        // flexDirection: "column",
+        // alignItems: "center",
+        // gap: 20, // 요소 사이 간격
+        height: "100vh",
         background: "#fbf2d5",
-        padding: "40px 20px",
         display: "flex",
-        overflow: "hidden",    // 스크롤 제거
         flexDirection: "column",
+        position: "relative",
         alignItems: "center",
+        // padding: "40px 20px",
         gap: 20, // 요소 사이 간격
       }}
     >
+
+      <svg
+        onClick={() => navigate("/TestResult")}
+        width={14}
+        height={16}
+        viewBox="0 0 14 16"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        style={{ position: "absolute", left: "38.5px", top: "67.5px" }}
+        preserveAspectRatio="none"
+      >
+        <path
+          d="M0.292893 7.29289C-0.0976314 7.68342 -0.0976315 8.31658 0.292893 8.70711L6.65685 15.0711C7.04738 15.4616 7.68054 15.4616 8.07107 15.0711C8.46159 14.6805 8.46159 14.0474 8.07107 13.6569L2.41421 8L8.07107 2.34315C8.46159 1.95262 8.46159 1.31946 8.07107 0.928932C7.68054 0.538407 7.04738 0.538407 6.65685 0.928932L0.292893 7.29289ZM14 8L14 7L1 7L1 8L1 9L14 9L14 8Z"
+          fill="black"
+          fillOpacity="0.42"
+        />
+      </svg>
 
       {/* 헤더 */}
       <div
