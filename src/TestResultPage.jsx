@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-
+// import "./App.css"; // #root 스타일 적용
 export default function TestResultPage() {
   
   const navigate = useNavigate();
@@ -8,8 +8,19 @@ export default function TestResultPage() {
     <div
       style={{
         width: 408,
-        minHeight: 1500, // 스크롤 영역 높이 고정
-        margin: "0 auto",
+        // width: "100%",         // 기기에 맞게 가로 폭 자동
+        // maxWidth: 408,         // PC에서도 모바일처럼 보이게 제한
+        // height: "100dvh",      // 기기 높이 100% (주소창 대응)
+        // minHeight: 1500, // 스크롤 영역 높이 고정
+        // margin: "0 auto",
+        // // padding: "40px 20px",
+        // background: "#fbf2d5",
+        // display: "flex",
+        // flexDirection: "column",
+        // position: "relative",
+        // width: "100%",
+        height: "100vh",
+        minHeight: 1500,
         background: "#fbf2d5",
         display: "flex",
         flexDirection: "column",
@@ -39,6 +50,22 @@ export default function TestResultPage() {
             style={{ width: 148, height: 96, objectFit: "cover" }}
           />
         </div> */}
+        <svg
+          onClick={() => navigate("/")}
+          width={14}
+          height={16}
+          viewBox="0 0 14 16"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          style={{ position: "absolute", left: "38.5px", top: "67.5px" }}
+          preserveAspectRatio="none"
+        >
+          <path
+            d="M0.292893 7.29289C-0.0976314 7.68342 -0.0976315 8.31658 0.292893 8.70711L6.65685 15.0711C7.04738 15.4616 7.68054 15.4616 8.07107 15.0711C8.46159 14.6805 8.46159 14.0474 8.07107 13.6569L2.41421 8L8.07107 2.34315C8.46159 1.95262 8.46159 1.31946 8.07107 0.928932C7.68054 0.538407 7.04738 0.538407 6.65685 0.928932L0.292893 7.29289ZM14 8L14 7L1 7L1 8L1 9L14 9L14 8Z"
+            fill="black"
+            fillOpacity="0.42"
+          />
+        </svg>
        
 
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", padding: "0 25px", }}>
@@ -140,12 +167,24 @@ export default function TestResultPage() {
         </p>
 
 
-      <div style={{ display: "flex", justifyContent: "space-between", padding: "0 25px" }}>
-        {/* 첫 번째 카드 + 글자 */}
+      {/* <div style={{ display: "flex", justifyContent: "space-between", padding: "0 25px" }}> */}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          padding: "0 25px",
+          maxWidth: "408px",
+          margin: "0 auto",
+        }}
+      >
+        {/* 첫 번째 카드 + 글자
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
           <svg
-            width={164}
-            height={164}
+            // width={164}
+            // height={164}
+            // viewBox="0 0 164 164"
+            width="100%"    // 부모 기준 비율 적용
+            height="auto"   // 정사각형 유지 위해 viewBox 활용
             viewBox="0 0 164 164"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -157,13 +196,46 @@ export default function TestResultPage() {
             />
           </svg>
           <p style={{ fontSize: 16, textAlign: "center", color: "#000", marginTop: 8 }}>AAA 스타일</p>
+        </div> */}
+         {/* 첫 번째 카드 */}
+        <div
+          style={{
+            flex: "0 0 45%", // 부모 기준 약 45%
+            maxWidth: "45%",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <svg
+              width="100%"     // 부모 크기에 맞춤
+              height="auto"
+              viewBox="0 0 164 164"
+              xmlns="http://www.w3.org/2000/svg"
+              preserveAspectRatio="xMidYMid meet"
+            >
+              <path
+                d="M0 20C0 8.95 8.95 0 20 0H144C155.05 0 164 8.95 164 20V144C164 155.05 155.05 164 144 164H20C8.95 164 0 155.05 0 144V20Z"
+                fill="#D9D9D9"
+              />
+            </svg>
+            <p style={{ fontSize: 16, textAlign: "center", color: "#000", marginTop: 8 }}>AAA 스타일</p>
+          </div>
         </div>
 
+
         {/* 두 번째 카드 + 글자 */}
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+        {/* <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
           <svg
-            width={164}
-            height={164}
+            // width={164}
+            // height={164}
+            // viewBox="0 0 164 164"
+            width="100%"    // 부모 기준 비율 적용
+            height="auto"  
             viewBox="0 0 164 164"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -175,7 +247,36 @@ export default function TestResultPage() {
             />
           </svg>
           <p style={{ fontSize: 16, textAlign: "center", color: "#000", marginTop: 8 }}>BBB 스타일</p>
-        </div>
+        </div> */}
+          <div
+            style={{
+              flex: "0 0 45%",
+              maxWidth: "45%",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
+              <svg
+                width="100%"
+                height="auto"
+                viewBox="0 0 164 164"
+                xmlns="http://www.w3.org/2000/svg"
+                preserveAspectRatio="xMidYMid meet"
+              >
+                <path
+                  d="M0 20C0 8.95 8.95 0 20 0H144C155.05 0 164 8.95 164 20V144C164 155.05 155.05 164 144 164H20C8.95 164 0 155.05 0 144V20Z"
+                  fill="#D9D9D9"
+                />
+              </svg>
+              <p style={{ fontSize: 16, textAlign: "center", color: "#000", marginTop: 8 }}>BBB 스타일</p>
+            </div>
+          </div>
+        
       </div>
 
     </div>
@@ -184,8 +285,11 @@ export default function TestResultPage() {
       {/* ✅ 하단 고정 영역 */}
       <div
         style={{
-          width: 408,
+          // width: 408,
+          width: "100%",         // 기기에 맞게 가로 폭 자동
+          maxWidth: 408,         // PC에서도 모바일처럼 보이게 제한
           height: 119,
+          
           position: "fixed",
           bottom: 0,
           background: "#fff",

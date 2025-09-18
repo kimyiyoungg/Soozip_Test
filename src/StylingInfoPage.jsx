@@ -3,6 +3,9 @@ export default function StylingInfoPage() {
     <div
       style={{
         width: 408,
+        // 기기에 맞게 가로 폭 자동
+        // maxWidth: 408,         // PC에서도 모바일처럼 보이게 제한
+        height: "100dvh",      // 기기 높이 100% (주소창 대응)
         minHeight: 2100,
         background: "#fff",
         display: "flex",

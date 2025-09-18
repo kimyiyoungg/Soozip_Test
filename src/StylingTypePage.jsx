@@ -6,17 +6,25 @@ export default function StylingTypePage() {
 
     <div
       style={{
-        // width: 408,
+        width: 408,
         // minHeight: 852,
-        width: "100%",         // 기기에 맞게 가로 폭 자동
-        maxWidth: 408,         // PC에서도 모바일처럼 보이게 제한
-        height: "100dvh",      // 기기 높이 100% (주소창 대응)
+        // width: "100%",         // 기기에 맞게 가로 폭 자동
+        // maxWidth: 408,         // PC에서도 모바일처럼 보이게 제한
+        // height: "100dvh",      // 기기 높이 100% (주소창 대응)
+        // background: "#fbf2d5",
+        // padding: "40px 20px",
+        // display: "flex",
+        // overflow: "hidden",    // 스크롤 제거
+        // flexDirection: "column",
+        // alignItems: "center",
+        // gap: 20, // 요소 사이 간격
+        height: "100vh",
         background: "#fbf2d5",
-        padding: "40px 20px",
         display: "flex",
-        overflow: "hidden",    // 스크롤 제거
         flexDirection: "column",
+        position: "relative",
         alignItems: "center",
+        // padding: "40px 20px",
         gap: 20, // 요소 사이 간격
       }}
     >
