@@ -14,7 +14,7 @@ export default function TestResultPage() {
       {/* ✅ 스크롤 되는 영역 */}
       <div style={{ flex: 1, padding: "150px 0 0 0", position: "relative" }}>
        
-{/*         
+       
         <p
           style={{
             fontSize: 16,
@@ -33,7 +33,7 @@ export default function TestResultPage() {
             src="src/assets/bear2.png"
             style={{ width: 148, height: 96, objectFit: "cover" }}
           />
-        </div> */}
+        </div> 
        
 
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", padding: "0 25px", }}>
