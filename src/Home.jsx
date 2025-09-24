@@ -8,6 +8,7 @@ export default function Home() {
     <div
       style={{
         width: 408,
+        minHeight: 852,
         height: "100dvh",//새로로 꽉차게 ,dvh는 주소창 높이를 제외한 실제 보이는 영역
         display: "flex",
         flexDirection: "column",

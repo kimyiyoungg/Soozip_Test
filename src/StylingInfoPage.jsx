@@ -12,8 +12,10 @@ export default function StylingInfoPage() {
         flexDirection: "column",
         alignItems: "center",
         overflowX: "hidden",
+        gap: 20,
       }}
     >
+      
 
       {/* 상단 배경 */}
       <div
@@ -29,6 +31,7 @@ export default function StylingInfoPage() {
           paddingTop: 36,
         }}
       >
+        
         {/* 상단 SVG */}
       <div style={{ width: "100%", display: "flex", justifyContent: "flex-start", paddingLeft: 38.5, paddingTop: 67.5 }}>
         <svg

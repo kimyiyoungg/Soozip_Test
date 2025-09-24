@@ -1,36 +1,26 @@
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 export default function StylingTypePage() {
+  const [activeIndex, setActiveIndex] = useState(null);
   const navigate = useNavigate();
   return (
 
     <div
       style={{
         width: 408,
-        // minHeight: 852,
-        // width: "100%",         // 기기에 맞게 가로 폭 자동
-        // maxWidth: 408,         // PC에서도 모바일처럼 보이게 제한
-        // height: "100dvh",      // 기기 높이 100% (주소창 대응)
-        // background: "#fbf2d5",
-        // padding: "40px 20px",
-        // display: "flex",
-        // overflow: "hidden",    // 스크롤 제거
-        // flexDirection: "column",
-        // alignItems: "center",
-        // gap: 20, // 요소 사이 간격
-        height: "100vh",
+        height: "100dvh",
         background: "#fbf2d5",
         display: "flex",
         flexDirection: "column",
         position: "relative",
         alignItems: "center",
-        // padding: "40px 20px",
         gap: 20, // 요소 사이 간격
       }}
     >
 
       <svg
-        onClick={() => navigate("/TestResult")}
+        onClick={() => navigate("/room-counsult")}
         width={14}
         height={16}
         viewBox="0 0 14 16"
@@ -59,7 +49,7 @@ export default function StylingTypePage() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          marginTop: 60,
+          marginTop: 100,
         }}
       >
         스타일링
@@ -81,19 +71,28 @@ export default function StylingTypePage() {
 
       {/* === 배치 솔루션 === */}
       <button
-        onClick={() => navigate("/styling-info")}
+        onClick={() => navigate("/setup-styling")}
+        onMouseEnter={() => setActiveIndex(0)}
+        onMouseDown={() => setActiveIndex(0)}
+        onMouseUp={() => setActiveIndex(0)}
+        onMouseLeave={() => setActiveIndex(null)}
         style={{
           marginTop: 30,
-          width: 312,
+          // width: 312,
+          gap: "1rem",
+          width: "100%",
+          maxWidth: 350,
           height: 100,
           borderRadius: 12,
           background: "#fff",
-          border: "1px solid #ddd9d9",
+          // border: "2px solid #ddd9d9",
+          border: activeIndex === 0 ? "2px solid #fe6a0f" : "2px solid #ddd9d9",
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
           padding: "10px 20px",
           cursor: "pointer",
+          outline: "none", // ✅ 브라우저 기본 파란 테두리 제거
         }}
       >
         <div style={{ textAlign: "left" }}>
@@ -102,22 +101,32 @@ export default function StylingTypePage() {
           </p>
           <p style={{ marginTop: 8, fontSize: 20, fontWeight: 600 ,color: "#000"}}>배치 솔루션</p>
         </div>
-        <img src="src/assets/bear.jpg" alt="bear" width="50" height="50" />
+        <img src="src/assets/bear.jpg" alt="bear" width="70" height="70" />
       </button>
 
       {/* === 소품 솔루션 버튼 === */}
       <button
+        onClick={() => navigate("/styling-info")}
+        onMouseDown={() => setActiveIndex(1)}
+        onMouseEnter={() => setActiveIndex(1)}
+        onMouseUp={() => setActiveIndex(null)}
+        onMouseLeave={() => setActiveIndex(null)}
         style={{
-          width: 312,
+          //width: 312,
+          gap: "1rem",
+          width: "100%",
+          maxWidth: 350,
           height: 100,
           borderRadius: 12,
           background: "#fff",
-          border: "1px solid #ddd9d9",
+          // border: "2px solid #ddd9d9",
+          border: activeIndex === 1 ? "2px solid #fe6a0f" : "2px solid #ddd9d9",
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
           padding: "10px 20px",
           cursor: "pointer",
+          outline: "none", // ✅ 브라우저 기본 파란 테두리 제거
         }}
       >
         <div style={{ textAlign: "left" }}>
@@ -126,22 +135,32 @@ export default function StylingTypePage() {
           </p>
           <p style={{  marginTop: 8,fontSize: 20, fontWeight: 600 ,color: "#000"}}>소품 솔루션</p>
         </div>
-        <img src="src/assets/bear.jpg" alt="bear" width="50" height="50" />
+        <img src="src/assets/bear.jpg" alt="bear" width="70" height="70" />
       </button>
 
       {/* === 풀 스타일링 버튼 === */}
       <button
+        onClick={() => navigate("/styling-info")}
+        onMouseDown={() => setActiveIndex(2)}
+        onMouseEnter={() => setActiveIndex(2)}
+        onMouseUp={() => setActiveIndex(null)}
+        onMouseLeave={() => setActiveIndex(null)}
         style={{
-          width: 312,
+          //width: 312,
+          gap: "1rem",
+          width: "100%",
+          maxWidth: 350,
           height: 100,
           borderRadius: 12,
           background: "#fff",
-          border: "1px solid #ddd9d9",
+          // border: "2px solid #ddd9d9",
+          border: activeIndex === 2 ? "2px solid #fe6a0f" : "2px solid #ddd9d9",
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
           padding: "10px 20px",
           cursor: "pointer",
+          outline: "none", // ✅ 브라우저 기본 파란 테두리 제거
         }}
       >
         <div style={{ textAlign: "left" }}>
@@ -150,7 +169,7 @@ export default function StylingTypePage() {
           </p>
           <p style={{ marginTop: 8, fontSize: 20, fontWeight: 600,color: "#000" }}>풀 스타일링</p>
         </div>
-        <img src="src/assets/bear.jpg" alt="bear" width="50" height="50" />
+        <img src="src/assets/bear.jpg" alt="bear" width="70" height="70" />
       </button>
     </div>
   );
