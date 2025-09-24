@@ -289,7 +289,6 @@ export default function TestResultPage() {
           width: "100%",         // 기기에 맞게 가로 폭 자동
           maxWidth: 408,         // PC에서도 모바일처럼 보이게 제한
           height: 119,
-          
           position: "fixed",
           bottom: 0,
           background: "#fff",
@@ -301,15 +300,20 @@ export default function TestResultPage() {
           boxSizing: "border-box",
         }}
       >
-        <p style={{ fontSize: 14, marginBottom: 12, color: "#000" }}>
+        <p style={{ fontSize: 14, fontWeight: 500, marginBottom: 12, color: "#000" }}>
           내 인테리어 취향으로 방을 꾸며요
         </p>
         <div
           style={{
             width: "100%",
-            height: 56,
-            borderRadius: 18,
-            background: "#2f2f2f",
+            maxWidth: 360,
+            height: 54,
+            borderRadius: 12,
+            background: "#000",
+            border: "1px solid #ddd9d9",
+            color: "#fff",
+            //fontSize: 19,
+            fontWeight: 600,
             display: "flex",
             alignItems: "center",
             justifyContent: "center",

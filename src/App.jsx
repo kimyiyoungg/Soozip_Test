@@ -5,6 +5,7 @@ import RoomCounsult from './RoomConsult';
 import StylingTypePage from './StylingTypePage';
 import StylingInfoPage from './StylingInfoPage';
 import TestResultPage from './TestResultPage';
+import SetUpStylingInfo from "./SetUpStylingInfo";
 
 
 export default function App() {
@@ -26,6 +27,7 @@ export default function App() {
         {/* 스타일링 관련 페이지 */}
         <Route path="/styling-type" element={<StylingTypePage />} />
         <Route path="/styling-info" element={<StylingInfoPage />} />
+        <Route path="/setup-styling" element={<SetUpStylingInfo />} />
       </Routes>
     // </BrowserRouter>
     // <div><StylingInfoPage/></div>

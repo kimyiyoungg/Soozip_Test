@@ -8,7 +8,7 @@ export default function Home() {
     <div
       style={{
         width: 408,
-        minHeight: 852,
+        // minHeight: 852,
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
