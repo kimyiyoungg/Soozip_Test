@@ -1,12 +1,21 @@
-
 import { useState } from "react";
-import { useNavigate } from "react-router-dom"; // ✅ 추가
+import { useNavigate } from "react-router-dom";
 
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
+import { Pagination } from "swiper/modules";
 
 export default function RoomCounsult() {
- const [selected, setSelected] = useState(null); // 선택 상태 저장
- const navigate = useNavigate(); 
- return (
+  const [selected, setSelected] = useState(null); // 선택 상태 저장
+  const navigate = useNavigate();
+  const images = [
+    "src/assets/image1.jpg",
+    "src/assets/image2.png",
+    "src/assets/image3.png",
+  ];
+
+  return (
     <div
       style={{
         width: 408,
@@ -22,6 +31,7 @@ export default function RoomCounsult() {
       {/* 상단 버튼 */}
       <div
         style={{
+          marginTop: 100,
           background: "#000",
           color: "#fff",
           borderRadius: 30,
@@ -34,46 +44,31 @@ export default function RoomCounsult() {
         상담 알아보기
       </div>
 
-      {/* 이미지 */}
-       <img
-        src="src/assets/image 3.png"
-        alt="상담"
+      <div
         style={{
-          width: 322,
-          height: 211,
+          width: "100%",
+          height: 230,
           borderRadius: 20,
-          objectFit: "cover",
+          overflow: "hidden",
           marginBottom: "1rem",
         }}
-      />
-
-      {/* 페이지 네비게이션 점 */}
-      <div style={{ display: "flex", gap: "0.5rem", marginBottom: "2rem" }}>
-        <div
-          style={{
-            width: 20,
-            height: 10,
-            borderRadius: 50,
-            background: "#fe6a0f",
-          }}
-        />
-        <div
-          style={{
-            width: 10,
-            height: 10,
-            borderRadius: "50%",
-            background: "#d9d9d9",
-          }}
-        />
-        <div
-          style={{
-            width: 10,
-            height: 10,
-            borderRadius: "50%",
-            background: "#d9d9d9",
-          }}
-        />
-      </div> 
+      >
+        <Swiper
+          pagination={{ clickable: true }}
+          modules={[Pagination]}
+          style={{ width: "100%", height: "100%" }}
+        >
+          {images.map((img, idx) => (
+            <SwiperSlide key={idx}>
+              <img
+                src={img}
+                alt={`slide-${idx}`}
+                style={{ width: "100%", height: "100%", objectFit: "cover" }}
+              />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
 
       {/* 카드 리스트 */}
       <div
@@ -88,9 +83,9 @@ export default function RoomCounsult() {
         {/* 카드 1 */}
         <div
           onClick={() => {
-    setSelected(1);
-    window.location.href = "https://open.kakao.com/o/sHCcxOnh"; // 원하는 사이트 주소
-  }}
+            setSelected(1);
+            window.location.href = "https://open.kakao.com/o/sHCcxOnh"; // 원하는 사이트 주소
+          }}
           style={{
             background: "#fff",
             border: `2px solid ${selected === 1 ? "#fe6a0f" : "#ddd9d9"}`,
@@ -103,19 +98,28 @@ export default function RoomCounsult() {
           }}
         >
           <div>
-            <p style={{ fontSize: 11, fontWeight: 600, color: "rgba(0,0,0,0.68)" }}>
+            <p
+              style={{
+                fontSize: 11,
+                fontWeight: 600,
+                color: "rgba(0,0,0,0.68)",
+              }}
+            >
               카카오톡 1:1 상담으로 맞춤 솔루션 제공해드려요
             </p>
-            <p style={{ fontSize: 20, fontWeight: 600 }}>스타일링 상담 바로가기</p>
+            <p style={{ fontSize: 20, fontWeight: 600 }}>
+              스타일링 상담 바로가기
+            </p>
           </div>
           <div style={{ width: 50, height: 50, background: "#d9d9d9" }} />
         </div>
 
         {/* 카드 2 */}
-        <div onClick={() => {
-    setSelected(2);
-    window.location.href = "https://www.instagram.com/soozip.01/"; // 원하는 사이트 주소
-  }}
+        <div
+          onClick={() => {
+            setSelected(2);
+            window.location.href = "https://www.instagram.com/soozip.01/"; // 원하는 사이트 주소
+          }}
           style={{
             background: "#fff",
             border: `2px solid ${selected === 2 ? "#fe6a0f" : "#ddd9d9"}`,
@@ -129,7 +133,13 @@ export default function RoomCounsult() {
           }}
         >
           <div>
-            <p style={{ fontSize: 11, fontWeight: 600, color: "rgba(0,0,0,0.68)" }}>
+            <p
+              style={{
+                fontSize: 11,
+                fontWeight: 600,
+                color: "rgba(0,0,0,0.68)",
+              }}
+            >
               설문을 미리 작성하여 상담 시간을 줄일 수 있어요
             </p>
             <p style={{ fontSize: 20, fontWeight: 600 }}>설문 작성하기</p>
@@ -138,14 +148,14 @@ export default function RoomCounsult() {
         </div>
 
         {/* 카드 3 */}
-        <div onClick={() => {
-    setSelected(3);
-    navigate("/styling-type")
-  }} 
-       
+        <div
+          onClick={() => {
+            setSelected(3);
+            navigate("/styling-type");
+          }}
           style={{
             background: "#fff",
-           border: `2px solid ${selected === 3 ? "#fe6a0f" : "#ddd9d9"}`,
+            border: `2px solid ${selected === 3 ? "#fe6a0f" : "#ddd9d9"}`,
             cursor: "pointer",
             borderRadius: 12,
             padding: "1rem",
@@ -155,10 +165,18 @@ export default function RoomCounsult() {
           }}
         >
           <div>
-            <p style={{ fontSize: 11, fontWeight: 600, color: "rgba(0,0,0,0.68)" }}>
+            <p
+              style={{
+                fontSize: 11,
+                fontWeight: 600,
+                color: "rgba(0,0,0,0.68)",
+              }}
+            >
               수집과 함께 스타일링을 더 알아보아요
             </p>
-            <p style={{ fontSize: 20, fontWeight: 600 }}>스타일링 과정 알아보기</p>
+            <p style={{ fontSize: 20, fontWeight: 600 }}>
+              스타일링 과정 알아보기
+            </p>
           </div>
           <div style={{ width: 50, height: 50, background: "#d9d9d9" }} />
         </div>

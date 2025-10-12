@@ -5,7 +5,6 @@ export default function StylingTypePage() {
   const [activeIndex, setActiveIndex] = useState(null);
   const navigate = useNavigate();
   return (
-
     <div
       style={{
         width: 408,
@@ -18,7 +17,6 @@ export default function StylingTypePage() {
         gap: 20, // 요소 사이 간격
       }}
     >
-
       <svg
         onClick={() => navigate("/room-counsult")}
         width={14}
@@ -56,18 +54,24 @@ export default function StylingTypePage() {
       </div>
 
       {/* 설명 */}
-      <div style={{fontSize: 20, fontWeight: 600, textAlign: "center", color: "#000"}}>
+      <div
+        style={{
+          fontSize: 20,
+          fontWeight: 600,
+          textAlign: "center",
+          color: "#000",
+        }}
+      >
         <p>
-            <b>soozip과 함께 스타일링 더 알아보고</b><br />
-            <b>맞춤 솔루션을 찾아보세요</b>
+          <b>soozip과 함께 스타일링 더 알아보고</b>
+          <br />
+          <b>맞춤 솔루션을 찾아보세요</b>
         </p>
 
         <p style={{ fontSize: 13, fontWeight: 600, color: "#b8b1b1" }}>
-        개인별 맞춤 솔루션을 선택할 수 있습니다.
+          개인별 맞춤 솔루션을 선택할 수 있습니다.
         </p>
-       </div>
-
-    
+      </div>
 
       {/* === 배치 솔루션 === */}
       <button
@@ -96,10 +100,26 @@ export default function StylingTypePage() {
         }}
       >
         <div style={{ textAlign: "left" }}>
-          <p style={{ marginTop: 20, fontSize: 13, fontWeight: 600, color: "rgba(0,0,0,0.68)" }}>
+          <p
+            style={{
+              marginTop: 20,
+              fontSize: 13,
+              fontWeight: 600,
+              color: "rgba(0,0,0,0.68)",
+            }}
+          >
             가구만 배치하고 싶어요!
           </p>
-          <p style={{ marginTop: 8, fontSize: 20, fontWeight: 600 ,color: "#000"}}>배치 솔루션</p>
+          <p
+            style={{
+              marginTop: 8,
+              fontSize: 20,
+              fontWeight: 600,
+              color: "#000",
+            }}
+          >
+            배치 솔루션
+          </p>
         </div>
         <img src="src/assets/bear.jpg" alt="bear" width="70" height="70" />
       </button>
@@ -130,10 +150,26 @@ export default function StylingTypePage() {
         }}
       >
         <div style={{ textAlign: "left" }}>
-          <p style={{  marginTop: 20,fontSize: 13, fontWeight: 600, color: "rgba(0,0,0,0.68)" }}>
+          <p
+            style={{
+              marginTop: 20,
+              fontSize: 13,
+              fontWeight: 600,
+              color: "rgba(0,0,0,0.68)",
+            }}
+          >
             공간에 어울리는 소품을 찾고 싶어요!
           </p>
-          <p style={{  marginTop: 8,fontSize: 20, fontWeight: 600 ,color: "#000"}}>소품 솔루션</p>
+          <p
+            style={{
+              marginTop: 8,
+              fontSize: 20,
+              fontWeight: 600,
+              color: "#000",
+            }}
+          >
+            소품 솔루션
+          </p>
         </div>
         <img src="src/assets/bear.jpg" alt="bear" width="70" height="70" />
       </button>
@@ -164,10 +200,26 @@ export default function StylingTypePage() {
         }}
       >
         <div style={{ textAlign: "left" }}>
-          <p style={{  marginTop: 20, fontSize: 13, fontWeight: 600, color: "rgba(0,0,0,0.68)" }}>
+          <p
+            style={{
+              marginTop: 20,
+              fontSize: 13,
+              fontWeight: 600,
+              color: "rgba(0,0,0,0.68)",
+            }}
+          >
             이제 입주해서 다 해주세요
           </p>
-          <p style={{ marginTop: 8, fontSize: 20, fontWeight: 600,color: "#000" }}>풀 스타일링</p>
+          <p
+            style={{
+              marginTop: 8,
+              fontSize: 20,
+              fontWeight: 600,
+              color: "#000",
+            }}
+          >
+            풀 스타일링
+          </p>
         </div>
         <img src="src/assets/bear.jpg" alt="bear" width="70" height="70" />
       </button>
@@ -175,11 +227,10 @@ export default function StylingTypePage() {
   );
 }
 
-
 // export default function StylingTypePage(){
-    
+
 //     return (
-        
+
 //         <div
 //             style={{
 //             width: 408,
@@ -258,10 +309,9 @@ export default function StylingTypePage() {
 //                 borderColor: "#ddd9d9",
 //                 }}
 //             >
-                
-            
-//             </button>   
-            
+
+//             </button>
+
 //             <p
 //                 style={{
 //                 position: "absolute",
@@ -290,7 +340,6 @@ export default function StylingTypePage() {
 //                 배치솔루션
 //             </p>
 
-            
 //             <div
 //                 style={{
 //                 width: 50,
@@ -302,7 +351,7 @@ export default function StylingTypePage() {
 //             }}>
 //                 <img src="src/assets/bear.jpg" alt="bear" width="50" height="50"/>
 //             </div>
-        
+
 //             <button
 //                 style={{
 //                 cursor: "pointer",
@@ -317,8 +366,8 @@ export default function StylingTypePage() {
 //                 borderColor: "#ddd9d9",
 //                 }}
 //             >
-                
-//             </button>   
+
+//             </button>
 //             <p
 //                 style={{
 //                 position: "absolute",
@@ -401,7 +450,7 @@ export default function StylingTypePage() {
 //                 }}
 //             >
 //                 풀 스타일링
-//             </p>      
+//             </p>
 //             <div
 //                 style={{
 //                 width: 50,
@@ -412,12 +461,10 @@ export default function StylingTypePage() {
 //                 background: "#d9d9d9",
 //             }}>
 //                 <img src="src/assets/bear.jpg" alt="bear" width="50" height="50"/>
-//             </div> 
-        
+//             </div>
 
 //         </div>
-        
 
 //     );
-    
+
 // }
