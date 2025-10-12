@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 
 export default function SetUpStylingInfo() {
-  const navigate = useNavigate(); // ✅ 선언
+  const navigate = useNavigate();
   return (
     <div
       style={{

@@ -139,7 +139,6 @@ export default function RoombtiTest() {
           />
         </div>
 
-        {/* ✅ 캐릭터 이미지 이동 */}
         <img
           src="src/assets/IMG_3286.png"
           alt="progress icon"
@@ -149,7 +148,7 @@ export default function RoombtiTest() {
             objectFit: "cover",
             position: "absolute",
             bottom: "5px",
-            left: `${progressPercent * (280 - 50)}px`, // 진행비율에 따라 이동
+            left: `${progressPercent * (280 - 50)}px`,
             transition: "left 0.4s ease",
           }}
         />
