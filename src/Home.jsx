@@ -1,4 +1,3 @@
-
 import { useNavigate } from "react-router-dom";
 
 export default function Home() {
@@ -9,7 +8,7 @@ export default function Home() {
       style={{
         width: 408,
         minHeight: 852,
-        height: "100dvh",//새로로 꽉차게 ,dvh는 주소창 높이를 제외한 실제 보이는 영역
+        height: "100dvh", //새로로 꽉차게 ,dvh는 주소창 높이를 제외한 실제 보이는 영역
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -20,12 +19,13 @@ export default function Home() {
       }}
     >
       <div style={{ textAlign: "center" }}>
-        <p style={{ fontSize: 12, fontWeight: 600, color: "#fe6a0f" }}>soozip</p>
+        <p style={{ fontSize: 12, fontWeight: 600, color: "#fe6a0f" }}>
+          soozip
+        </p>
         <p style={{ fontSize: 16, fontWeight: 600, color: "rgba(0,0,0,0.68)" }}>
           나의 집꾸 스타일은?
         </p>
         <p style={{ fontSize: 20, fontWeight: 600, color: "#000" }}>
-          
           내가 어떤 공간을 좋아하는지 알아보세요.
         </p>
       </div>
@@ -64,4 +64,3 @@ export default function Home() {
     </div>
   );
 }
-
