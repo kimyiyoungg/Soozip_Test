@@ -45,63 +45,6 @@ export default function RoombtiTest() {
   }, []);
 
 
-  // const current = questions[step];
-
-  // // 답변 선택
-  // const handleAnswer = (option_id, index) => {
-  //   setSelected(index);
-
-  //   // 선택지를 업데이트하고, 마지막 문항이면 submit
-  //   setChoices((prev) => {
-  //     const updatedChoices = { ...prev, [current.question_id]: option_id };
-
-  //     if (step === questions.length - 1) {
-  //       // 마지막 문항 선택 → submit
-  //       handleSubmit(updatedChoices);
-  //     } else {
-  //       // 다음 문항으로 이동
-  //       setStep(step + 1);
-  //       setSelected(null);
-  //     }
-
-  //     return updatedChoices;
-  //   });
-  // };
-
-  // // 제출
-  // const handleSubmit = async (finalChoices) => {
-  //   try {
-  //     // sessionuser 테이블 이름 소문자로
-  //     const { data: sessionData, error: sessionError } = await supabase
-  //       .from("sessionuser")
-  //       .insert([{ session_uuid: crypto.randomUUID() }])
-  //       .select("session_id")
-  //       .single();
-
-  //     if (sessionError) throw sessionError;
-
-  //     const session_id = sessionData.session_id;
-
-  //     // choice 테이블에 12개 선택지만 정확히 insert
-  //     const choiceInserts = Object.entries(finalChoices).map(([qId, optionId]) => ({
-  //       session_id,
-  //       option_id: optionId,
-  //     }));
-
-  //     const { error: choiceError } = await supabase
-  //       .from("choice")
-  //       .insert(choiceInserts);
-
-  //     if (choiceError) throw choiceError;
-
-  //     // TestResult 페이지로 이동
-  //     navigate("/TestResult", { state: { session_id } });
-  //   } catch (err) {
-  //     console.error("제출 오류:", err);
-  //   }
-  // };
-  
-
    const current = questions[step];
 
   // 답변 선택
@@ -151,6 +94,127 @@ export default function RoombtiTest() {
         .insert(choiceInserts);
 
       if (choiceError) throw choiceError;
+
+      
+      // 3. sessionresultdetail 계산 (dimension_value_id 기준 점수 누적)
+      const valueScores = {}; // { dimension_value_id: { dimension_id, score } }
+
+      for (let option_id of Object.values(finalChoices)) {
+        // option_id → dimension_value_id
+        const { data: optionData, error: optionErr } = await supabase
+          .from("questionoption")
+          .select("dimension_value_id")
+          .eq("option_id", option_id)
+          .single();
+        if (optionErr) throw optionErr;
+
+        // dimension_value_id → dimension_id
+        const { data: dimValueData, error: dimErr } = await supabase
+          .from("dimensionvalue")
+          .select("dimension_id")
+          .eq("dimension_value_id", optionData.dimension_value_id)
+          .single();
+        if (dimErr) throw dimErr;
+
+        const dim_id = dimValueData.dimension_id;
+        const value_id = optionData.dimension_value_id;
+
+        // 동일 dimension_value_id이면 점수 누적
+        if (!valueScores[value_id]) {
+          valueScores[value_id] = { dimension_id: dim_id, score: 1 };
+        } else {
+          valueScores[value_id].score += 1;
+        }
+      }
+
+      // 4. sessionresultdetail upsert
+      const resultInserts = Object.entries(valueScores).map(([value_id, { dimension_id, score }]) => ({
+        session_id,
+        dimension_id,
+        dimension_value_id: value_id,
+        score,
+      }));
+
+      const { error: resultError } = await supabase
+        .from("sessionresultdetail")
+        .upsert(resultInserts, { onConflict: ["session_id", "dimension_id", "dimension_value_id"] });
+
+      if (resultError) throw resultError;
+
+      // 5. 최종 MBTI/방BTI 계산 및 ResultType 저장
+      const { data: details, error: detailErr } = await supabase
+        .from("sessionresultdetail")
+        .select("dimension_id, dimension_value_id, score")
+        .eq("session_id", session_id);
+      if (detailErr) throw detailErr;
+
+      // dimension별 최고 score 선택
+      const bestValues = {}; // { dimension_id: dimension_value_id }
+      details.forEach(({ dimension_id, dimension_value_id, score }) => {
+        if (!bestValues[dimension_id] || score > bestValues[dimension_id].score) {
+          bestValues[dimension_id] = { dimension_value_id, score };
+        }
+      });
+
+      // dimension_id 순서대로 MBTI 코드 조합
+      const dimensionOrder = [1, 2, 3, 4]; // 실제 dimension_id 순서에 맞게 수정
+      // let result_code = "";
+
+      // for (let dim_id of dimensionOrder) {
+      //   const value_id = bestValues[dim_id].dimension_value_id;
+
+      //   // DB에서 dimension_value_id → 코드 문자 가져오기
+      //   const { data: valueData, error: valueErr } = await supabase
+      //     .from("dimensionvalue")
+      //     .select("dimension_value") // code 컬럼에 I, E, S 등 저장
+      //     .eq("dimension_value_id", value_id)
+      //     .single();
+      //   if (valueErr) throw valueErr;
+
+      //   result_code += valueData.code;
+      // }
+
+      // // 결과 설명, 이미지
+      // const result_text = `${result_code} 유형입니다!`;
+      // const result_image = `/images/${result_code}.png`;
+
+      // // ResultType 테이블 저장
+      // const { error: resultTypeErr } = await supabase
+      //   .from("resulttype")
+      //   .insert([{ session_id, result_code, result_text, result_image }]);
+      // if (resultTypeErr) throw resultTypeErr;
+
+      let result_code = "";
+      for (let dim_id of dimensionOrder) {
+        const valueEntry = bestValues[dim_id];
+        if (!valueEntry) continue;
+
+        const value_id = valueEntry.dimension_value_id;
+        const { data: valueData, error: valueErr } = await supabase
+          .from("dimensionvalue")
+          .select("dimension_value")
+          .eq("dimension_value_id", value_id)
+          .single();
+
+        if (valueErr || !valueData?.dimension_value) {
+          console.error("dimensionvalue 누락:", value_id);
+          continue;
+        }
+
+        result_code += valueData.dimension_value; // dimension_value 컬럼 사용
+      }
+
+      const result_text = `${result_code} 유형입니다!`;
+      const result_image = `/images/${result_code}.png`;
+
+      const { error: resultTypeErr } = await supabase
+        .from("resulttype")
+        .insert([{ session_id, result_code, result_text, result_image }]);
+      if (resultTypeErr) throw resultTypeErr;
+
+
+
+
 
       // TestResult 페이지로 이동
       navigate("/TestResult", { state: { session_id } });

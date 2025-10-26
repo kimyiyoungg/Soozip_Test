@@ -1,7 +1,42 @@
+// import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-// import "./App.css"; // #root 스타일 적용
+// import { createClient } from "@supabase/supabase-js";
+
+// const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+// const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+// const supabase = createClient(supabaseUrl, supabaseKey);
+
 export default function TestResultPage() {
   const navigate = useNavigate();
+  // const location = useLocation();
+
+  //   // ===== 여기서 navigate로 전달된 session_id를 가져옵니다 =====
+  // const { session_id } = location.state || {}; 
+
+  // // 결과 데이터를 저장할 state
+  // const [result, setResult] = useState(null);
+
+  // useEffect(() => {
+  //   if (!session_id) return;
+
+  //   // ===== DB에서 session_id 기반으로 resulttype 가져오기 =====
+  //   const fetchResult = async () => {
+  //     const { data, error } = await supabase
+  //       .from("resulttype") // table 이름 소문자로
+  //       .select("*")
+  //       .eq("session_id", session_id)
+  //       .single(); // session 하나만 가져오기
+
+  //     if (error) {
+  //       console.error("결과 불러오기 실패:", error);
+  //     } else {
+  //       setResult(data); // 가져온 데이터 state에 저장
+  //     }
+  //   };
+
+  //   fetchResult();
+  // }, [session_id]);
+
 
   return (
     <div
