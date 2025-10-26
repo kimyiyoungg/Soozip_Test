@@ -21,12 +21,14 @@ export default function RoombtiTest() {
     async function fetchQuestions() {
       const { data, error } = await supabase
         .from("question")
-        .select(`
+        .select(
+          `
           question_id,
           question_text,
           question_order,
           questionoption:questionoption(option_id, option_text)
-        `)
+        `
+        )
         .order("question_order", { ascending: true });
 
       if (error) {
@@ -124,7 +126,14 @@ export default function RoombtiTest() {
       </svg>
 
       {/* 진행바 */}
-      <div style={{ position: "relative", width: 280, height: 50, marginTop: "20px" }}>
+      <div
+        style={{
+          position: "relative",
+          width: 280,
+          height: 50,
+          marginTop: "20px",
+        }}
+      >
         <div
           style={{
             width: "100%",
@@ -204,8 +213,6 @@ export default function RoombtiTest() {
   );
 }
 
-
-
 // import { useState } from "react";
 // import { useNavigate } from "react-router-dom";
 
@@ -214,56 +221,56 @@ export default function RoombtiTest() {
 //   const [step, setStep] = useState(0);
 //   const navigate = useNavigate();
 
-  // const questions = [
-  //   {
-  //     question: "1.내가 어떤 공간을 좋아하는지 알아보세요.",
-  //     options: ["아늑한 공간", "넓은 공간"],
-  //   },
-  //   {
-  //     question: "2.선호하는 가구 스타일은?",
-  //     options: ["심플 모던", "클래식 빈티지"],
-  //   },
-  //   {
-  //     question: "3.좋아하는 색감은?",
-  //     options: ["밝은 톤", "어두운 톤"],
-  //   },
-  //   {
-  //     question: "4.내가 정착할 곳은?",
-  //     options: ["교통이 불편 집상태 최상", "지하철역 3분컷 집상태 별로"],
-  //   },
-  //   {
-  //     question: "5.데스트테리어를 한다면?",
-  //     options: ["필요한것만 미니멀하게", "이것저것 취향껏 레이어"],
-  //   },
-  //   {
-  //     question: "6.마음에 드는 소품이 비싸다면?",
-  //     options: ["없다고 죽지않아~!", "볼 때마다 행복할듯 그냥 사."],
-  //   },
-  //   {
-  //     question: "7.침대 맡에 둘 예쁜조명 살까 말까?",
-  //     options: ["아무리 예뻐도 비싸면 별로", "내방에 찰떡이자냐"],
-  //   },
-  //   {
-  //     question: "8.1인 소파 무료 나눔이닷. 방에 둘곳이 없는데 어쩌지",
-  //     options: ["무리해서 들이는건 싫어", "공간 지각력 총출동~ 어떻게든"],
-  //   },
-  //   {
-  //     question: "9.청소기를 사려고 한다",
-  //     options: ["성능 최고, 리뷰 극찬", "고감도 디자인"],
-  //   },
-  //   {
-  //     question: "10.방문을 열었을 때 떠오르는?",
-  //     options: ["모든 물건이 제자리에! 깔끔", "따듯한 조명과 침구의 조화"],
-  //   },
-  //   {
-  //     question: "11.집 밖에 나가지 않는것은?",
-  //     options: ["포상이에요", "감금이에요"],
-  //   },
-  //   {
-  //     question: "12.끝 ~~!!",
-  //     options: ["메롱", "메롱"],
-  //   },
-  // ];
+// const questions = [
+//   {
+//     question: "1.내가 어떤 공간을 좋아하는지 알아보세요.",
+//     options: ["아늑한 공간", "넓은 공간"],
+//   },
+//   {
+//     question: "2.선호하는 가구 스타일은?",
+//     options: ["심플 모던", "클래식 빈티지"],
+//   },
+//   {
+//     question: "3.좋아하는 색감은?",
+//     options: ["밝은 톤", "어두운 톤"],
+//   },
+//   {
+//     question: "4.내가 정착할 곳은?",
+//     options: ["교통이 불편 집상태 최상", "지하철역 3분컷 집상태 별로"],
+//   },
+//   {
+//     question: "5.데스트테리어를 한다면?",
+//     options: ["필요한것만 미니멀하게", "이것저것 취향껏 레이어"],
+//   },
+//   {
+//     question: "6.마음에 드는 소품이 비싸다면?",
+//     options: ["없다고 죽지않아~!", "볼 때마다 행복할듯 그냥 사."],
+//   },
+//   {
+//     question: "7.침대 맡에 둘 예쁜조명 살까 말까?",
+//     options: ["아무리 예뻐도 비싸면 별로", "내방에 찰떡이자냐"],
+//   },
+//   {
+//     question: "8.1인 소파 무료 나눔이닷. 방에 둘곳이 없는데 어쩌지",
+//     options: ["무리해서 들이는건 싫어", "공간 지각력 총출동~ 어떻게든"],
+//   },
+//   {
+//     question: "9.청소기를 사려고 한다",
+//     options: ["성능 최고, 리뷰 극찬", "고감도 디자인"],
+//   },
+//   {
+//     question: "10.방문을 열었을 때 떠오르는?",
+//     options: ["모든 물건이 제자리에! 깔끔", "따듯한 조명과 침구의 조화"],
+//   },
+//   {
+//     question: "11.집 밖에 나가지 않는것은?",
+//     options: ["포상이에요", "감금이에요"],
+//   },
+//   {
+//     question: "12.끝 ~~!!",
+//     options: ["메롱", "메롱"],
+//   },
+// ];
 //   const current = questions[step];
 
 //   const handleAnswer = (option) => {

@@ -3,7 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination } from "swiper/modules";
-import CardButton from "C:/Users/yel08/soozip/src/CardButton.tsx";
+import CardButton from "/Users/2eeeee0/soozip/src/CardButton.tsx";
 
 export default function RoomCounsult() {
   const [selectedId, setSelectedId] = useState(null);
@@ -36,30 +36,33 @@ export default function RoomCounsult() {
     <div
       style={{
         width: 408,
-        minHeight: 852,
+        minHeight: "100dvh",
         background: "#fbf2d5",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        padding: "2rem 1rem",
+        gap: 20,
+        // padding: "1rem 1rem",
         boxSizing: "border-box",
       }}
     >
       <div
         style={{
+          width: 150,
+          height: 30,
+          borderRadius: 30,
           background: "#000",
           color: "#fff",
-          borderRadius: 30,
-          padding: "0.5rem 1rem",
-          marginBottom: "1rem",
           fontSize: 20,
           fontWeight: 600,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          marginTop: 60,
         }}
       >
         상담 알아보기
       </div>
-
-      {/* 이미지 슬라이드 */}
       <div
         style={{
           width: "100%",
@@ -69,7 +72,12 @@ export default function RoomCounsult() {
           marginBottom: "1rem",
         }}
       >
-        <Swiper pagination={{ clickable: true }} modules={[Pagination]}>
+        <Swiper
+          pagination={{ clickable: true }}
+          modules={[Pagination]}
+          slidesPerView={1}
+          style={{ height: "100%" }}
+        >
           {cards.map((card, idx) => (
             <SwiperSlide key={idx}>
               <img
@@ -82,23 +90,84 @@ export default function RoomCounsult() {
         </Swiper>
       </div>
 
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "1rem",
-          width: "100%",
-        }}
-      >
-        {cards.map((card) => (
-          <CardButton
-            key={card.id}
-            {...card}
-            selectedId={selectedId}
-            setSelectedId={setSelectedId}
-          />
-        ))}
-      </div>
+      {cards.map((card) => (
+        <CardButton
+          key={card.id}
+          {...card}
+          selectedId={selectedId}
+          setSelectedId={setSelectedId}
+        />
+      ))}
     </div>
   );
 }
+
+//   <div
+//     style={{
+//       width: 408,
+//       minHeight: 852,
+//       background: "#fbf2d5",
+//       display: "flex",
+//       flexDirection: "column",
+//       alignItems: "center",
+//       padding: "2rem 1rem",
+//       boxSizing: "border-box",
+//     }}
+//   >
+//     <div
+//       style={{
+//         background: "#000",
+//         color: "#fff",
+//         borderRadius: 30,
+//         padding: "0.5rem 1rem",
+//         marginBottom: "1rem",
+//         fontSize: 20,
+//         fontWeight: 600,
+//       }}
+//     >
+//       상담 알아보기
+//     </div>
+
+//     {/* 이미지 슬라이드 */}
+//     <div
+//       style={{
+//         width: "100%",
+//         height: 230,
+//         borderRadius: 20,
+//         overflow: "hidden",
+//         marginBottom: "1rem",
+//       }}
+//     >
+//       <Swiper pagination={{ clickable: true }} modules={[Pagination]}>
+//         {cards.map((card, idx) => (
+//           <SwiperSlide key={idx}>
+//             <img
+//               src={card.imgSrc}
+//               alt={`slide-${idx}`}
+//               style={{ width: "100%", height: "100%", objectFit: "cover" }}
+//             />
+//           </SwiperSlide>
+//         ))}
+//       </Swiper>
+//     </div>
+
+//     <div
+//       style={{
+//         display: "flex",
+//         flexDirection: "column",
+//         gap: "1rem",
+//         width: "100%",
+//       }}
+//     >
+//       {cards.map((card) => (
+//         <CardButton
+//           key={card.id}
+//           {...card}
+//           selectedId={selectedId}
+//           setSelectedId={setSelectedId}
+//         />
+//       ))}
+//     </div>
+//   </div>
+// );
+//}

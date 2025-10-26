@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import CardButton from "C:/Users/yel08/soozip/src/CardButton.tsx";
+import CardButton from "/Users/2eeeee0/soozip/src/CardButton.tsx";
 export default function StylingTypePage() {
   const [selectedId, setSelectedId] = useState(null);
 
@@ -9,21 +9,21 @@ export default function StylingTypePage() {
       id: 1,
       title: "배치 솔루션",
       subtitle: "가구만 배치하고 싶어요!",
-      url: "/setup-styling",
+      url: "/styling-info1",
       imgSrc: "src/assets/bear.jpg",
     },
     {
       id: 2,
       title: "소품 솔루션",
       subtitle: "공간에 어울리는 소품을 찾고 싶어요!",
-      url: "/styling-info",
+      url: "/styling-info2",
       imgSrc: "src/assets/bear.jpg",
     },
     {
       id: 3,
       title: "풀 스타일링",
       subtitle: "이제 입주해서 다 해주세요",
-      url: "/styling-info",
+      url: "/styling-info3",
       imgSrc: "src/assets/bear.jpg",
     },
   ];

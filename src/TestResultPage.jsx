@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 // import "./App.css"; // #root 스타일 적용
 export default function TestResultPage() {
-  
   const navigate = useNavigate();
 
   return (
@@ -29,8 +28,7 @@ export default function TestResultPage() {
     >
       {/* ✅ 스크롤 되는 영역 */}
       <div style={{ flex: 1, padding: "150px 0 0 0", position: "relative" }}>
-       
-{/*         
+        {/*         
         <p
           style={{
             fontSize: 16,
@@ -66,30 +64,42 @@ export default function TestResultPage() {
             fillOpacity="0.42"
           />
         </svg>
-       
 
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", padding: "0 25px", }}>
-            {/* 왼쪽 텍스트 */}
-            <p
-                style={{
-                fontSize: 16,
-                fontWeight: 700,
-                color: "#000",
-                margin: 10,
-                }}
-            >
-                SOOZIP
-            </p>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "flex-end",
+            padding: "0 25px",
+          }}
+        >
+          {/* 왼쪽 텍스트 */}
+          <p
+            style={{
+              fontSize: 16,
+              fontWeight: 700,
+              color: "#000",
+              margin: 10,
+            }}
+          >
+            SOOZIP
+          </p>
 
-            {/* 오른쪽 이미지 */}
-            <img
-                src="src/assets/bear2.png"
-                style={{ width: 148, height: 96, objectFit: "cover" }}
-            />
+          {/* 오른쪽 이미지 */}
+          <img
+            src="src/assets/bear2.png"
+            style={{ width: 148, height: 96, objectFit: "cover" }}
+          />
         </div>
 
         {/* 메인 SVG 박스 */}
-        <div style={{ display: "flex", justifyContent: "center", marginBottom: 20 }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginBottom: 20,
+          }}
+        >
           <svg
             width={361}
             height={490}
@@ -105,10 +115,17 @@ export default function TestResultPage() {
           </svg>
         </div>
 
-        
-
         {/* 이미지 저장 / 테스트 공유 */}
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: 5, marginBottom: 20 }}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexDirection: "column",
+            gap: 5,
+            marginBottom: 20,
+          }}
+        >
           <p
             style={{
               fontSize: 16,
@@ -123,7 +140,7 @@ export default function TestResultPage() {
           >
             이미지 저장
           </p>
-          
+
           <p
             style={{
               fontSize: 16,
@@ -139,11 +156,23 @@ export default function TestResultPage() {
           </p>
         </div>
 
-        <hr style={{ border: "1px solid #D9D9D9", width: 354, marginTop: 30, marginBottom : 50 }} />
+        <hr
+          style={{
+            border: "1px solid #D9D9D9",
+            width: 354,
+            marginTop: 30,
+            marginBottom: 50,
+          }}
+        />
 
-        
         {/* TIP 버튼 */}
-        <div style={{ display: "flex", justifyContent: "center", marginBottom: 40 }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginBottom: 40,
+          }}
+        >
           <div
             style={{
               width: 75,
@@ -162,22 +191,30 @@ export default function TestResultPage() {
           </div>
         </div>
 
-        <p style={{ fontSize: 20, fontWeight: 600, textAlign: "center", color: "#000" ,marginTop:20 ,marginBottom: 30}}>
+        <p
+          style={{
+            fontSize: 20,
+            fontWeight: 600,
+            textAlign: "center",
+            color: "#000",
+            marginTop: 20,
+            marginBottom: 30,
+          }}
+        >
           나에게 어울리는 인테리어는?
         </p>
 
-
-      {/* <div style={{ display: "flex", justifyContent: "space-between", padding: "0 25px" }}> */}
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          padding: "0 25px",
-          maxWidth: "408px",
-          margin: "0 auto",
-        }}
-      >
-        {/* 첫 번째 카드 + 글자
+        {/* <div style={{ display: "flex", justifyContent: "space-between", padding: "0 25px" }}> */}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            padding: "0 25px",
+            maxWidth: "408px",
+            margin: "0 auto",
+          }}
+        >
+          {/* 첫 번째 카드 + 글자
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
           <svg
             // width={164}
@@ -197,39 +234,47 @@ export default function TestResultPage() {
           </svg>
           <p style={{ fontSize: 16, textAlign: "center", color: "#000", marginTop: 8 }}>AAA 스타일</p>
         </div> */}
-         {/* 첫 번째 카드 */}
-        <div
-          style={{
-            flex: "0 0 45%", // 부모 기준 약 45%
-            maxWidth: "45%",
-          }}
-        >
+          {/* 첫 번째 카드 */}
           <div
             style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
+              flex: "0 0 45%", // 부모 기준 약 45%
+              maxWidth: "45%",
             }}
           >
-            <svg
-              width="100%"     // 부모 크기에 맞춤
-              height="auto"
-              viewBox="0 0 164 164"
-              xmlns="http://www.w3.org/2000/svg"
-              preserveAspectRatio="xMidYMid meet"
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
             >
-              <path
-                d="M0 20C0 8.95 8.95 0 20 0H144C155.05 0 164 8.95 164 20V144C164 155.05 155.05 164 144 164H20C8.95 164 0 155.05 0 144V20Z"
-                fill="#D9D9D9"
-              />
-            </svg>
-            <p style={{ fontSize: 16, textAlign: "center", color: "#000", marginTop: 8 }}>AAA 스타일</p>
+              <svg
+                width="100%" // 부모 크기에 맞춤
+                height="auto"
+                viewBox="0 0 164 164"
+                xmlns="http://www.w3.org/2000/svg"
+                preserveAspectRatio="xMidYMid meet"
+              >
+                <path
+                  d="M0 20C0 8.95 8.95 0 20 0H144C155.05 0 164 8.95 164 20V144C164 155.05 155.05 164 144 164H20C8.95 164 0 155.05 0 144V20Z"
+                  fill="#D9D9D9"
+                />
+              </svg>
+              <p
+                style={{
+                  fontSize: 16,
+                  textAlign: "center",
+                  color: "#000",
+                  marginTop: 8,
+                }}
+              >
+                AAA 스타일
+              </p>
+            </div>
           </div>
-        </div>
 
-
-        {/* 두 번째 카드 + 글자 */}
-        {/* <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+          {/* 두 번째 카드 + 글자 */}
+          {/* <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
           <svg
             // width={164}
             // height={164}
@@ -273,21 +318,27 @@ export default function TestResultPage() {
                   fill="#D9D9D9"
                 />
               </svg>
-              <p style={{ fontSize: 16, textAlign: "center", color: "#000", marginTop: 8 }}>BBB 스타일</p>
+              <p
+                style={{
+                  fontSize: 16,
+                  textAlign: "center",
+                  color: "#000",
+                  marginTop: 8,
+                }}
+              >
+                BBB 스타일
+              </p>
             </div>
           </div>
-        
+        </div>
       </div>
-
-    </div>
-
 
       {/* ✅ 하단 고정 영역 */}
       <div
         style={{
           // width: 408,
-          width: "100%",         // 기기에 맞게 가로 폭 자동
-          maxWidth: 408,         // PC에서도 모바일처럼 보이게 제한
+          width: "100%", // 기기에 맞게 가로 폭 자동
+          maxWidth: 408, // PC에서도 모바일처럼 보이게 제한
           height: 119,
           position: "fixed",
           bottom: 0,
@@ -300,7 +351,14 @@ export default function TestResultPage() {
           boxSizing: "border-box",
         }}
       >
-        <p style={{ fontSize: 14, fontWeight: 500, marginBottom: 12, color: "#000" }}>
+        <p
+          style={{
+            fontSize: 14,
+            fontWeight: 500,
+            marginBottom: 12,
+            color: "#000",
+          }}
+        >
           내 인테리어 취향으로 방을 꾸며요
         </p>
         <div
@@ -321,13 +379,14 @@ export default function TestResultPage() {
           }}
           onClick={() => navigate("/room-counsult")}
         >
-          <p style={{ fontSize: 16, color: "#fff" }}>홈스타일링 상담 알아보기</p>
+          <p style={{ fontSize: 16, color: "#fff" }}>
+            홈스타일링 상담 알아보기
+          </p>
         </div>
       </div>
     </div>
   );
 }
-
 
 // // 자리 박은 버전
 // export default function TestResultPage() {
@@ -344,7 +403,7 @@ export default function TestResultPage() {
 //     >
 //       {/* ✅ 스크롤 되는 영역 */}
 //       <div style={{ paddingBottom: 1500 }}>
-        
+
 //         <p
 //                 style={{
 //                 position: "absolute",
@@ -358,21 +417,21 @@ export default function TestResultPage() {
 //             >
 //                 SOOZIP
 //             </p>
-           
-            // <svg
-            //     width={361}
-            //     height={490}
-            //     viewBox="0 0 361 490"
-            //     fill="none"
-            //     xmlns="http://www.w3.org/2000/svg"
-            //     style={{ position: "absolute", left: 22, top: 193 }}
-            //     preserveAspectRatio="none"
-            // >
-            //     <path
-            //     d="M0 20C0 8.9543 8.9543 0 20 0H341C352.046 0 361 8.9543 361 20V470C361 481.046 352.046 490 341 490H20C8.95431 490 0 481.046 0 470V20Z"
-            //     fill="#D9D9D9"
-            //     />
-            // </svg>
+
+// <svg
+//     width={361}
+//     height={490}
+//     viewBox="0 0 361 490"
+//     fill="none"
+//     xmlns="http://www.w3.org/2000/svg"
+//     style={{ position: "absolute", left: 22, top: 193 }}
+//     preserveAspectRatio="none"
+// >
+//     <path
+//     d="M0 20C0 8.9543 8.9543 0 20 0H341C352.046 0 361 8.9543 361 20V470C361 481.046 352.046 490 341 490H20C8.95431 490 0 481.046 0 470V20Z"
+//     fill="#D9D9D9"
+//     />
+// </svg>
 //             <img
 //                 src="src/assets/bear2.png"
 //                 style={{ width: 148, height: 96, position: "absolute", left: 235, top: 97, objectFit: "cover" }}
@@ -505,20 +564,20 @@ export default function TestResultPage() {
 //             >
 //                 <line y1="0.5" x2={86} y2="0.5" stroke="black" />
 //             </svg>
-            // <svg
-            //     width={23}
-            //     height={23}
-            //     viewBox="0 0 23 23"
-            //     fill="none"
-            //     xmlns="http://www.w3.org/2000/svg"
-            //     style={{ width: 23, height: 23, position: "absolute", left: 147, top: 758 }}
-            //     preserveAspectRatio="none"
-            // >
-            //     <path
-            //     d="M16.2915 21.0833C15.4929 21.0833 14.8141 20.8038 14.255 20.2448C13.696 19.6858 13.4165 19.0069 13.4165 18.2083C13.4165 18.1125 13.4405 17.8889 13.4884 17.5375L6.75609 13.6083C6.50053 13.8479 6.20505 14.0356 5.86963 14.1714C5.53421 14.3071 5.17484 14.375 4.7915 14.375C3.99289 14.375 3.31407 14.0955 2.75505 13.5365C2.19602 12.9774 1.9165 12.2986 1.9165 11.5C1.9165 10.7014 2.19602 10.0226 2.75505 9.46354C3.31407 8.90451 3.99289 8.625 4.7915 8.625C5.17484 8.625 5.53421 8.69288 5.86963 8.82864C6.20505 8.96441 6.50053 9.15208 6.75609 9.39166L13.4884 5.4625C13.4564 5.35069 13.4365 5.24288 13.4285 5.13906C13.4205 5.03524 13.4165 4.91944 13.4165 4.79166C13.4165 3.99305 13.696 3.31423 14.255 2.75521C14.8141 2.19618 15.4929 1.91666 16.2915 1.91666C17.0901 1.91666 17.7689 2.19618 18.328 2.75521C18.887 3.31423 19.1665 3.99305 19.1665 4.79166C19.1665 5.59028 18.887 6.26909 18.328 6.82812C17.7689 7.38715 17.0901 7.66666 16.2915 7.66666C15.9082 7.66666 15.5488 7.59878 15.2134 7.46302C14.878 7.32725 14.5825 7.13958 14.3269 6.9L7.59463 10.8292C7.62657 10.941 7.64654 11.0488 7.65452 11.1526C7.66251 11.2564 7.6665 11.3722 7.6665 11.5C7.6665 11.6278 7.66251 11.7436 7.65452 11.8474C7.64654 11.9512 7.62657 12.059 7.59463 12.1708L14.3269 16.1C14.5825 15.8604 14.878 15.6727 15.2134 15.537C15.5488 15.4012 15.9082 15.3333 16.2915 15.3333C17.0901 15.3333 17.7689 15.6128 18.328 16.1719C18.887 16.7309 19.1665 17.4097 19.1665 18.2083C19.1665 19.0069 18.887 19.6858 18.328 20.2448C17.7689 20.8038 17.0901 21.0833 16.2915 21.0833ZM16.2915 19.1667C16.563 19.1667 16.7906 19.0748 16.9743 18.8911C17.158 18.7075 17.2498 18.4799 17.2498 18.2083C17.2498 17.9368 17.158 17.7092 16.9743 17.5255C16.7906 17.3418 16.563 17.25 16.2915 17.25C16.02 17.25 15.7924 17.3418 15.6087 17.5255C15.425 17.7092 15.3332 17.9368 15.3332 18.2083C15.3332 18.4799 15.425 18.7075 15.6087 18.8911C15.7924 19.0748 16.02 19.1667 16.2915 19.1667ZM4.7915 12.4583C5.06303 12.4583 5.29064 12.3665 5.47432 12.1828C5.658 11.9991 5.74984 11.7715 5.74984 11.5C5.74984 11.2285 5.658 11.0009 5.47432 10.8172C5.29064 10.6335 5.06303 10.5417 4.7915 10.5417C4.51998 10.5417 4.29237 10.6335 4.10869 10.8172C3.92501 11.0009 3.83317 11.2285 3.83317 11.5C3.83317 11.7715 3.92501 11.9991 4.10869 12.1828C4.29237 12.3665 4.51998 12.4583 4.7915 12.4583ZM16.2915 5.75C16.563 5.75 16.7906 5.65816 16.9743 5.47448C17.158 5.2908 17.2498 5.06319 17.2498 4.79166C17.2498 4.52014 17.158 4.29253 16.9743 4.10885C16.7906 3.92517 16.563 3.83333 16.2915 3.83333C16.02 3.83333 15.7924 3.92517 15.6087 4.10885C15.425 4.29253 15.3332 4.52014 15.3332 4.79166C15.3332 5.06319 15.425 5.2908 15.6087 5.47448C15.7924 5.65816 16.02 5.75 16.2915 5.75Z"
-            //     fill="black"
-            //     />
-            // </svg>
+// <svg
+//     width={23}
+//     height={23}
+//     viewBox="0 0 23 23"
+//     fill="none"
+//     xmlns="http://www.w3.org/2000/svg"
+//     style={{ width: 23, height: 23, position: "absolute", left: 147, top: 758 }}
+//     preserveAspectRatio="none"
+// >
+//     <path
+//     d="M16.2915 21.0833C15.4929 21.0833 14.8141 20.8038 14.255 20.2448C13.696 19.6858 13.4165 19.0069 13.4165 18.2083C13.4165 18.1125 13.4405 17.8889 13.4884 17.5375L6.75609 13.6083C6.50053 13.8479 6.20505 14.0356 5.86963 14.1714C5.53421 14.3071 5.17484 14.375 4.7915 14.375C3.99289 14.375 3.31407 14.0955 2.75505 13.5365C2.19602 12.9774 1.9165 12.2986 1.9165 11.5C1.9165 10.7014 2.19602 10.0226 2.75505 9.46354C3.31407 8.90451 3.99289 8.625 4.7915 8.625C5.17484 8.625 5.53421 8.69288 5.86963 8.82864C6.20505 8.96441 6.50053 9.15208 6.75609 9.39166L13.4884 5.4625C13.4564 5.35069 13.4365 5.24288 13.4285 5.13906C13.4205 5.03524 13.4165 4.91944 13.4165 4.79166C13.4165 3.99305 13.696 3.31423 14.255 2.75521C14.8141 2.19618 15.4929 1.91666 16.2915 1.91666C17.0901 1.91666 17.7689 2.19618 18.328 2.75521C18.887 3.31423 19.1665 3.99305 19.1665 4.79166C19.1665 5.59028 18.887 6.26909 18.328 6.82812C17.7689 7.38715 17.0901 7.66666 16.2915 7.66666C15.9082 7.66666 15.5488 7.59878 15.2134 7.46302C14.878 7.32725 14.5825 7.13958 14.3269 6.9L7.59463 10.8292C7.62657 10.941 7.64654 11.0488 7.65452 11.1526C7.66251 11.2564 7.6665 11.3722 7.6665 11.5C7.6665 11.6278 7.66251 11.7436 7.65452 11.8474C7.64654 11.9512 7.62657 12.059 7.59463 12.1708L14.3269 16.1C14.5825 15.8604 14.878 15.6727 15.2134 15.537C15.5488 15.4012 15.9082 15.3333 16.2915 15.3333C17.0901 15.3333 17.7689 15.6128 18.328 16.1719C18.887 16.7309 19.1665 17.4097 19.1665 18.2083C19.1665 19.0069 18.887 19.6858 18.328 20.2448C17.7689 20.8038 17.0901 21.0833 16.2915 21.0833ZM16.2915 19.1667C16.563 19.1667 16.7906 19.0748 16.9743 18.8911C17.158 18.7075 17.2498 18.4799 17.2498 18.2083C17.2498 17.9368 17.158 17.7092 16.9743 17.5255C16.7906 17.3418 16.563 17.25 16.2915 17.25C16.02 17.25 15.7924 17.3418 15.6087 17.5255C15.425 17.7092 15.3332 17.9368 15.3332 18.2083C15.3332 18.4799 15.425 18.7075 15.6087 18.8911C15.7924 19.0748 16.02 19.1667 16.2915 19.1667ZM4.7915 12.4583C5.06303 12.4583 5.29064 12.3665 5.47432 12.1828C5.658 11.9991 5.74984 11.7715 5.74984 11.5C5.74984 11.2285 5.658 11.0009 5.47432 10.8172C5.29064 10.6335 5.06303 10.5417 4.7915 10.5417C4.51998 10.5417 4.29237 10.6335 4.10869 10.8172C3.92501 11.0009 3.83317 11.2285 3.83317 11.5C3.83317 11.7715 3.92501 11.9991 4.10869 12.1828C4.29237 12.3665 4.51998 12.4583 4.7915 12.4583ZM16.2915 5.75C16.563 5.75 16.7906 5.65816 16.9743 5.47448C17.158 5.2908 17.2498 5.06319 17.2498 4.79166C17.2498 4.52014 17.158 4.29253 16.9743 4.10885C16.7906 3.92517 16.563 3.83333 16.2915 3.83333C16.02 3.83333 15.7924 3.92517 15.6087 4.10885C15.425 4.29253 15.3332 4.52014 15.3332 4.79166C15.3332 5.06319 15.425 5.2908 15.6087 5.47448C15.7924 5.65816 16.02 5.75 16.2915 5.75Z"
+//     fill="black"
+//     />
+// </svg>
 //             {/* <div style={{ width: 131, height: 36, position: "relative", alignItems: "center", justifyContent:"center", top: 940 }}> */}
 //                 <div style={{ width: 131, height: 36, position: "relative", left: 135, top: 940 }}>
 //                 <div
@@ -534,7 +593,7 @@ export default function TestResultPage() {
 //                     fontSize: 20,
 //                     fontWeight: 500,
 //                     alignItems: "center",
-//                     justifyContent: "center", 
+//                     justifyContent: "center",
 //                 }}
 //                 >
 //                 TIP</div>
@@ -586,7 +645,7 @@ export default function TestResultPage() {
 //           boxSizing: "border-box",
 //         }}
 //       >
-        
+
 //         <p style={{ fontSize: 14, marginBottom: 12, color: "#000" }}>
 //           내 인테리어 취향으로 방을 꾸며요
 //         </p>
@@ -605,7 +664,7 @@ export default function TestResultPage() {
 //           <p style={{ fontSize: 16, color: "#fff" }}>홈스타일링 상담 알아보기</p>
 //         </div>
 //       </div>
-        
+
 //     </div>
 //   );
 // }
