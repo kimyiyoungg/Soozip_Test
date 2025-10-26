@@ -1,6 +1,6 @@
 import { useState } from "react";
+import CardButton from "/Users/yel08/soozip/src/CardButton.tsx";
 
-import CardButton from "/Users/2eeeee0/soozip/src/CardButton.tsx";
 export default function StylingTypePage() {
   const [selectedId, setSelectedId] = useState(null);
 

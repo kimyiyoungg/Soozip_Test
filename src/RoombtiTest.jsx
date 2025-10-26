@@ -1,3 +1,4 @@
+// 예린 코드
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { createClient } from "@supabase/supabase-js";
@@ -15,6 +16,7 @@ export default function RoombtiTest() {
   const [step, setStep] = useState(0);
   const [selected, setSelected] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [submitted, setSubmitted] = useState(false); // submit 중복 방지
 
   // DB에서 질문 불러오기
   useEffect(() => {
@@ -42,42 +44,118 @@ export default function RoombtiTest() {
     fetchQuestions();
   }, []);
 
-  const current = questions[step];
 
+  // const current = questions[step];
+
+  // // 답변 선택
+  // const handleAnswer = (option_id, index) => {
+  //   setSelected(index);
+
+  //   // 선택지를 업데이트하고, 마지막 문항이면 submit
+  //   setChoices((prev) => {
+  //     const updatedChoices = { ...prev, [current.question_id]: option_id };
+
+  //     if (step === questions.length - 1) {
+  //       // 마지막 문항 선택 → submit
+  //       handleSubmit(updatedChoices);
+  //     } else {
+  //       // 다음 문항으로 이동
+  //       setStep(step + 1);
+  //       setSelected(null);
+  //     }
+
+  //     return updatedChoices;
+  //   });
+  // };
+
+  // // 제출
+  // const handleSubmit = async (finalChoices) => {
+  //   try {
+  //     // sessionuser 테이블 이름 소문자로
+  //     const { data: sessionData, error: sessionError } = await supabase
+  //       .from("sessionuser")
+  //       .insert([{ session_uuid: crypto.randomUUID() }])
+  //       .select("session_id")
+  //       .single();
+
+  //     if (sessionError) throw sessionError;
+
+  //     const session_id = sessionData.session_id;
+
+  //     // choice 테이블에 12개 선택지만 정확히 insert
+  //     const choiceInserts = Object.entries(finalChoices).map(([qId, optionId]) => ({
+  //       session_id,
+  //       option_id: optionId,
+  //     }));
+
+  //     const { error: choiceError } = await supabase
+  //       .from("choice")
+  //       .insert(choiceInserts);
+
+  //     if (choiceError) throw choiceError;
+
+  //     // TestResult 페이지로 이동
+  //     navigate("/TestResult", { state: { session_id } });
+  //   } catch (err) {
+  //     console.error("제출 오류:", err);
+  //   }
+  // };
+  
+
+   const current = questions[step];
+
+  // 답변 선택
   const handleAnswer = (option_id, index) => {
-    setSelected(index); // 선택 표시
-    setChoices((prev) => ({ ...prev, [current.question_id]: option_id }));
+    setSelected(index);
 
-    // 다음 질문 또는 제출
-    if (step < questions.length - 1) {
-      setStep(step + 1);
-      setSelected(null); // 다음 질문 선택 초기화
+    // 선택지를 업데이트
+    const updatedChoices = { ...choices, [current.question_id]: option_id };
+    setChoices(updatedChoices);
+
+    if (step === questions.length - 1) {
+      // 마지막 문항이면 setState 외부에서 submit 호출
+      handleSubmit(updatedChoices);
     } else {
-      handleSubmit();
+      // 다음 문항으로 이동
+      setStep(step + 1);
+      setSelected(null);
     }
   };
 
-  // 제출 후 DB 저장
-  const handleSubmit = async () => {
+
+  // 제출
+  const handleSubmit = async (finalChoices) => {
+    if (submitted) return; // 이미 제출되었으면 아무것도 안 함
+    setSubmitted(true);     // 제출 시작 표시
+
     try {
-      const { data: sessionData } = await supabase
-        .from("SessionUser")
+      // sessionuser 테이블 이름 소문자
+      const { data: sessionData, error: sessionError } = await supabase
+        .from("sessionuser")
         .insert([{ session_uuid: crypto.randomUUID() }])
-        .select()
+        .select("session_id")
         .single();
+
+      if (sessionError) throw sessionError;
 
       const session_id = sessionData.session_id;
 
-      const choiceInserts = Object.entries(choices).map(([qId, optionId]) => ({
+      // choice 테이블에 12개 선택지만 정확히 insert
+      const choiceInserts = Object.entries(finalChoices).map(([qId, optionId]) => ({
         session_id,
         option_id: optionId,
       }));
 
-      await supabase.from("Choice").insert(choiceInserts);
+      const { error: choiceError } = await supabase
+        .from("choice")
+        .insert(choiceInserts);
 
+      if (choiceError) throw choiceError;
+
+      // TestResult 페이지로 이동
       navigate("/TestResult", { state: { session_id } });
     } catch (err) {
-      console.error(err);
+      console.error("제출 오류:", err);
     }
   };
 
@@ -213,6 +291,7 @@ export default function RoombtiTest() {
   );
 }
 
+// // 이영주임님 코드
 // import { useState } from "react";
 // import { useNavigate } from "react-router-dom";
 

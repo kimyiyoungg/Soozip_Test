@@ -3,7 +3,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination } from "swiper/modules";
-import CardButton from "/Users/2eeeee0/soozip/src/CardButton.tsx";
+import CardButton from "/Users/yel08/soozip/src/CardButton.tsx";
+
 
 export default function RoomCounsult() {
   const [selectedId, setSelectedId] = useState(null);
