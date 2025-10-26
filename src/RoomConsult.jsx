@@ -3,7 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination } from "swiper/modules";
-import CardButton from "/Users/yel08/soozip/src/CardButton.tsx";
+import CardButton from "./CardButton.tsx";
 
 
 export default function RoomCounsult() {

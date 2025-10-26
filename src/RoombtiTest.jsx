@@ -283,7 +283,7 @@ export default function RoombtiTest() {
               cursor: "pointer",
             }}
           >
-            <p style={{ fontSize: 16, fontWeight: 500 }}>{opt.option_text}</p>
+            <p style={{ fontSize: 16, fontWeight: 500, color:"#000" }}>{opt.option_text}</p>
           </div>
         ))}
       </div>
