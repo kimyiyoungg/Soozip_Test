@@ -1,41 +1,41 @@
-// import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-// import { createClient } from "@supabase/supabase-js";
+import { useEffect, useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { createClient } from "@supabase/supabase-js";
 
-// const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-// const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
-// const supabase = createClient(supabaseUrl, supabaseKey);
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseKey = import.meta.env.VITE_SUPABASE_KEY;
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 export default function TestResultPage() {
   const navigate = useNavigate();
-  // const location = useLocation();
+  const location = useLocation();
 
   //   // ===== 여기서 navigate로 전달된 session_id를 가져옵니다 =====
-  // const { session_id } = location.state || {}; 
+  const { session_id } = location.state || {}; 
 
   // // 결과 데이터를 저장할 state
-  // const [result, setResult] = useState(null);
+  const [result, setResult] = useState(null);
 
-  // useEffect(() => {
-  //   if (!session_id) return;
+  useEffect(() => {
+    if (!session_id) return;
 
-  //   // ===== DB에서 session_id 기반으로 resulttype 가져오기 =====
-  //   const fetchResult = async () => {
-  //     const { data, error } = await supabase
-  //       .from("resulttype") // table 이름 소문자로
-  //       .select("*")
-  //       .eq("session_id", session_id)
-  //       .single(); // session 하나만 가져오기
+    // ===== DB에서 session_id 기반으로 resulttype 가져오기 =====
+    const fetchResult = async () => {
+      const { data, error } = await supabase
+        .from("resulttype") // table 이름 소문자로
+        .select("*")
+        .eq("session_id", session_id)
+        .single(); // session 하나만 가져오기
 
-  //     if (error) {
-  //       console.error("결과 불러오기 실패:", error);
-  //     } else {
-  //       setResult(data); // 가져온 데이터 state에 저장
-  //     }
-  //   };
+      if (error) {
+        console.error("결과 불러오기 실패:", error);
+      } else {
+        setResult(data); // 가져온 데이터 state에 저장
+      }
+    };
 
-  //   fetchResult();
-  // }, [session_id]);
+    fetchResult();
+  }, [session_id]);
 
 
   return (
@@ -128,27 +128,36 @@ export default function TestResultPage() {
         </div>
 
         {/* 메인 SVG 박스 */}
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            marginBottom: 20,
-          }}
-        >
-          <svg
-            width={361}
-            height={490}
-            viewBox="0 0 361 490"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            preserveAspectRatio="none"
+        {result? (
+            <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              marginBottom: 20,
+            }}
           >
-            <path
-              d="M0 20C0 8.9543 8.9543 0 20 0H341C352.046 0 361 8.9543 361 20V470C361 481.046 352.046 490 341 490H20C8.95431 490 0 481.046 0 470V20Z"
-              fill="#D9D9D9"
+            {/* <svg
+              width={361}
+              height={490}
+              viewBox="0 0 361 490"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              preserveAspectRatio="none"
+            >
+              <path
+                d="M0 20C0 8.9543 8.9543 0 20 0H341C352.046 0 361 8.9543 361 20V470C361 481.046 352.046 490 341 490H20C8.95431 490 0 481.046 0 470V20Z"
+                fill="#D9D9D9"
+              />
+            </svg> */}
+            <img
+              src={`${result.result_image}`} // 📝 DB에서 가져온 result_image
+              alt="Test Result"
+              style={{ width: 361, height: 490, objectFit: "cover" }}
             />
-          </svg>
-        </div>
+          </div>
+        ) : (
+          <p>결과 불러오는 중...</p>
+        )}
 
         {/* 이미지 저장 / 테스트 공유 */}
         <div
