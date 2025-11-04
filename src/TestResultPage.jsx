@@ -62,7 +62,7 @@ export default function TestResultPage() {
       }}
     >
       {/* ✅ 스크롤 되는 영역 */}
-      <div style={{ flex: 1, padding: "150px 0 0 0", position: "relative" }}>
+      <div style={{ flex: 1, padding: "115px 0 0 0", position: "relative" }}>
         {/*         
         <p
           style={{

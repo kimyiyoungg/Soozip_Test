@@ -48,10 +48,10 @@ export default function CardButton({
       }}
     >
       <div style={{ textAlign: "left" }}>
-        <p style={{ fontSize: 13, fontWeight: 600, color: "rgba(0,0,0,0.68)" }}>
+        <p style={{ fontSize: 13, fontWeight: 600, color: "#000"}}>
           {subtitle}
         </p>
-        <p style={{ fontSize: 20, fontWeight: 600 }}>{title}</p>
+        <p style={{ fontSize: 20, fontWeight: 600, color: "#000" }}>{title}</p>
       </div>
       <img
         src={imgSrc}

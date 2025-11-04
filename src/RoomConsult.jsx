@@ -67,10 +67,10 @@ export default function RoomCounsult() {
       <div
         style={{
           width: "100%",
-          height: 230,
+          height: 210,
           borderRadius: 20,
           overflow: "hidden",
-          marginBottom: "1rem",
+          // marginBottom: "1rem",
         }}
       >
         <Swiper
@@ -97,6 +97,7 @@ export default function RoomCounsult() {
           {...card}
           selectedId={selectedId}
           setSelectedId={setSelectedId}
+
         />
       ))}
     </div>

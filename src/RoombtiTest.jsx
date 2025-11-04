@@ -234,14 +234,18 @@ export default function RoombtiTest() {
     <div
       style={{
         width: 408,
-        height: 852,
+        //height: 852,
+        minHeight: 700,
+        height: "100dvh",
         background: "#fbf2d5",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        overflow: "hidden",
+        justifyContent: "space-between", // ✅ 요소가 위–중앙–아래 균등 배치
+        padding: "80px 0 40px",   // ✅ 상단/하단 여백만 지정
+        boxSizing: "border-box",  // ✅ 여백 포함 크기 계산
         paddingTop: "80px",
-        gap: "2rem",
+        gap: "10px",
         position: "relative",
       }}
     >

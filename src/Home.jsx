@@ -7,7 +7,7 @@ export default function Home() {
     <div
       style={{
         width: 408,
-        minHeight: 852,
+        minHeight: 600,
         height: "100dvh", //새로로 꽉차게 ,dvh는 주소창 높이를 제외한 실제 보이는 영역
         display: "flex",
         flexDirection: "column",
@@ -16,9 +16,10 @@ export default function Home() {
         background: "#fbf2d5",
         padding: "2rem 1rem",
         boxSizing: "border-box",
+        cursor: "default"
       }}
     >
-      <div style={{ textAlign: "center" }}>
+      <div style={{ textAlign: "center", cursor:"default"}}>
         <p style={{ fontSize: 12, fontWeight: 600, color: "#fe6a0f" }}>
           soozip
         </p>
