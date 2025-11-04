@@ -205,7 +205,7 @@ export default function RoombtiTest() {
       }
 
       const result_text = `${result_code} 유형입니다!`;
-      const result_image = `/images/${result_code}.png`;
+      const result_image = `src/assets/${result_code}.png`;
 
       const { error: resultTypeErr } = await supabase
         .from("resulttype")

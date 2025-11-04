@@ -151,8 +151,9 @@ export default function TestResultPage() {
             </svg> */}
             <img
               src={`${result.result_image}`} // 📝 DB에서 가져온 result_image
-              alt="Test Result"
-              style={{ width: 361, height: 490, objectFit: "cover" }}
+              // src="src/assets/INFP.png"
+              alt={`${result.result_image}`}
+              style={{ width: 361, height: 490, objectFit: "cover",borderRadius: 20, }}
             />
           </div>
         ) : (
