@@ -31,8 +31,19 @@ export default function Home() {
         </p>
       </div>
 
-      <img
+      {/* <img
         src="src/assets/bear3.png"
+        alt="main"
+        style={{
+          width: 250,
+          height: 250,
+          objectFit: "cover",
+          margin: "2rem 0",
+        }}
+      /> */}
+
+      <img
+        src="src/assets/main_bear.png"
         alt="main"
         style={{
           width: 250,
