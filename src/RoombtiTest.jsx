@@ -18,6 +18,8 @@ export default function RoombtiTest() {
   const [loading, setLoading] = useState(true);
   const [submitted, setSubmitted] = useState(false); // submit 중복 방지
 
+  const [loadingSubmit, setLoadingSubmit] = useState(false);
+
   // DB에서 질문 불러오기
   useEffect(() => {
     async function fetchQuestions() {
@@ -70,6 +72,8 @@ export default function RoombtiTest() {
   const handleSubmit = async (finalChoices) => {
     if (submitted) return; // 이미 제출되었으면 아무것도 안 함
     setSubmitted(true);     // 제출 시작 표시
+
+    setLoadingSubmit(true);
 
     try {
       // sessionuser 테이블 이름 소문자
@@ -220,6 +224,8 @@ export default function RoombtiTest() {
       navigate("/TestResult", { state: { session_id } });
     } catch (err) {
       console.error("제출 오류:", err);
+    } finally {
+      setLoadingSubmit(false);
     }
   };
 
@@ -355,6 +361,77 @@ export default function RoombtiTest() {
           </div>
         ))}
       </div>
+     
+
+      
+
+
+      {/* 🔥🔥🔥 제출 로딩 오버레이 (캐릭터 GIF) */}
+      {loadingSubmit && (
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100vw",
+            height: "100vh",
+            background: "rgba(0, 0, 0, 0.45)",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            zIndex: 99999,
+            backdropFilter: "blur(2px)",
+          }}
+        >
+          <div
+            style={{
+              background: "#fff",
+              width: 220,
+              padding: "30px 20px 25px",
+              borderRadius: "16px",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              boxShadow: "0 4px 25px rgba(0,0,0,0.15)",
+            }}
+          >
+            <img
+              // src="src/assets/loading_character.gif"
+              src="src/assets/bear4.png"
+              alt="loading"
+              style={{
+                width: 120,
+                height: 120,
+                objectFit: "contain",
+                marginBottom: 12,
+              }}
+            />
+
+            <p
+              style={{
+                fontSize: 18,
+                fontWeight: 600,
+                color: "#fe6a0f",
+                marginBottom: 5,
+              }}
+            >
+              잠시만요!
+            </p>
+
+            <p
+              style={{
+                fontSize: 15,
+                color: "#555",
+              }}
+            >
+              방BTI를 계산 중이에요 🔎
+            </p>
+          </div>
+        </div>
+      )}
+
+
+
     </div>
   );
 }
