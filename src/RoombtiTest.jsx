@@ -46,8 +46,7 @@ export default function RoombtiTest() {
     fetchQuestions();
   }, []);
 
-
-   const current = questions[step];
+  const current = questions[step];
 
   // 답변 선택
   const handleAnswer = (option_id, index) => {
@@ -67,11 +66,10 @@ export default function RoombtiTest() {
     }
   };
 
-
   // 제출
   const handleSubmit = async (finalChoices) => {
     if (submitted) return; // 이미 제출되었으면 아무것도 안 함
-    setSubmitted(true);     // 제출 시작 표시
+    setSubmitted(true); // 제출 시작 표시
 
     setLoadingSubmit(true);
 
@@ -88,10 +86,12 @@ export default function RoombtiTest() {
       const session_id = sessionData.session_id;
 
       // choice 테이블에 12개 선택지만 정확히 insert
-      const choiceInserts = Object.entries(finalChoices).map(([qId, optionId]) => ({
-        session_id,
-        option_id: optionId,
-      }));
+      const choiceInserts = Object.entries(finalChoices).map(
+        ([qId, optionId]) => ({
+          session_id,
+          option_id: optionId,
+        })
+      );
 
       const { error: choiceError } = await supabase
         .from("choice")
@@ -99,7 +99,6 @@ export default function RoombtiTest() {
 
       if (choiceError) throw choiceError;
 
-      
       // 3. sessionresultdetail 계산 (dimension_value_id 기준 점수 누적)
       const valueScores = {}; // { dimension_value_id: { dimension_id, score } }
 
@@ -132,16 +131,20 @@ export default function RoombtiTest() {
       }
 
       // 4. sessionresultdetail upsert
-      const resultInserts = Object.entries(valueScores).map(([value_id, { dimension_id, score }]) => ({
-        session_id,
-        dimension_id,
-        dimension_value_id: value_id,
-        score,
-      }));
+      const resultInserts = Object.entries(valueScores).map(
+        ([value_id, { dimension_id, score }]) => ({
+          session_id,
+          dimension_id,
+          dimension_value_id: value_id,
+          score,
+        })
+      );
 
       const { error: resultError } = await supabase
         .from("sessionresultdetail")
-        .upsert(resultInserts, { onConflict: ["session_id", "dimension_id", "dimension_value_id"] });
+        .upsert(resultInserts, {
+          onConflict: ["session_id", "dimension_id", "dimension_value_id"],
+        });
 
       if (resultError) throw resultError;
 
@@ -155,7 +158,10 @@ export default function RoombtiTest() {
       // dimension별 최고 score 선택
       const bestValues = {}; // { dimension_id: dimension_value_id }
       details.forEach(({ dimension_id, dimension_value_id, score }) => {
-        if (!bestValues[dimension_id] || score > bestValues[dimension_id].score) {
+        if (
+          !bestValues[dimension_id] ||
+          score > bestValues[dimension_id].score
+        ) {
           bestValues[dimension_id] = { dimension_value_id, score };
         }
       });
@@ -216,10 +222,6 @@ export default function RoombtiTest() {
         .insert([{ session_id, result_code, result_text, result_image }]);
       if (resultTypeErr) throw resultTypeErr;
 
-
-
-
-
       // TestResult 페이지로 이동
       navigate("/TestResult", { state: { session_id } });
     } catch (err) {
@@ -248,8 +250,8 @@ export default function RoombtiTest() {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "space-between", // ✅ 요소가 위–중앙–아래 균등 배치
-        padding: "80px 0 40px",   // ✅ 상단/하단 여백만 지정
-        boxSizing: "border-box",  // ✅ 여백 포함 크기 계산
+        padding: "80px 0 40px", // ✅ 상단/하단 여백만 지정
+        boxSizing: "border-box", // ✅ 여백 포함 크기 계산
         paddingTop: "80px",
         gap: "10px",
         position: "relative",
@@ -357,7 +359,9 @@ export default function RoombtiTest() {
               cursor: "pointer",
             }}
           >
-            <p style={{ fontSize: 16, fontWeight: 500, color:"#000" }}>{opt.option_text}</p>
+            <p style={{ fontSize: 16, fontWeight: 500, color: "#000" }}>
+              {opt.option_text}
+            </p>
           </div>
         ))}
       </div>
