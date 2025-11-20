@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { createClient } from "@supabase/supabase-js";
+import downloadIcon from './assets/download.svg';
+import shareIcon from './assets/share.svg';
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseKey = import.meta.env.VITE_SUPABASE_KEY;
@@ -148,6 +150,16 @@ export default function TestResultPage() {
           }}
         >
           {/* 왼쪽 텍스트 */}
+          {/* <img
+            src="src/assets/soozip_logo.png"
+            alt="로고"
+            style={{
+              width: "20px", // 작게!
+              height: "20px",
+              // objectFit: "contain",
+              marginBottom: "10px",
+            }}
+          />
           <p
             style={{
               fontSize: 16,
@@ -157,7 +169,32 @@ export default function TestResultPage() {
             }}
           >
             SOOZIP
-          </p>
+          </p> */}
+          {/* 왼쪽: 로고 + 텍스트 */}
+          <div style={{ display: "flex", alignItems: "flex-end", gap: 5 }}>
+            <img
+              src="src/assets/soozip_logo.png"
+              alt="로고"
+              style={{
+                width: 20,
+                height: 20,
+                marginBottom: 10,
+                marginLeft: 10,
+                // marginTop:0
+              }}
+            />
+            <p
+              style={{
+                fontSize: 35,
+                fontWeight: 700,
+                color: "#000",
+                margin: 0, // margin 제거
+                lineHeight: 1, // 글씨 바닥 맞춤
+              }}
+            >
+              SOOZIP
+            </p>
+          </div>
 
           {/* 오른쪽 이미지 */}
           <img
@@ -197,13 +234,14 @@ export default function TestResultPage() {
           style={{
             display: "flex",
             alignItems: "center",
-            justifyContent: "center",
-            flexDirection: "column",
-            gap: 5,
+            justifyContent: "flex-end",
+            flexDirection: "row",
+            gap: 20,
             marginBottom: 20,
+            marginRight: 40,
           }}
         >
-          <p
+          {/* <p
             style={{
               fontSize: 16,
               fontWeight: 700,
@@ -216,9 +254,17 @@ export default function TestResultPage() {
             onMouseLeave={(e) => (e.currentTarget.style.color = "#000")}
           >
             이미지 저장
-          </p>
+          </p> */}
+          <img
+            src={downloadIcon}
+            alt="이미지 저장"
+            style={{ cursor: 'pointer', width: 30, height: 30 }}
+            onClick={() => downloadImage(result.result_image)}
+            onMouseEnter={(e) => (e.currentTarget.style.filter = 'brightness(0.7)')}
+            onMouseLeave={(e) => (e.currentTarget.style.filter = 'brightness(1)')}
+          />
 
-          <p
+          {/* <p
             style={{
               fontSize: 16,
               fontWeight: 700,
@@ -230,7 +276,19 @@ export default function TestResultPage() {
             onMouseLeave={(e) => (e.currentTarget.style.color = "#000")}
           >
             테스트 공유
-          </p>
+          </p> */}
+
+          <img
+            src={shareIcon}
+            alt="테스트 공유"
+            style={{ cursor: 'pointer', width: 24, height: 24 }}
+            onClick={() => alert("테스트 공유 기능 준비 중입니다")}
+            onMouseEnter={(e) => (e.currentTarget.style.filter = 'brightness(0.7)')}
+            onMouseLeave={(e) => (e.currentTarget.style.filter = 'brightness(1)')}
+          />
+
+
+
         </div>
 
         <hr
