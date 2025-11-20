@@ -332,11 +332,14 @@ export default function RoombtiTest() {
       {/* 질문 */}
       <p
         style={{
-          fontSize: 20,
-          fontWeight: 600,
+          fontSize: 28,
+          fontWeight: 900,
           textAlign: "center",
           color: "#000",
           marginTop: "1.5rem",
+          whiteSpace: "pre-wrap", // 줄바꿈 문자(\n) 적용
+          wordWrap: "break-word", 
+          lineHeight: 1.4,
         }}
       >
         {current.question_text}
@@ -422,7 +425,7 @@ export default function RoombtiTest() {
               onClick={() => handleAnswer(opt.option_id, i)}
               style={{
                 width: current.questionoption.length === 4 ? 150 : 312,
-                height: 200,
+                height: 170,
                 borderRadius: 12,
                 background: "#fff",
                 border: `2px solid ${selected === i ? "#fe6a0f" : "#ddd9d9"}`,
