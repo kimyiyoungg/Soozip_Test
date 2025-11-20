@@ -18,11 +18,14 @@ export default function TestResultPage() {
   // // 결과 데이터를 저장할 state
   const [result, setResult] = useState(null);
 
+  const [imageLoaded, setImageLoaded] = useState(false);
+
   useEffect(() => {
+    const fetchResult = async () => {
     if (!session_id) return;
 
     // ===== DB에서 session_id 기반으로 resulttype 가져오기 =====
-    const fetchResult = async () => {
+    // const fetchResult = async () => {
       const { data, error } = await supabase
         .from("resulttype") // table 이름 소문자로
         .select("*")
@@ -33,15 +36,22 @@ export default function TestResultPage() {
         console.error("결과 불러오기 실패:", error);
       } else {
         setResult(data); // 가져온 데이터 state에 저장
+        localStorage.setItem("lastResult", JSON.stringify(data)); // 결과 저장
       }
     };
 
     fetchResult();
   }, [session_id]);
 
-  const [imageLoaded, setImageLoaded] = useState(false);
+  // 2) 뒤로 가기 시 localStorage에서 복구
+  useEffect(() => {
+  if (!result) {
+  const saved = localStorage.getItem("lastResult");
+  if (saved) setResult(JSON.parse(saved));
+  }
+  }, [result]);
 
-  // 2) 이미지 로드 후 session 삭제  ← ★ 여기에 넣으면 됨
+  // 3) 이미지 로드 후 session 삭제  ← ★ 여기에 넣으면 됨
   useEffect(() => {
     if (!imageLoaded || !session_id) return;
 
