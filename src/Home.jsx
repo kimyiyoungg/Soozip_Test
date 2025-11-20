@@ -44,7 +44,7 @@ export default function Home() {
           />
           <p
             style={{
-              fontSize: 25,
+              fontSize: 34,
               fontWeight: 600,
               color: "rgba(0,0,0,0.68)",
               margin: 0, // 기본 여백 제거
@@ -56,7 +56,15 @@ export default function Home() {
           </p>
         </div>
 
-        <p style={{ fontSize: 50, fontWeight: 1000, color: "#000" }}>
+        <p
+          style={{
+            fontSize: 50,
+            fontWeight: 800,
+            color: "#000",
+            marginTop: 40,
+            background: "linear-gradient(transparent 60%, #f88d2f4D 0%)",
+          }}
+        >
           나의 집꾸 스타일은?
         </p>
       </div>
