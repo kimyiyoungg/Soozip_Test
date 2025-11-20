@@ -45,7 +45,7 @@ export default function StylingTypePage() {
         position: "relative", // ✅ 추가 중요!!
       }}
     >
-            {/* ✅ SVG 뒤로가기 버튼 */}
+      {/* ✅ SVG 뒤로가기 버튼 */}
       <svg
         onClick={() => navigate(-1)} // 이전 페이지로 이동
         width={14}
@@ -80,14 +80,13 @@ export default function StylingTypePage() {
           alignItems: "center",
           justifyContent: "center",
           marginTop: 60,
-          
         }}
       >
         스타일링
       </div>
 
       <div style={{ textAlign: "center" }}>
-        <p style={{ fontSize: 20, fontWeight: 600,  color: "#000"}}>
+        <p style={{ fontSize: 20, fontWeight: 600, color: "#000" }}>
           <b>soozip과 함께 스타일링 더 알아보고</b>
           <br />
           <b>맞춤 솔루션을 찾아보세요</b>
