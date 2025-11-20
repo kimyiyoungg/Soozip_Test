@@ -82,7 +82,7 @@ export default function StylingTypePage() {
           marginTop: 60,
         }}
       >
-        스타일링
+        스타일링 타입
       </div>
 
       <div style={{ textAlign: "center" }}>
@@ -92,7 +92,7 @@ export default function StylingTypePage() {
           <b>맞춤 솔루션을 찾아보세요</b>
         </p>
         <p style={{ fontSize: 13, fontWeight: 600, color: "#b8b1b1" }}>
-          개인별 맞춤 솔루션을 선택할 수 있습니다.
+          개인별 맞춤 솔루션을 알아볼 수 있습니다.
         </p>
       </div>
 
