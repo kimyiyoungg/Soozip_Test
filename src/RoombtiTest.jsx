@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { createClient } from "@supabase/supabase-js";
 import progressIcon from "./assets/IMG_3286.png"; // 이미지 import
+import LoadingPage from "./LoadingPage";
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseKey = import.meta.env.VITE_SUPABASE_KEY;
@@ -229,7 +230,7 @@ export default function RoombtiTest() {
     }
   };
 
-  if (loading) return <p>로딩 중...</p>;
+  if (loading) return <LoadingPage/>;
   if (!current) return <p>질문이 없습니다.</p>;
 
   const progressStep = Math.min(step, questions.length - 1);
@@ -340,7 +341,7 @@ export default function RoombtiTest() {
       </p>
 
       {/* 선택 옵션 */}
-      <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
+      {/* <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
         {current.questionoption.map((opt, i) => (
           <div
             key={opt.option_id}
@@ -360,8 +361,99 @@ export default function RoombtiTest() {
             <p style={{ fontSize: 16, fontWeight: 500, color:"#000" }}>{opt.option_text}</p>
           </div>
         ))}
-      </div>
+      </div> */}
+     {/* 선택 옵션 */}
      
+      {/* <div
+        style={{
+          display: "grid",
+          gap: "1.5rem",
+          gridTemplateColumns:
+            current.questionoption.length === 4 ? "1fr 1fr" : "1fr",
+          justifyItems: "center",
+          marginTop: "1rem",
+        }}
+      >
+        {current.questionoption.map((opt, i) => (
+          <div
+            key={opt.option_id}
+            onClick={() => handleAnswer(opt.option_id, i)}
+            style={{
+              width: current.questionoption.length === 4 ? 150 : 312,
+              height: 200, // ← 4개일 때도 높이 동일하게 맞춤
+              borderRadius: 12,
+              background: "#fff",
+              border: `2px solid ${selected === i ? "#fe6a0f" : "#ddd9d9"}`,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              cursor: "pointer",
+              textAlign: "center",
+              padding: "0 10px",
+            }}
+          >
+            <p style={{ fontSize: 16, fontWeight: 500, color: "#000" }}>
+              {opt.option_text}
+            </p>
+          </div>
+        ))}
+      </div> */}
+      {/* 선택 옵션 */}
+      <div
+        style={{
+          display: "grid",
+          gap: "1.5rem",
+          gridTemplateColumns:
+            current.questionoption.length === 4 ? "1fr 1fr" : "1fr",
+          justifyItems: "center",
+          marginTop: "1rem",
+        }}
+      >
+        {current.questionoption.map((opt, i) => {
+          const isImage = opt.option_text?.toLowerCase().endsWith(".png");
+
+          return (
+            <div
+              key={opt.option_id}
+              onClick={() => handleAnswer(opt.option_id, i)}
+              style={{
+                width: current.questionoption.length === 4 ? 150 : 312,
+                height: 200,
+                borderRadius: 12,
+                background: "#fff",
+                border: `2px solid ${selected === i ? "#fe6a0f" : "#ddd9d9"}`,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                cursor: "pointer",
+                textAlign: "center",
+                padding: "10px",
+              }}
+            >
+
+              {/* 🔥 텍스트 vs 이미지 분기 */}
+              {isImage ? (
+                <img
+                  src={`src/assets/${opt.option_text}`}
+                  alt="option"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "contain",
+                  }}
+                />
+              ) : (
+                <p style={{ fontSize: 16, fontWeight: 500, color: "#000" }}>
+                  {opt.option_text}
+                </p>
+              )}
+            </div>
+          );
+        })}
+      </div>
+
+
+
 
       
 
@@ -424,7 +516,7 @@ export default function RoombtiTest() {
                 color: "#555",
               }}
             >
-              방BTI를 계산 중이에요 🔎
+              방BTI 결과를 기다리는 중이에요 🔎
             </p>
           </div>
         </div>

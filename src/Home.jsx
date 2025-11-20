@@ -91,7 +91,7 @@ export default function Home() {
           justifyContent: "center",
           cursor: "pointer",
         }}
-        onClick={() => navigate("/loading")}
+        onClick={() => navigate("/RoombtiTest")}
       >
         방BTI 알아보기
       </button>
