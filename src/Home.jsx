@@ -56,7 +56,7 @@ export default function Home() {
           </p>
         </div>
 
-        <p style={{ fontSize: 45, fontWeight: 1000, color: "#000" }}>
+        <p style={{ fontSize: 50, fontWeight: 1000, color: "#000" }}>
           나의 집꾸 스타일은?
         </p>
       </div>
@@ -66,11 +66,11 @@ export default function Home() {
         src="src/assets/bear3.png"
         alt="main"
         style={{
-          marginBottom: "50px",
-          width: 300,
-          height: 300,
+          marginTop: "0rem", // 원하는 만큼 조절
+          marginBottom: "3rem",
+          width: 400,
+          height: 400,
           objectFit: "cover",
-          margin: "2rem 0",
         }}
       />
 
@@ -91,7 +91,7 @@ export default function Home() {
           justifyContent: "center",
           cursor: "pointer",
         }}
-        onClick={() => navigate("/RoombtiTest")}
+        onClick={() => navigate("/loading")}
       >
         방BTI 알아보기
       </button>

@@ -7,7 +7,7 @@ import StylingTypePage from "./StylingTypePage";
 import StylingInfoPage1 from "./StylingInfoPage1";
 import StylingInfoPage2 from "./StylingInfoPage2";
 import StylingInfoPage3 from "./StylingInfoPage3";
-
+import LoadingPage from "./LoadingPage";
 import TestResultPage from "./TestResultPage";
 import SetUpStylingInfo from "./SetUpStylingInfo";
 
@@ -17,6 +17,9 @@ export default function App() {
     <Routes>
       {/* 홈 */}
       <Route path="/" element={<Home />} />
+
+      {/* 로딩 */}
+      <Route path="/loading" element={<LoadingPage />} />
 
       {/* 방BTI 테스트 */}
       <Route path="/RoombtiTest" element={<RoombtiTest />} />
