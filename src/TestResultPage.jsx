@@ -6,6 +6,8 @@ const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseKey = import.meta.env.VITE_SUPABASE_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
+
+
 export default function TestResultPage() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -36,6 +38,25 @@ export default function TestResultPage() {
 
     fetchResult();
   }, [session_id]);
+
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  // 2) 이미지 로드 후 session 삭제  ← ★ 여기에 넣으면 됨
+  useEffect(() => {
+    if (!imageLoaded || !session_id) return;
+
+    const deleteSession = async () => {
+      const { error } = await supabase
+        .from("sessionuser")
+        .delete()
+        .eq("session_id", session_id);
+
+      if (error) console.error("session 삭제 실패:", error);
+      else console.log("session 삭제 완료");
+    };
+
+    deleteSession();
+  }, [imageLoaded, session_id]);  // ← 이미지가 로드되면 실행됨
 
   const downloadImage = async (imageUrl) => {
     try {
@@ -148,6 +169,7 @@ export default function TestResultPage() {
               src={`${result.result_image}`} // 📝 DB에서 가져온 result_image
               // src="src/assets/INFP.png"
               alt={`${result.result_image}`}
+              onLoad={() => setImageLoaded(true)}
               style={{
                 width: 361,
                 height: 490,
