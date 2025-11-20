@@ -34,7 +34,7 @@ export default function CardButton({
       style={{
         width: "100%",
         maxWidth: 360,
-        height: 100,
+        height: 170,
         borderRadius: 12,
         background: "#fff",
         border: `2px solid ${borderColor}`,
@@ -51,13 +51,13 @@ export default function CardButton({
         <p style={{ fontSize: 13, fontWeight: 600, color: "#000" }}>
           {subtitle}
         </p>
-        <p style={{ fontSize: 20, fontWeight: 600, color: "#000" }}>{title}</p>
+        <p style={{ fontSize: 35, fontWeight: 600, color: "#000" }}>{title}</p>
       </div>
       <img
         src={imgSrc}
         alt={title}
-        width={50}
-        height={50}
+        width={60}
+        height={60}
         style={{ borderRadius: 8, objectFit: "cover" }}
       />
     </button>

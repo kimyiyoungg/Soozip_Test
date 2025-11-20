@@ -61,14 +61,24 @@ export default function Home() {
             fontSize: 50,
             fontWeight: 800,
             color: "#000",
-            marginTop: 40,
-            background: "linear-gradient(transparent 60%, #f88d2f4D 0%)",
+            marginTop: 70,
           }}
         >
-          나의 집꾸 스타일은?
+          나의{" "}
+          <span
+            style={{
+              backgroundImage:
+                "linear-gradient(#f88d2f4D 0.5em, transparent 0)",
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "100% 0.3em", // 형광펜 굵기
+              backgroundPosition: "0 0.5em", // 위치 조정 (글자 아래)
+            }}
+          >
+            집꾸 스타일
+          </span>
+          은?
         </p>
       </div>
-
       {/* 중앙 이미지 */}
       <img
         src="src/assets/bear3.png"
@@ -76,30 +86,29 @@ export default function Home() {
         style={{
           marginTop: "0rem", // 원하는 만큼 조절
           marginBottom: "3rem",
-          width: 400,
-          height: 400,
+          width: 360,
           objectFit: "cover",
         }}
       />
-
       {/* 하단 버튼 */}
       <button
         style={{
           width: "100%",
           maxWidth: 360,
-          height: 54,
+          height: 58,
           borderRadius: 12,
           background: "#000",
           border: "1px solid #ddd9d9",
           color: "#fff",
-          fontSize: 25,
+          fontSize: 30,
           fontWeight: 600,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
           cursor: "pointer",
+          marginTop: -20,
         }}
-        onClick={() => navigate("/RoombtiTest")}
+        onClick={() => navigate("/loading")}
       >
         방BTI 알아보기
       </button>
