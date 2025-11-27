@@ -34,7 +34,7 @@ export default function CardButton({
       style={{
         width: "100%",
         maxWidth: 360,
-        height: 170,
+        height: 150,
         borderRadius: 12,
         background: "#fff",
         border: `2px solid ${borderColor}`,

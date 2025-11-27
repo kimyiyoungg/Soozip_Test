@@ -217,10 +217,11 @@ export default function RoombtiTest() {
 
       const result_text = `${result_code} 유형입니다!`;
       const result_image = `src/assets/${result_code}.png`;
+      const result_info_image = `src/assets/${result_code}_info.png`;
 
       const { error: resultTypeErr } = await supabase
         .from("resulttype")
-        .insert([{ session_id, result_code, result_text, result_image }]);
+        .insert([{ session_id, result_code, result_text, result_image, result_info_image }]);
       if (resultTypeErr) throw resultTypeErr;
 
       // TestResult 페이지로 이동
