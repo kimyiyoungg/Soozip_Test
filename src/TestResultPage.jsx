@@ -125,7 +125,7 @@ export default function TestResultPage() {
           />
         </svg>
 
-        <div
+        {/* <div
           style={{
             display: "flex",
             justifyContent: "space-between",
@@ -144,6 +144,67 @@ export default function TestResultPage() {
             SOOZIP
           </p>
 
+          <img
+            src="src/assets/bear2.png"
+            style={{ width: 148, height: 96, objectFit: "cover" }}
+          />
+        </div> */}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "flex-end",
+            padding: "0 25px",
+          }}
+        >
+          {/* 왼쪽 텍스트 */}
+          {/* <img
+            src="src/assets/soozip_logo.png"
+            alt="로고"
+            style={{
+              width: "20px", // 작게!
+              height: "20px",
+              // objectFit: "contain",
+              marginBottom: "10px",
+            }}
+          />
+          <p
+            style={{
+              fontSize: 16,
+              fontWeight: 700,
+              color: "#000",
+              margin: 10,
+            }}
+          >
+            SOOZIP
+          </p> */}
+          {/* 왼쪽: 로고 + 텍스트 */}
+          <div style={{ display: "flex", alignItems: "flex-end", gap: 5 }}>
+            <img
+              src="src/assets/soozip_logo.png"
+              alt="로고"
+              style={{
+                width: 20,
+                height: 20,
+                marginBottom: 10,
+                marginLeft: 10,
+                // marginTop:0
+              }}
+            />
+            <p
+              style={{
+                fontSize: 35,
+                fontWeight: 700,
+                color: "#000",
+                margin: 0, // margin 제거
+                lineHeight: 1, // 글씨 바닥 맞춤
+              }}
+            >
+              SOOZIP
+            </p>
+          </div>
+
+          {/* 오른쪽 이미지 */}
           <img
             src="src/assets/bear2.png"
             style={{ width: 148, height: 96, objectFit: "cover" }}
