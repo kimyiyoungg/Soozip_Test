@@ -10,27 +10,27 @@ export default function TestResultPage() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  //   // ===== 여기서 navigate로 전달된 session_id를 가져옵니다 =====
   const { session_id } = location.state || {};
 
-  // // 결과 데이터를 저장할 state
   const [result, setResult] = useState(null);
+
+  // ⭐ 메인 이미지 flip 상태 추가
+  const [flipMain, setFlipMain] = useState(false);
 
   useEffect(() => {
     if (!session_id) return;
 
-    // ===== DB에서 session_id 기반으로 resulttype 가져오기 =====
     const fetchResult = async () => {
       const { data, error } = await supabase
-        .from("resulttype") // table 이름 소문자로
+        .from("resulttype")
         .select("*")
         .eq("session_id", session_id)
-        .single(); // session 하나만 가져오기
+        .single();
 
       if (error) {
         console.error("결과 불러오기 실패:", error);
       } else {
-        setResult(data); // 가져온 데이터 state에 저장
+        setResult(data);
       }
     };
 
@@ -45,7 +45,7 @@ export default function TestResultPage() {
 
       const a = document.createElement("a");
       a.href = blobUrl;
-      a.download = "soozip_result.png"; // 저장될 파일 이름
+      a.download = "soozip_result.png";
       document.body.appendChild(a);
       a.click();
       a.remove();
@@ -56,11 +56,47 @@ export default function TestResultPage() {
     }
   };
 
+  // ⭐ Flip 공통 스타일
+  const flipContainer = {
+    perspective: "1000px",
+    width: "361px",
+    height: "490px",
+  };
+
+  const flipInner = (flip) => ({
+    position: "relative",
+    width: "100%",
+    height: "100%",
+    transformStyle: "preserve-3d",
+    transition: "transform 0.6s",
+    transform: flip ? "rotateY(180deg)" : "rotateY(0deg)",
+  });
+
+  const flipFace = {
+    position: "absolute",
+    width: "100%",
+    height: "100%",
+    backfaceVisibility: "hidden",
+    borderRadius: "20px",
+    overflow: "hidden",
+  };
+
+  const flipBack = {
+    ...flipFace,
+    transform: "rotateY(180deg)",
+    background: "#fff",
+    border: "1px solid #ddd",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    fontSize: "20px",
+    fontWeight: "600",
+  };
+
   return (
     <div
       style={{
         width: 408,
-
         height: "100vh",
         minHeight: 1500,
         background: "#fbf2d5",
@@ -69,28 +105,7 @@ export default function TestResultPage() {
         position: "relative",
       }}
     >
-      {/* ✅ 스크롤 되는 영역 */}
       <div style={{ flex: 1, padding: "115px 0 0 0", position: "relative" }}>
-        {/*         
-        <p
-          style={{
-            fontSize: 16,
-            fontWeight: 700,
-            textAlign: "center",
-            color: "#000",
-            marginBottom: 20,
-          }}
-        >
-          SOOZIP
-        </p>
-
-        
-        <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: 50, paddingRight: 25 }}>
-          <img
-            src="src/assets/bear2.png"
-            style={{ width: 148, height: 96, objectFit: "cover" }}
-          />
-        </div> */}
         <svg
           onClick={() => navigate("/")}
           width={14}
@@ -116,7 +131,6 @@ export default function TestResultPage() {
             padding: "0 25px",
           }}
         >
-          {/* 왼쪽 텍스트 */}
           <p
             style={{
               fontSize: 16,
@@ -128,14 +142,13 @@ export default function TestResultPage() {
             SOOZIP
           </p>
 
-          {/* 오른쪽 이미지 */}
           <img
             src="src/assets/bear2.png"
             style={{ width: 148, height: 96, objectFit: "cover" }}
           />
         </div>
 
-        {/* 메인 SVG 박스 */}
+        {/* ⭐ 메인 이미지 → 클릭 시 뒤집히는 카드 */}
         {result ? (
           <div
             style={{
@@ -143,24 +156,35 @@ export default function TestResultPage() {
               justifyContent: "center",
               marginBottom: 20,
             }}
+            onClick={() => setFlipMain(!flipMain)}
           >
-            <img
-              src={`${result.result_image}`} // 📝 DB에서 가져온 result_image
-              // src="src/assets/INFP.png"
-              alt={`${result.result_image}`}
-              style={{
-                width: 361,
-                height: 490,
-                objectFit: "cover",
-                borderRadius: 20,
-              }}
-            />
+            <div style={flipContainer}>
+              <div style={flipInner(flipMain)}>
+                {/* front */}
+                <div style={flipFace}>
+                  <img
+                    src={result.result_image}
+                    alt="result"
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      borderRadius: 20,
+                    }}
+                  />
+                </div>
+
+                {/* back */}
+                <div style={flipBack}>메인 이미지 설명</div>
+              </div>
+            </div>
           </div>
         ) : (
           <p>결과 불러오는 중...</p>
         )}
 
-        {/* 이미지 저장 / 테스트 공유 */}
+        {/* 아래 두 개 카드는 그대로 유지 */}
+        {/* ===== 이미지 저장 / 테스트 공유 ===== */}
         <div
           style={{
             display: "flex",
@@ -210,7 +234,6 @@ export default function TestResultPage() {
           }}
         />
 
-        {/* TIP 버튼 */}
         <div
           style={{
             display: "flex",
@@ -249,7 +272,7 @@ export default function TestResultPage() {
           나에게 어울리는 인테리어는?
         </p>
 
-        {/* <div style={{ display: "flex", justifyContent: "space-between", padding: "0 25px" }}> */}
+        {/* ⭐ 아래 2개 카드는 아무 변화 없이 그대로 유지됨 */}
         <div
           style={{
             display: "flex",
@@ -259,12 +282,7 @@ export default function TestResultPage() {
             margin: "0 auto",
           }}
         >
-          <div
-            style={{
-              flex: "0 0 45%", // 부모 기준 약 45%
-              maxWidth: "45%",
-            }}
-          >
+          <div style={{ flex: "0 0 45%", maxWidth: "45%" }}>
             <div
               style={{
                 display: "flex",
@@ -272,13 +290,7 @@ export default function TestResultPage() {
                 alignItems: "center",
               }}
             >
-              <svg
-                width="100%" // 부모 크기에 맞춤
-                height="auto"
-                viewBox="0 0 164 164"
-                xmlns="http://www.w3.org/2000/svg"
-                preserveAspectRatio="xMidYMid meet"
-              >
+              <svg width="100%" height="auto" viewBox="0 0 164 164">
                 <path
                   d="M0 20C0 8.95 8.95 0 20 0H144C155.05 0 164 8.95 164 20V144C164 155.05 155.05 164 144 164H20C8.95 164 0 155.05 0 144V20Z"
                   fill="#D9D9D9"
@@ -297,32 +309,7 @@ export default function TestResultPage() {
             </div>
           </div>
 
-          {/* 두 번째 카드 + 글자 */}
-          {/* <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-          <svg
-            // width={164}
-            // height={164}
-            // viewBox="0 0 164 164"
-            width="100%"    // 부모 기준 비율 적용
-            height="auto"  
-            viewBox="0 0 164 164"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            preserveAspectRatio="none"
-          >
-            <path
-              d="M0 20C0 8.95431 8.95431 0 20 0H144C155.046 0 164 8.95431 164 20V144C164 155.046 155.046 164 144 164H20C8.9543 164 0 155.046 0 144V20Z"
-              fill="#D9D9D9"
-            />
-          </svg>
-          <p style={{ fontSize: 16, textAlign: "center", color: "#000", marginTop: 8 }}>BBB 스타일</p>
-        </div> */}
-          <div
-            style={{
-              flex: "0 0 45%",
-              maxWidth: "45%",
-            }}
-          >
+          <div style={{ flex: "0 0 45%", maxWidth: "45%" }}>
             <div
               style={{
                 display: "flex",
@@ -330,13 +317,7 @@ export default function TestResultPage() {
                 alignItems: "center",
               }}
             >
-              <svg
-                width="100%"
-                height="auto"
-                viewBox="0 0 164 164"
-                xmlns="http://www.w3.org/2000/svg"
-                preserveAspectRatio="xMidYMid meet"
-              >
+              <svg width="100%" height="auto" viewBox="0 0 164 164">
                 <path
                   d="M0 20C0 8.95 8.95 0 20 0H144C155.05 0 164 8.95 164 20V144C164 155.05 155.05 164 144 164H20C8.95 164 0 155.05 0 144V20Z"
                   fill="#D9D9D9"
@@ -357,12 +338,11 @@ export default function TestResultPage() {
         </div>
       </div>
 
-      {/* ✅ 하단 고정 영역 */}
+      {/* 하단 고정 영역 */}
       <div
         style={{
-          // width: 408,
-          width: "100%", // 기기에 맞게 가로 폭 자동
-          maxWidth: 408, // PC에서도 모바일처럼 보이게 제한
+          width: "100%",
+          maxWidth: 408,
           height: 119,
           position: "fixed",
           bottom: 0,
@@ -385,6 +365,7 @@ export default function TestResultPage() {
         >
           내 인테리어 취향으로 방을 꾸며요
         </p>
+
         <div
           style={{
             width: "100%",
@@ -394,7 +375,6 @@ export default function TestResultPage() {
             background: "#000",
             border: "1px solid #ddd9d9",
             color: "#fff",
-            //fontSize: 19,
             fontWeight: 600,
             display: "flex",
             alignItems: "center",
