@@ -451,7 +451,7 @@ export default function RoombtiTest() {
                   }}
                 />
               ) : (
-                <p style={{ fontSize: 16, fontWeight: 500, color: "#000" }}>
+                <p style={{ fontSize: 25, fontWeight: 500, color: "#000" }}>
                   {opt.option_text}
                 </p>
               )}

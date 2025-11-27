@@ -205,10 +205,27 @@ export default function TestResultPage() {
           </div>
 
           {/* 오른쪽 이미지 */}
-          <img
+          {/* <img
             src="src/assets/bear2.png"
             style={{ width: 148, height: 96, objectFit: "cover" }}
-          />
+          /> */}
+          <div  style={{
+                fontSize: 18,
+                fontWeight: 1000,
+                width: 130,
+                height: 20,
+                borderRadius: 100,
+                textAlign:"center",
+                //alignItems: "center",
+                justifyContent: "center",
+                background: "#c59b72ff",
+                color: "#fff",
+                margin: 10, // margin 제거
+                // lineHeight: 3, // 글씨 바닥 맞춤
+              }}>카드를 터치해보세요 !</div>
+
+              
+
         </div>
 
         {/* ⭐ 메인 이미지 → 클릭 시 뒤집히는 카드 */}
@@ -256,6 +273,7 @@ export default function TestResultPage() {
         ) : (
           <p>결과 불러오는 중...</p>
         )}
+
 
         {/* 아래 두 개 카드는 그대로 유지 */}
         {/* 이미지 저장 / 테스트 공유 */}

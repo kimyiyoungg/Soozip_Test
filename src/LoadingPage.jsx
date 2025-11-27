@@ -29,14 +29,14 @@ export default function LoadingPage() {
         src="src/assets/bear3.png"
         alt="loading"
         style={{
-          width: 120,
-          height: 120,
+          width: 150,
+          height: 150,
           marginBottom: "1.5rem",
           animation: "bounce 1s infinite ease-in-out",
         }}
       />
 
-      <p style={{ fontSize: 20, fontWeight: 600, color: "#000" }}>
+      <p style={{ fontSize: 30, fontWeight: 600, color: "#000" }}>
         잠시만 기다려주세요...
       </p>
     </div>
