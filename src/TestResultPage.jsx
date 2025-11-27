@@ -11,10 +11,13 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 export default function TestResultPage() {
   const navigate = useNavigate();
   const location = useLocation();
-
+ //   // ===== 여기서 navigate로 전달된 session_id를 가져옵니다 =====
   const { session_id } = location.state || {};
 
+  // // 결과 데이터를 저장할 state
   const [result, setResult] = useState(null);
+
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   // ⭐ 메인 이미지 flip 상태 추가
   const [flipMain, setFlipMain] = useState(false);
@@ -23,6 +26,9 @@ export default function TestResultPage() {
     if (!session_id) return;
 
     const fetchResult = async () => {
+
+      if (!session_id) return;
+
       const { data, error } = await supabase
         .from("resulttype")
         .select("*")
@@ -32,12 +38,38 @@ export default function TestResultPage() {
       if (error) {
         console.error("결과 불러오기 실패:", error);
       } else {
-        setResult(data);
+        setResult(data); // 가져온 데이터 state에 저장
+        localStorage.setItem("lastResult", JSON.stringify(data)); // 결과 저장
       }
     };
 
     fetchResult();
   }, [session_id]);
+
+    // 2) 뒤로 가기 시 localStorage에서 복구
+      useEffect(() => {
+      if (!result) {
+      const saved = localStorage.getItem("lastResult");
+      if (saved) setResult(JSON.parse(saved));
+      }
+      }, [result]);
+
+      // 3) 이미지 로드 후 session 삭제  ← ★ 여기에 넣으면 됨
+      useEffect(() => {
+        if (!imageLoaded || !session_id) return;
+
+        const deleteSession = async () => {
+          const { error } = await supabase
+            .from("sessionuser")
+            .delete()
+            .eq("session_id", session_id);
+
+          if (error) console.error("session 삭제 실패:", error);
+          else console.log("session 삭제 완료");
+        };
+
+        deleteSession();
+      }, [imageLoaded, session_id]);  // ← 이미지가 로드되면 실행됨
 
   const downloadImage = async (imageUrl) => {
     try {
@@ -245,6 +277,7 @@ export default function TestResultPage() {
                   <img
                     src={result.result_image}
                     alt="result"
+                    onLoad={() => setImageLoaded(true)}
                     style={{
                       width: "100%",
                       height: "100%",
