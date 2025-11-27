@@ -213,7 +213,7 @@ export default function StylingInfoPage1() {
             marginTop: 20,
           }}
         >
-          일단, 이렇게 이렇게 이렇게 해요
+          일단, 이렇게 이렇게 해요
         </p>
         <svg width={298} height={164} viewBox="0 0 298 164" fill="none">
           <path

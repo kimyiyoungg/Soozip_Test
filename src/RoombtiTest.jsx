@@ -217,10 +217,11 @@ export default function RoombtiTest() {
 
       const result_text = `${result_code} 유형입니다!`;
       const result_image = `src/assets/${result_code}.png`;
+      const result_info_image = `src/assets/${result_code}_info.png`;
 
       const { error: resultTypeErr } = await supabase
         .from("resulttype")
-        .insert([{ session_id, result_code, result_text, result_image }]);
+        .insert([{ session_id, result_code, result_text, result_image, result_info_image }]);
       if (resultTypeErr) throw resultTypeErr;
 
       // TestResult 페이지로 이동
@@ -332,11 +333,14 @@ export default function RoombtiTest() {
       {/* 질문 */}
       <p
         style={{
-          fontSize: 20,
-          fontWeight: 600,
+          fontSize: 28,
+          fontWeight: 900,
           textAlign: "center",
           color: "#000",
           marginTop: "1.5rem",
+          whiteSpace: "pre-wrap", // 줄바꿈 문자(\n) 적용
+          wordWrap: "break-word", 
+          lineHeight: 1.4,
         }}
       >
         {current.question_text}
@@ -422,7 +426,7 @@ export default function RoombtiTest() {
               onClick={() => handleAnswer(opt.option_id, i)}
               style={{
                 width: current.questionoption.length === 4 ? 150 : 312,
-                height: 200,
+                height: 170,
                 borderRadius: 12,
                 background: "#fff",
                 border: `2px solid ${selected === i ? "#fe6a0f" : "#ddd9d9"}`,

@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { createClient } from "@supabase/supabase-js";
+import downloadIcon from './assets/download.svg';
+import shareIcon from './assets/share.svg';
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseKey = import.meta.env.VITE_SUPABASE_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
+
+
 
 export default function TestResultPage() {
   const navigate = useNavigate();
@@ -14,13 +18,23 @@ export default function TestResultPage() {
 
   const [result, setResult] = useState(null);
 
+<<<<<<< HEAD
   // ⭐ 메인 이미지 flip 상태 추가
   const [flipMain, setFlipMain] = useState(false);
+=======
+  const [imageLoaded, setImageLoaded] = useState(false);
+>>>>>>> f34f591b414f95bce4739b83b815f703eb4e67a3
 
   useEffect(() => {
+    const fetchResult = async () => {
     if (!session_id) return;
 
+<<<<<<< HEAD
     const fetchResult = async () => {
+=======
+    // ===== DB에서 session_id 기반으로 resulttype 가져오기 =====
+    // const fetchResult = async () => {
+>>>>>>> f34f591b414f95bce4739b83b815f703eb4e67a3
       const { data, error } = await supabase
         .from("resulttype")
         .select("*")
@@ -30,12 +44,42 @@ export default function TestResultPage() {
       if (error) {
         console.error("결과 불러오기 실패:", error);
       } else {
+<<<<<<< HEAD
         setResult(data);
+=======
+        setResult(data); // 가져온 데이터 state에 저장
+        localStorage.setItem("lastResult", JSON.stringify(data)); // 결과 저장
+>>>>>>> f34f591b414f95bce4739b83b815f703eb4e67a3
       }
     };
 
     fetchResult();
   }, [session_id]);
+
+  // 2) 뒤로 가기 시 localStorage에서 복구
+  useEffect(() => {
+  if (!result) {
+  const saved = localStorage.getItem("lastResult");
+  if (saved) setResult(JSON.parse(saved));
+  }
+  }, [result]);
+
+  // 3) 이미지 로드 후 session 삭제  ← ★ 여기에 넣으면 됨
+  useEffect(() => {
+    if (!imageLoaded || !session_id) return;
+
+    const deleteSession = async () => {
+      const { error } = await supabase
+        .from("sessionuser")
+        .delete()
+        .eq("session_id", session_id);
+
+      if (error) console.error("session 삭제 실패:", error);
+      else console.log("session 삭제 완료");
+    };
+
+    deleteSession();
+  }, [imageLoaded, session_id]);  // ← 이미지가 로드되면 실행됨
 
   const downloadImage = async (imageUrl) => {
     try {
@@ -131,6 +175,20 @@ export default function TestResultPage() {
             padding: "0 25px",
           }}
         >
+<<<<<<< HEAD
+=======
+          {/* 왼쪽 텍스트 */}
+          {/* <img
+            src="src/assets/soozip_logo.png"
+            alt="로고"
+            style={{
+              width: "20px", // 작게!
+              height: "20px",
+              // objectFit: "contain",
+              marginBottom: "10px",
+            }}
+          />
+>>>>>>> f34f591b414f95bce4739b83b815f703eb4e67a3
           <p
             style={{
               fontSize: 16,
@@ -140,7 +198,32 @@ export default function TestResultPage() {
             }}
           >
             SOOZIP
-          </p>
+          </p> */}
+          {/* 왼쪽: 로고 + 텍스트 */}
+          <div style={{ display: "flex", alignItems: "flex-end", gap: 5 }}>
+            <img
+              src="src/assets/soozip_logo.png"
+              alt="로고"
+              style={{
+                width: 20,
+                height: 20,
+                marginBottom: 10,
+                marginLeft: 10,
+                // marginTop:0
+              }}
+            />
+            <p
+              style={{
+                fontSize: 35,
+                fontWeight: 700,
+                color: "#000",
+                margin: 0, // margin 제거
+                lineHeight: 1, // 글씨 바닥 맞춤
+              }}
+            >
+              SOOZIP
+            </p>
+          </div>
 
           <img
             src="src/assets/bear2.png"
@@ -158,6 +241,7 @@ export default function TestResultPage() {
             }}
             onClick={() => setFlipMain(!flipMain)}
           >
+<<<<<<< HEAD
             <div style={flipContainer}>
               <div style={flipInner(flipMain)}>
                 {/* front */}
@@ -178,6 +262,20 @@ export default function TestResultPage() {
                 <div style={flipBack}>메인 이미지 설명</div>
               </div>
             </div>
+=======
+            <img
+              src={`${result.result_image}`} // 📝 DB에서 가져온 result_image
+              // src="src/assets/INFP.png"
+              alt={`${result.result_image}`}
+              onLoad={() => setImageLoaded(true)}
+              style={{
+                width: 361,
+                height: 490,
+                objectFit: "cover",
+                borderRadius: 20,
+              }}
+            />
+>>>>>>> f34f591b414f95bce4739b83b815f703eb4e67a3
           </div>
         ) : (
           <p>결과 불러오는 중...</p>
@@ -189,13 +287,14 @@ export default function TestResultPage() {
           style={{
             display: "flex",
             alignItems: "center",
-            justifyContent: "center",
-            flexDirection: "column",
-            gap: 5,
+            justifyContent: "flex-end",
+            flexDirection: "row",
+            gap: 20,
             marginBottom: 20,
+            marginRight: 40,
           }}
         >
-          <p
+          {/* <p
             style={{
               fontSize: 16,
               fontWeight: 700,
@@ -208,9 +307,17 @@ export default function TestResultPage() {
             onMouseLeave={(e) => (e.currentTarget.style.color = "#000")}
           >
             이미지 저장
-          </p>
+          </p> */}
+          <img
+            src={downloadIcon}
+            alt="이미지 저장"
+            style={{ cursor: 'pointer', width: 30, height: 30 }}
+            onClick={() => downloadImage(result.result_image)}
+            onMouseEnter={(e) => (e.currentTarget.style.filter = 'brightness(0.7)')}
+            onMouseLeave={(e) => (e.currentTarget.style.filter = 'brightness(1)')}
+          />
 
-          <p
+          {/* <p
             style={{
               fontSize: 16,
               fontWeight: 700,
@@ -222,7 +329,19 @@ export default function TestResultPage() {
             onMouseLeave={(e) => (e.currentTarget.style.color = "#000")}
           >
             테스트 공유
-          </p>
+          </p> */}
+
+          <img
+            src={shareIcon}
+            alt="테스트 공유"
+            style={{ cursor: 'pointer', width: 24, height: 24 }}
+            onClick={() => alert("테스트 공유 기능 준비 중입니다")}
+            onMouseEnter={(e) => (e.currentTarget.style.filter = 'brightness(0.7)')}
+            onMouseLeave={(e) => (e.currentTarget.style.filter = 'brightness(1)')}
+          />
+
+
+
         </div>
 
         <hr
