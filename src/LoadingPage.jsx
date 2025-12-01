@@ -26,7 +26,8 @@ export default function LoadingPage() {
     >
       {/* 로딩 이미지 / 애니메이션 */}
       <img
-        src="src/assets/loading_bear.png"
+        src="https://mmfurloptocazvhfmcvk.supabase.co/storage/v1/object/public/roombti/loading_bear.png"
+        //src="src/assets/loading_bear.png"
         alt="loading"
         style={{
           width: 130,

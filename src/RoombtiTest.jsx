@@ -196,8 +196,10 @@ export default function RoombtiTest() {
       }
 
       const result_text = `${result_code} 유형입니다!`;
-      const result_image = `src/assets/${result_code}.png`;
-      const result_info_image = `src/assets/${result_code}_info.png`;
+      // const result_image = `src/assets/${result_code}.png`;
+      // const result_info_image = `src/assets/${result_code}_info.png`;
+      const result_image = `https://mmfurloptocazvhfmcvk.supabase.co/storage/v1/object/public/roombti/${result_code}.png`;
+      const result_info_image = `https://mmfurloptocazvhfmcvk.supabase.co/storage/v1/object/public/roombti/${result_code}_info.png`;
 
       const { error: resultTypeErr } = await supabase
         .from("resulttype")
@@ -428,7 +430,8 @@ export default function RoombtiTest() {
           >
             <img
               // src="src/assets/loading_character.gif"
-              src="src/assets/calc_bear.png"
+              //src="src/assets/calc_bear.png"
+              src="https://mmfurloptocazvhfmcvk.supabase.co/storage/v1/object/public/roombti/calc_bear.png"
               alt="loading"
               style={{
                 width: 120,
