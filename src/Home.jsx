@@ -81,7 +81,7 @@ export default function Home() {
       </div>
       {/* 중앙 이미지 */}
       <img
-        src="src/assets/bear3.png"
+        src="src/assets/main_bear.png"
         alt="main"
         style={{
           marginTop: "0rem", // 원하는 만큼 조절

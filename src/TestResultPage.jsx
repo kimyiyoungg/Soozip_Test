@@ -132,7 +132,7 @@ export default function TestResultPage() {
       style={{
         width: 408,
         height: "100vh",
-        minHeight: 1500,
+        minHeight: 1300,
         background: "#fbf2d5",
         display: "flex",
         flexDirection: "column",
@@ -419,7 +419,8 @@ export default function TestResultPage() {
             marginBottom: 30,
           }}
         >
-          나에게 어울리는 인테리어는?
+          나에게 어울리는 인테리어는?<br/>
+          (아직 개발 진행 중입니다.)
         </p>
 
         {/* ⭐ 아래 2개 카드는 아무 변화 없이 그대로 유지됨 */}
@@ -493,10 +494,11 @@ export default function TestResultPage() {
         style={{
           width: "100%",
           maxWidth: 408,
-          height: 119,
+          height: 120,
           position: "fixed",
           bottom: 0,
-          background: "#fff",
+          // background: "#fff",
+          background: "linear-gradient(to top, #fff 85%, rgba(255,255,255,0) 100%)",
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
@@ -507,9 +509,9 @@ export default function TestResultPage() {
       >
         <p
           style={{
-            fontSize: 14,
+            fontSize: 18,
             fontWeight: 500,
-            marginBottom: 12,
+            marginBottom: 5,
             color: "#000",
           }}
         >
@@ -533,7 +535,7 @@ export default function TestResultPage() {
           }}
           onClick={() => navigate("/room-counsult")}
         >
-          <p style={{ fontSize: 16, color: "#fff" }}>
+          <p style={{ fontSize: 20, color: "#fff" }}>
             홈스타일링 상담 알아보기
           </p>
         </div>

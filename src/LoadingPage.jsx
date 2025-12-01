@@ -26,11 +26,11 @@ export default function LoadingPage() {
     >
       {/* 로딩 이미지 / 애니메이션 */}
       <img
-        src="src/assets/bear3.png"
+        src="src/assets/loading_bear.png"
         alt="loading"
         style={{
-          width: 150,
-          height: 150,
+          width: 130,
+          height: 90,
           marginBottom: "1.5rem",
           animation: "bounce 1s infinite ease-in-out",
         }}

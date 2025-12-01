@@ -11,22 +11,25 @@ export default function StylingTypePage() {
       id: 1,
       title: "배치 솔루션",
       subtitle: "가구만 배치하고 싶어요!",
-      url: "/styling-info1",
-      imgSrc: "src/assets/bear.jpg",
+      // url: "/styling-info1",
+      url: "/",
+      imgSrc: "src/assets/image02.jpg",
     },
     {
       id: 2,
       title: "소품 솔루션",
       subtitle: "공간에 어울리는 소품을 찾고 싶어요!",
-      url: "/styling-info2",
-      imgSrc: "src/assets/bear.jpg",
+      // url: "/styling-info2",
+      url: "/",
+      imgSrc: "src/assets/image02.jpg",
     },
     {
       id: 3,
       title: "풀 스타일링",
       subtitle: "이제 입주해서 다 해주세요",
-      url: "/styling-info3",
-      imgSrc: "src/assets/bear.jpg",
+      // url: "/styling-info3",
+      url: "/",
+      imgSrc: "src/assets/image02.jpg",
     },
   ];
 
@@ -47,7 +50,7 @@ export default function StylingTypePage() {
     >
       {/* ✅ SVG 뒤로가기 버튼 */}
       <svg
-        onClick={() => navigate(-1)} // 이전 페이지로 이동
+        onClick={() => navigate("/room-counsult")}
         width={14}
         height={16}
         viewBox="0 0 14 16"
@@ -70,11 +73,11 @@ export default function StylingTypePage() {
       <div
         style={{
           width: 150,
-          height: 30,
+          height: 33,
           borderRadius: 30,
           background: "#000",
           color: "#fff",
-          fontSize: 20,
+          fontSize: 23,
           fontWeight: 600,
           display: "flex",
           alignItems: "center",
@@ -86,12 +89,12 @@ export default function StylingTypePage() {
       </div>
 
       <div style={{ textAlign: "center" }}>
-        <p style={{ fontSize: 20, fontWeight: 600, color: "#000" }}>
+        <p style={{ fontSize: 20, fontWeight: 800, color: "#000" }}>
           <b>soozip과 함께 스타일링 더 알아보고</b>
           <br />
           <b>맞춤 솔루션을 찾아보세요</b>
         </p>
-        <p style={{ fontSize: 13, fontWeight: 600, color: "#b8b1b1" }}>
+        <p style={{ fontSize: 15, fontWeight: 600, color: "#8c8686ff" }}>
           개인별 맞춤 솔루션을 알아볼 수 있습니다.
         </p>
       </div>

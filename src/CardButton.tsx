@@ -41,25 +41,34 @@ export default function CardButton({
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-        padding: "1rem",
+        // alignItems: "flex-start",
+        padding: "20px",
         cursor: "pointer",
         outline: "none",
         transition: "border 0.2s ease, transform 0.15s ease",
       }}
     >
-      <div style={{ textAlign: "left" }}>
-        <p style={{ fontSize: 13, fontWeight: 600, color: "#000" }}>
+      <div 
+        style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        height: "90%",       // ← 전체 카드 높이에 맞춤
+        textAlign: "left",
+      }}>
+        <p style={{ fontSize: 18, fontWeight: 600, color: "#000", margin: 8}}>
           {subtitle}
         </p>
-        <p style={{ fontSize: 35, fontWeight: 600, color: "#000" }}>{title}</p>
+        <p style={{ fontSize: 35, fontWeight: 800, color: "#000", margin: 8}}>{title}</p>
       </div>
       <img
         src={imgSrc}
         alt={title}
-        width={60}
-        height={60}
-        style={{ borderRadius: 8, objectFit: "cover" }}
+        width={80}
+        height={80}
+        style={{ borderRadius: 8, objectFit: "cover", margin: 5}}
       />
     </button>
+    
   );
 }
