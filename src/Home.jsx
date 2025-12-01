@@ -32,7 +32,8 @@ export default function Home() {
           }}
         >
           <img
-            src="src/assets/soozip_logo.png"
+            // src="src/assets/soozip_logo.png"
+            src="https://mmfurloptocazvhfmcvk.supabase.co/storage/v1/object/public/roombti/soozip_logo.png"
             alt="로고"
             style={{
               width: "20px", // 작게!
@@ -81,7 +82,8 @@ export default function Home() {
       </div>
       {/* 중앙 이미지 */}
       <img
-        src="src/assets/main_bear.png"
+        //src="src/assets/main_bear.png"
+        src="https://mmfurloptocazvhfmcvk.supabase.co/storage/v1/object/public/roombti/main_bear.png"
         alt="main"
         style={{
           marginTop: "0rem", // 원하는 만큼 조절

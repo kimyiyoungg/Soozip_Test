@@ -13,7 +13,8 @@ export default function StylingTypePage() {
       subtitle: "가구만 배치하고 싶어요!",
       // url: "/styling-info1",
       url: "/",
-      imgSrc: "src/assets/image02.jpg",
+      // imgSrc: "src/assets/image02.jpg",
+      imgSrc: "https://mmfurloptocazvhfmcvk.supabase.co/storage/v1/object/public/roombti/image02.jpg",
     },
     {
       id: 2,
@@ -21,7 +22,8 @@ export default function StylingTypePage() {
       subtitle: "공간에 어울리는 소품을 찾고 싶어요!",
       // url: "/styling-info2",
       url: "/",
-      imgSrc: "src/assets/image02.jpg",
+      // imgSrc: "src/assets/image02.jpg",
+      imgSrc: "https://mmfurloptocazvhfmcvk.supabase.co/storage/v1/object/public/roombti/image02.jpg",
     },
     {
       id: 3,
@@ -29,7 +31,8 @@ export default function StylingTypePage() {
       subtitle: "이제 입주해서 다 해주세요",
       // url: "/styling-info3",
       url: "/",
-      imgSrc: "src/assets/image02.jpg",
+      //imgSrc: "src/assets/image02.jpg",
+      imgSrc: "https://mmfurloptocazvhfmcvk.supabase.co/storage/v1/object/public/roombti/image02.jpg",
     },
   ];
 
