@@ -213,7 +213,8 @@ export default function TestResultPage() {
           {/* 왼쪽: 로고 + 텍스트 */}
           <div style={{ display: "flex", alignItems: "flex-end", gap: 5 }}>
             <img
-              src="src/assets/soozip_logo.png"
+              //src="src/assets/soozip_logo.png"
+              src="https://mmfurloptocazvhfmcvk.supabase.co/storage/v1/object/public/roombti/soozip_logo.png"
               alt="로고"
               style={{
                 width: 20,
@@ -283,6 +284,7 @@ export default function TestResultPage() {
                       height: "100%",
                       objectFit: "cover",
                       borderRadius: 20,
+                      imageRendering: "crisp-edges",
                     }}
                   />
                 </div>
@@ -296,6 +298,7 @@ export default function TestResultPage() {
                       width: "100%",
                       height: "100%",
                       objectFit: "cover",
+                      imageRendering: "crisp-edges",
                       borderRadius: 20,
                     }}
                   />
