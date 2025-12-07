@@ -35,8 +35,9 @@ export default function RoomCounsult() {
   return (
     <div
       style={{
-        width: 408,
-        minHeight: "100dvh",
+        width: "100vw", // 화면 가로 전체
+        minHeight: "100vh", // 화면 세로 전체
+        height: "100dvh", // 세로 꽉 차게
         background: "#fbf2d5",
         display: "flex",
         flexDirection: "column",
@@ -70,21 +71,21 @@ export default function RoomCounsult() {
       </svg>
       <div
         style={{
-          width: 150,
-          height: 33,
-          borderRadius: 30,
+          width: 360,
+          height: 50,
+          borderRadius: 40,
           background: "#000",
           color: "#fff",
-          fontSize: 23,
+          fontSize: 40,
           fontWeight: 600,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          marginTop: 90,
+          marginTop: 100,
           marginBottom: 80,
         }}
       >
-        상담 알아보기
+        수집 홈스타일링
       </div>
 
       {cards.map((card) => (

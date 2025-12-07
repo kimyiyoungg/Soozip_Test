@@ -171,9 +171,7 @@ export default function RoombtiTest() {
         }
       });
 
-      
       const dimensionOrder = [1, 2, 3, 4]; // 실제 dimension_id 순서에 맞게 수정
-      
 
       let result_code = "";
       for (let dim_id of dimensionOrder) {
@@ -203,7 +201,15 @@ export default function RoombtiTest() {
 
       const { error: resultTypeErr } = await supabase
         .from("resulttype")
-        .insert([{ session_id, result_code, result_text, result_image, result_info_image }]);
+        .insert([
+          {
+            session_id,
+            result_code,
+            result_text,
+            result_image,
+            result_info_image,
+          },
+        ]);
       if (resultTypeErr) throw resultTypeErr;
 
       // TestResult 페이지로 이동
@@ -215,7 +221,7 @@ export default function RoombtiTest() {
     }
   };
 
-  if (loading) return <LoadingPage/>;
+  if (loading) return <LoadingPage />;
   if (!current) return <p>질문이 없습니다.</p>;
 
   const progressStep = Math.min(step, questions.length - 1);
@@ -321,7 +327,7 @@ export default function RoombtiTest() {
           color: "#000",
           marginTop: "1.5rem",
           whiteSpace: "pre-wrap", // 줄바꿈 문자(\n) 적용
-          wordWrap: "break-word", 
+          wordWrap: "break-word",
           lineHeight: 1.4,
         }}
       >
@@ -344,13 +350,13 @@ export default function RoombtiTest() {
           const isImage = opt.option_text?.toLowerCase().endsWith(".png");
           const isTouchDevice = "ontouchstart" in window;
 
-          
           return (
             <div
               key={opt.option_id}
-              onClick={() => {handleAnswer(opt.option_id, i);
-                setHoveredIndex(null);}
-              }
+              onClick={() => {
+                handleAnswer(opt.option_id, i);
+                setHoveredIndex(null);
+              }}
               // onMouseEnter={() => setHoveredIndex(i)}
               // onMouseLeave={() => setHoveredIndex(null)}
               onMouseEnter={() => {
@@ -367,7 +373,11 @@ export default function RoombtiTest() {
                 //border: `2px solid ${selected === i ? "#fe6a0f" : "#ddd9d9"}`,
                 // 🔹 수정: 선택 또는 hover 상태에 따라 border 색상 변경
                 border: `2px solid ${
-                  selected === i ? "#fe6a0f" : hoveredIndex === i ? "#fe6a0f" : "#ddd9d9"
+                  selected === i
+                    ? "#fe6a0f"
+                    : hoveredIndex === i
+                    ? "#fe6a0f"
+                    : "#ddd9d9"
                 }`,
                 display: "flex",
                 alignItems: "center",
@@ -377,7 +387,6 @@ export default function RoombtiTest() {
                 padding: "10px",
               }}
             >
-
               {/* 🔥 텍스트 vs 이미지 분기 */}
               {isImage ? (
                 <img
@@ -398,12 +407,6 @@ export default function RoombtiTest() {
           );
         })}
       </div>
-
-
-
-
-      
-
 
       {/* 🔥🔥🔥 제출 로딩 오버레이 (캐릭터 GIF) */}
       {loadingSubmit && (
@@ -469,9 +472,6 @@ export default function RoombtiTest() {
           </div>
         </div>
       )}
-
-
-
     </div>
   );
 }

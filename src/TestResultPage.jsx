@@ -11,7 +11,7 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 export default function TestResultPage() {
   const navigate = useNavigate();
   const location = useLocation();
- //   // ===== 여기서 navigate로 전달된 session_id를 가져옵니다 =====
+  //   // ===== 여기서 navigate로 전달된 session_id를 가져옵니다 =====
   const { session_id } = location.state || {};
 
   // // 결과 데이터를 저장할 state
@@ -26,7 +26,6 @@ export default function TestResultPage() {
     if (!session_id) return;
 
     const fetchResult = async () => {
-
       if (!session_id) return;
 
       const { data, error } = await supabase
@@ -46,30 +45,30 @@ export default function TestResultPage() {
     fetchResult();
   }, [session_id]);
 
-    // 2) 뒤로 가기 시 localStorage에서 복구
-      useEffect(() => {
-      if (!result) {
+  // 2) 뒤로 가기 시 localStorage에서 복구
+  useEffect(() => {
+    if (!result) {
       const saved = localStorage.getItem("lastResult");
       if (saved) setResult(JSON.parse(saved));
-      }
-      }, [result]);
+    }
+  }, [result]);
 
-      // 3) 이미지 로드 후 session 삭제  ← ★ 여기에 넣으면 됨
-      useEffect(() => {
-        if (!imageLoaded || !session_id) return;
+  // 3) 이미지 로드 후 session 삭제  ← ★ 여기에 넣으면 됨
+  useEffect(() => {
+    if (!imageLoaded || !session_id) return;
 
-        const deleteSession = async () => {
-          const { error } = await supabase
-            .from("sessionuser")
-            .delete()
-            .eq("session_id", session_id);
+    const deleteSession = async () => {
+      const { error } = await supabase
+        .from("sessionuser")
+        .delete()
+        .eq("session_id", session_id);
 
-          if (error) console.error("session 삭제 실패:", error);
-          else console.log("session 삭제 완료");
-        };
+      if (error) console.error("session 삭제 실패:", error);
+      else console.log("session 삭제 완료");
+    };
 
-        deleteSession();
-      }, [imageLoaded, session_id]);  // ← 이미지가 로드되면 실행됨
+    deleteSession();
+  }, [imageLoaded, session_id]); // ← 이미지가 로드되면 실행됨
 
   const downloadImage = async (imageUrl) => {
     try {
@@ -130,9 +129,10 @@ export default function TestResultPage() {
   return (
     <div
       style={{
-        width: 408,
-        height: "100vh",
-        minHeight: 1300,
+        width: "100vw", // 화면 가로 전체
+        minHeight: "100vh", // 화면 세로 전체
+        height: "180vh", // 세로 꽉 차게
+
         background: "#fbf2d5",
         display: "flex",
         flexDirection: "column",
@@ -220,7 +220,7 @@ export default function TestResultPage() {
                 width: 20,
                 height: 20,
                 marginBottom: 10,
-                marginLeft: 10,
+                marginLeft: 555,
                 // marginTop:0
               }}
             />
@@ -242,23 +242,6 @@ export default function TestResultPage() {
             src="src/assets/bear2.png"
             style={{ width: 148, height: 96, objectFit: "cover" }}
           /> */}
-          <div  style={{
-                fontSize: 18,
-                fontWeight: 1000,
-                width: 130,
-                height: 20,
-                borderRadius: 100,
-                textAlign:"center",
-                //alignItems: "center",
-                justifyContent: "center",
-                background: "#c59b72ff",
-                color: "#fff",
-                margin: 10, // margin 제거
-                // lineHeight: 3, // 글씨 바닥 맞춤
-              }}>카드를 터치해보세요 !</div>
-
-              
-
         </div>
 
         {/* ⭐ 메인 이미지 → 클릭 시 뒤집히는 카드 */}
@@ -309,8 +292,25 @@ export default function TestResultPage() {
         ) : (
           <p>결과 불러오는 중...</p>
         )}
-
-
+        <div
+          style={{
+            fontSize: 18,
+            fontWeight: 1000,
+            width: 130,
+            height: 20,
+            marginLeft: 50,
+            borderRadius: 100,
+            textAlign: "center",
+            display: "flex", // 추가
+            justifyContent: "center", // 가로 중앙
+            alignItems: "center", // 세로 중앙
+            background: "#c59b72ff",
+            color: "#fff",
+            margin: 10,
+          }}
+        >
+          카드를 터치해보세요 !
+        </div>
         {/* 아래 두 개 카드는 그대로 유지 */}
         {/* 이미지 저장 / 테스트 공유 */}
         <div
@@ -321,7 +321,7 @@ export default function TestResultPage() {
             flexDirection: "row",
             gap: 20,
             marginBottom: 20,
-            marginRight: 40,
+            marginRight: 573,
           }}
         >
           {/* <p
@@ -422,7 +422,8 @@ export default function TestResultPage() {
             marginBottom: 30,
           }}
         >
-          나에게 어울리는 인테리어는?<br/>
+          나에게 어울리는 인테리어는?
+          <br />
           (아직 개발 진행 중입니다.)
         </p>
 
@@ -496,12 +497,12 @@ export default function TestResultPage() {
       <div
         style={{
           width: "100%",
-          maxWidth: 408,
           height: 120,
           position: "fixed",
           bottom: 0,
           // background: "#fff",
-          background: "linear-gradient(to top, #fff 85%, rgba(255,255,255,0) 100%)",
+          background:
+            "linear-gradient(to top, #fff 85%, rgba(255,255,255,0) 100%)",
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",

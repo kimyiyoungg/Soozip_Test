@@ -5,9 +5,9 @@ export default function SetUpStylingInfo() {
   return (
     <div
       style={{
-        width: 408, // PC에서도 모바일처럼 보이게 제한
-        height: "100dvh", // 기기 높이 100% (주소창 대응)
-        minHeight: 2100,
+        width: "100vw", // 화면 가로 전체
+        minHeight: "100vh", // 화면 세로 전체
+        height: "100dvh", // 세로 꽉 차게
         // background: "#fff",
         background: "#fbf2d5",
         display: "flex",

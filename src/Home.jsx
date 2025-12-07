@@ -6,8 +6,8 @@ export default function Home() {
   return (
     <div
       style={{
-        width: 408,
-        minHeight: 600,
+        width: "100vw", // 화면 가로 전체
+        minHeight: "100vh", // 화면 세로 전체
         height: "100dvh", // 세로 꽉 차게
         display: "flex",
         flexDirection: "column",
