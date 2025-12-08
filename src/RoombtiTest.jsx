@@ -42,14 +42,43 @@ export default function RoombtiTest() {
 
       if (error) {
         console.error("DB 연결 실패:", error);
-      } else {
-        console.log("DB 연결 성공! 데이터:", data);
-        setQuestions(data);
-        setLoading(false);
+        return;
       }
+      const extraQuestions = [
+        {
+          question_id: "extra1",
+          question_text: "더 마음에 드는 인테리어는?",
+          questionoption: [
+            { option_id: "A", option_text: "https://mmfurloptocazvhfmcvk.supabase.co/storage/v1/object/public/roombti/my_pick_interier/A.png" },
+            { option_id: "B", option_text: "https://mmfurloptocazvhfmcvk.supabase.co/storage/v1/object/public/roombti/my_pick_interier/B.png" },
+            { option_id: "C", option_text: "https://mmfurloptocazvhfmcvk.supabase.co/storage/v1/object/public/roombti/my_pick_interier/C.png" },
+            { option_id: "D", option_text: "https://mmfurloptocazvhfmcvk.supabase.co/storage/v1/object/public/roombti/my_pick_interier/D.png" },
+          ],
+        },
+        {
+          question_id: "extra2",
+          question_text: "또 더 마음에 드는 인테리어는?",
+          questionoption: [
+            { option_id: "E", option_text: "https://mmfurloptocazvhfmcvk.supabase.co/storage/v1/object/public/roombti/my_pick_interier/E.png" },
+            { option_id: "F", option_text: "https://mmfurloptocazvhfmcvk.supabase.co/storage/v1/object/public/roombti/my_pick_interier/F.png" },
+            { option_id: "G", option_text: "https://mmfurloptocazvhfmcvk.supabase.co/storage/v1/object/public/roombti/my_pick_interier/G.png" },
+            { option_id: "H", option_text: "https://mmfurloptocazvhfmcvk.supabase.co/storage/v1/object/public/roombti/my_pick_interier/H.png" },
+          ],
+        },
+        {
+          question_id: "extra3",
+          question_text: "최종 선택! 어떤 스타일이 더 좋아?",
+          questionoption: [], // 🔥 step이 14일 때 수정해서 채우기
+        },
+      ];
+
+      setQuestions([...data, ...extraQuestions]);
+      setLoading(false);
     }
     fetchQuestions();
   }, []);
+
+  
 
   const current = questions[step];
 
@@ -71,6 +100,49 @@ export default function RoombtiTest() {
     }
   };
 
+  // 예린 : 선택한 인테리어 저장 부분 시작
+      useEffect(() => {
+        if (step === 14) {
+          // const pick1 = choices['extra1'];
+          // const pick2 = choices['extra2'];
+
+          // extra1과 extra2 질문 객체 가져오기
+          const extra1Question = questions[12];
+          const extra2Question = questions[13];
+
+          // 선택한 값(A~D)
+          const pick1 = choices["extra1"]; 
+          const pick2 = choices["extra2"];
+
+          // 그 선택지의 이미지 URL 추출
+          const pick1Image = extra1Question.questionoption.find(o => o.option_id === pick1)?.option_text;
+          const pick2Image = extra2Question.questionoption.find(o => o.option_id === pick2)?.option_text;
+
+          const q3 = {
+            ...questions[14],
+           
+            questionoption: [
+              {
+                option_id: pick1,       // A, B, C, D (DB 저장용)
+                option_text: pick1Image // extra1에서의 이미지 그대로
+              },
+              {
+                option_id: pick2,       // E, F, G, H
+                option_text: pick2Image // extra2에서의 이미지 그대로
+              }
+            ],
+          };
+
+          const newQs = [...questions];
+          newQs[14] = q3;
+          setQuestions(newQs);
+        }
+      }, [step]);
+          
+          // 예린 : 선택한 인테리어 저장 부분 끝
+
+  
+
   // 제출
   const handleSubmit = async (finalChoices) => {
     if (submitted) return; // 이미 제출되었으면 아무것도 안 함
@@ -90,13 +162,29 @@ export default function RoombtiTest() {
 
       const session_id = sessionData.session_id;
 
-      // choice 테이블에 12개 선택지만 정확히 insert
-      const choiceInserts = Object.entries(finalChoices).map(
-        ([qId, optionId]) => ({
-          session_id,
-          option_id: optionId,
-        })
-      );
+      // // choice 테이블에 12개 선택지만 정확히 insert
+      // const choiceInserts = Object.entries(finalChoices).map(
+      //   ([qId, optionId]) => ({
+      //     session_id,
+      //     option_id: optionId,
+      //   })
+      // );
+
+      // 🔥 DB 질문만 저장하도록 필터링
+      const dbOnlyChoices = Object.entries(finalChoices)
+        .filter(([qId, _]) => !qId.startsWith("extra"));
+
+
+      // const choiceInserts = dbChoices.map(([qId, optionId]) => ({
+      //   session_id,
+      //   option_id: optionId,
+      // }));
+      const choiceInserts = dbOnlyChoices.map(([qId, optionId]) => ({
+        session_id,
+        option_id: optionId,
+      }));
+
+
 
       const { error: choiceError } = await supabase
         .from("choice")
@@ -105,10 +193,14 @@ export default function RoombtiTest() {
       if (choiceError) throw choiceError;
 
       // 3. sessionresultdetail 계산 (dimension_value_id 기준 점수 누적)
+      //const onlyDbOptionIds = dbChoicesEntries.map(([_, optionId]) => optionId);
+      const onlyDbOptionIds = dbOnlyChoices.map(([_, optionId]) => optionId);
+
       const valueScores = {}; // { dimension_value_id: { dimension_id, score } }
 
-      for (let option_id of Object.values(finalChoices)) {
-        // option_id → dimension_value_id
+      //for (let option_id of Object.values(finalChoices)) {
+      for (let option_id of onlyDbOptionIds) {
+      // option_id → dimension_value_id
         const { data: optionData, error: optionErr } = await supabase
           .from("questionoption")
           .select("dimension_value_id")
@@ -152,6 +244,8 @@ export default function RoombtiTest() {
         });
 
       if (resultError) throw resultError;
+
+      
 
       // 5. 최종 MBTI/방BTI 계산 및 ResultType 저장
       const { data: details, error: detailErr } = await supabase
@@ -201,13 +295,34 @@ export default function RoombtiTest() {
       const result_image = `https://mmfurloptocazvhfmcvk.supabase.co/storage/v1/object/public/roombti/${result_code}.png`;
       const result_info_image = `https://mmfurloptocazvhfmcvk.supabase.co/storage/v1/object/public/roombti/${result_code}_info.png`;
 
+      
+
+
+          
       const { error: resultTypeErr } = await supabase
         .from("resulttype")
         .insert([{ session_id, result_code, result_text, result_image, result_info_image }]);
       if (resultTypeErr) throw resultTypeErr;
 
+      // 🔥 extra3 질문 객체
+      const extra3Question = questions[14];
+
+      // 🔥 최종 선택한 이미지 ID
+      const finalPick = finalChoices["extra3"];
+
+      const finalImage = questions[14].questionoption.find(
+        o => o.option_id === finalPick
+      )?.option_text;
+
+
       // TestResult 페이지로 이동
-      navigate("/TestResult", { state: { session_id } });
+      navigate("/TestResult", {
+         state: {
+          session_id,
+          // myInterior: finalChoices['extra3']  // 🔥 최종 인테리어 결과 추가
+          myInterior: finalPick,        // A 또는 E 같은 선택된 ID
+          myInteriorImage: finalImage // 🔥 서버 이미지 링크 전달!
+        } });
     } catch (err) {
       console.error("제출 오류:", err);
     } finally {
