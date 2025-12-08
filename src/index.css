@@ -28,14 +28,15 @@
 
 html,
 body,
-/* #root {
+ #root {
   margin: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   background:  #fbf2d5;
- 
-} */
+  
+}
+
 
 a {
   font-weight: 900;
