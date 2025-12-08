@@ -49,20 +49,20 @@ export default function RoombtiTest() {
           question_id: "extra1",
           question_text: "더 마음에 드는 인테리어는?",
           questionoption: [
-            { option_id: "A", option_text: "/src/assets/soozip_logo.png" },
-            { option_id: "B", option_text: "/src/assets/soozip_logo.png" },
-            { option_id: "C", option_text: "/src/assets/soozip_logo.png" },
-            { option_id: "D", option_text: "/src/assets/soozip_logo.png" },
+            { option_id: "A", option_text: "https://mmfurloptocazvhfmcvk.supabase.co/storage/v1/object/public/roombti/my_pick_interier/A.png" },
+            { option_id: "B", option_text: "https://mmfurloptocazvhfmcvk.supabase.co/storage/v1/object/public/roombti/my_pick_interier/B.png" },
+            { option_id: "C", option_text: "https://mmfurloptocazvhfmcvk.supabase.co/storage/v1/object/public/roombti/my_pick_interier/C.png" },
+            { option_id: "D", option_text: "https://mmfurloptocazvhfmcvk.supabase.co/storage/v1/object/public/roombti/my_pick_interier/D.png" },
           ],
         },
         {
           question_id: "extra2",
           question_text: "또 더 마음에 드는 인테리어는?",
           questionoption: [
-            { option_id: "E", option_text: "/src/assets/soozip_logo.png" },
-            { option_id: "F", option_text: "/src/assets/soozip_logo.png" },
-            { option_id: "G", option_text: "/src/assets/soozip_logo.png" },
-            { option_id: "H", option_text: "/src/assets/soozip_logo.png" },
+            { option_id: "E", option_text: "https://mmfurloptocazvhfmcvk.supabase.co/storage/v1/object/public/roombti/my_pick_interier/E.png" },
+            { option_id: "F", option_text: "https://mmfurloptocazvhfmcvk.supabase.co/storage/v1/object/public/roombti/my_pick_interier/F.png" },
+            { option_id: "G", option_text: "https://mmfurloptocazvhfmcvk.supabase.co/storage/v1/object/public/roombti/my_pick_interier/G.png" },
+            { option_id: "H", option_text: "https://mmfurloptocazvhfmcvk.supabase.co/storage/v1/object/public/roombti/my_pick_interier/H.png" },
           ],
         },
         {
@@ -304,11 +304,24 @@ export default function RoombtiTest() {
         .insert([{ session_id, result_code, result_text, result_image, result_info_image }]);
       if (resultTypeErr) throw resultTypeErr;
 
+      // 🔥 extra3 질문 객체
+      const extra3Question = questions[14];
+
+      // 🔥 최종 선택한 이미지 ID
+      const finalPick = finalChoices["extra3"];
+
+      const finalImage = questions[14].questionoption.find(
+        o => o.option_id === finalPick
+      )?.option_text;
+
+
       // TestResult 페이지로 이동
       navigate("/TestResult", {
          state: {
           session_id,
-          myInterior: finalChoices['extra3']  // 🔥 최종 인테리어 결과 추가
+          // myInterior: finalChoices['extra3']  // 🔥 최종 인테리어 결과 추가
+          myInterior: finalPick,        // A 또는 E 같은 선택된 ID
+          myInteriorImage: finalImage // 🔥 서버 이미지 링크 전달!
         } });
     } catch (err) {
       console.error("제출 오류:", err);

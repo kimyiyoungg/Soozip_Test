@@ -13,10 +13,11 @@ export default function TestResultPage() {
   const location = useLocation();
   
  //   // ===== 여기서 navigate로 전달된 session_id를 가져옵니다 =====
-  const { session_id, myInterior } = location.state || {};
+  const { session_id, myInterior, myInteriorImage } = location.state || {};
   
   
   console.log("받은 session_id:", session_id);
+  console.log("받은 myInteriorImage:", myInteriorImage);
   // // 결과 데이터를 저장할 state
   const [result, setResult] = useState(null);
 
@@ -455,8 +456,9 @@ export default function TestResultPage() {
                 />
               </svg> */}
               <img
-                src={myInterior}
+                src={myInteriorImage}
                 alt={myInterior}
+                // alt={myInteriorImage}
                 style={{ width: 160, height: 160, borderRadius: 12 }}
               />
               <p
@@ -467,7 +469,7 @@ export default function TestResultPage() {
                   marginTop: 8,
                 }}
               >
-                AAA 스타일
+                내가 선택한 <br/>AAA 스타일
               </p>
             </div>
           </div>
