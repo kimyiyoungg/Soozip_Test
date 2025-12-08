@@ -13,7 +13,7 @@ export default function TestResultPage() {
   const location = useLocation();
   
  //   // ===== 여기서 navigate로 전달된 session_id를 가져옵니다 =====
-  const { session_id } = location.state || {};
+  const { session_id, myInterior } = location.state || {};
   
   
   console.log("받은 session_id:", session_id);
@@ -21,6 +21,7 @@ export default function TestResultPage() {
   const [result, setResult] = useState(null);
 
   const [imageLoaded, setImageLoaded] = useState(false);
+  
 
   // ⭐ 메인 이미지 flip 상태 추가
   const [flipMain, setFlipMain] = useState(false);
@@ -447,12 +448,17 @@ export default function TestResultPage() {
                 alignItems: "center",
               }}
             >
-              <svg width="100%" height="auto" viewBox="0 0 164 164">
+              {/* <svg width="100%" height="auto" viewBox="0 0 164 164">
                 <path
                   d="M0 20C0 8.95 8.95 0 20 0H144C155.05 0 164 8.95 164 20V144C164 155.05 155.05 164 144 164H20C8.95 164 0 155.05 0 144V20Z"
                   fill="#D9D9D9"
                 />
-              </svg>
+              </svg> */}
+              <img
+                src={myInterior}
+                alt={myInterior}
+                style={{ width: 160, height: 160, borderRadius: 12 }}
+              />
               <p
                 style={{
                   fontSize: 16,
