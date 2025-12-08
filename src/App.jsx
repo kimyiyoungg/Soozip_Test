@@ -11,6 +11,14 @@ import TestResultPage from "./TestResultPage";
 import SetUpStylingInfo from "./SetUpStylingInfo";
 
 export default function App() {
+  // function setVh() {
+  //   const vh = window.innerHeight * 0.01;
+  //   document.documentElement.style.setProperty("--vh", `${vh}px`);
+  // }
+
+  // setVh();
+  // window.addEventListener("resize", setVh);
+
   return (
     <Routes>
       {/* 홈 */}
