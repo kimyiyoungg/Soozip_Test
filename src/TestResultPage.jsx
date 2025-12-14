@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState} from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { createClient } from "@supabase/supabase-js";
 import downloadIcon from "./assets/download.svg";
@@ -11,6 +11,8 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 export default function TestResultPage() {
   const navigate = useNavigate();
   const location = useLocation();
+
+
   
  //   // ===== 여기서 navigate로 전달된 session_id를 가져옵니다 =====
   const { session_id, myInterior, myInteriorImage } = location.state || {};
@@ -18,6 +20,23 @@ export default function TestResultPage() {
   
   console.log("받은 session_id:", session_id);
   console.log("받은 myInteriorImage:", myInteriorImage);
+
+  // myInterior 값에 따른 텍스트 정의
+  const interiorTextMap = {
+    A: "화이트톤 스타일",
+    B: "북유럽 스타일",
+    C: "레트로 스타일",
+    D: "파스텔톤 스타일",
+    E: "보타니컬 스타일",
+    F: "무채색 스타일",
+    G: "아메리칸 빈티지 스타일",
+    H: "청량한 블루 스타일",
+  };
+
+  // fallback 포함
+  const myInteriorText =
+    interiorTextMap[myInterior] || myInterior || "나의 스타일";
+
   // // 결과 데이터를 저장할 state
   const [result, setResult] = useState(null);
 
@@ -95,6 +114,35 @@ export default function TestResultPage() {
     }
   };
 
+  const handleShare = async () => {
+    if (!result) return;
+
+    const { data, error } = await supabase
+      .from("share_result")
+      .insert({
+        mbti: result.mbti,
+        result_type: result.result_type,
+        result_image: result.result_image,
+        interior_code: myInterior,
+        interior_text: myInteriorText,
+        interior_image: myInteriorImage,
+      })
+      .select()
+      .single();
+
+    if (error) {
+      console.error("공유 저장 실패:", error);
+      alert("공유에 실패했어요 😢");
+      return;
+    }
+
+    const shareUrl = `${window.location.origin}/share/${data.id}`;
+
+    await navigator.clipboard.writeText(shareUrl);
+    alert("결과 링크가 복사되었어요!");
+  };
+
+
   // ⭐ Flip 공통 스타일
   const flipContainer = {
     perspective: "1000px",
@@ -131,6 +179,9 @@ export default function TestResultPage() {
     fontSize: "20px",
     fontWeight: "600",
   };
+
+  
+
 
   return (
     <div
@@ -370,7 +421,7 @@ export default function TestResultPage() {
             테스트 공유
           </p> */}
 
-          <img
+          {/* <img
             src={shareIcon}
             alt="테스트 공유"
             style={{ cursor: "pointer", width: 24, height: 24 }}
@@ -381,7 +432,14 @@ export default function TestResultPage() {
             onMouseLeave={(e) =>
               (e.currentTarget.style.filter = "brightness(1)")
             }
+          /> */}
+          <img
+            src={shareIcon}
+            alt="테스트 공유"
+            style={{ cursor: "pointer", width: 24, height: 24 }}
+            onClick={handleShare}
           />
+
         </div>
         <hr
           style={{
@@ -469,7 +527,7 @@ export default function TestResultPage() {
                   marginTop: 8,
                 }}
               >
-                내가 선택한 <br/>AAA 스타일
+                내가 선택한 <br/>{myInteriorText}
               </p>
             </div>
           </div>
