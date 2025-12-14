@@ -114,6 +114,35 @@ export default function TestResultPage() {
     }
   };
 
+  // const handleShare = async () => {
+  //   if (!result) return;
+
+  //   const { data, error } = await supabase
+  //     .from("share_result")
+  //     .insert({
+  //       mbti: result.mbti,
+  //       result_type: result.result_type,
+  //       result_image: result.result_image,
+  //       interior_code: myInterior,
+  //       interior_text: myInteriorText,
+  //       interior_image: myInteriorImage,
+  //     })
+  //     .select()
+  //     .single();
+
+  //   if (error) {
+  //     console.error("공유 저장 실패:", error);
+  //     alert("공유에 실패했어요 😢");
+  //     return;
+  //   }
+
+  //   const shareUrl = `${window.location.origin}/share/${data.id}`;
+
+  //   await navigator.clipboard.writeText(shareUrl);
+  //   alert("결과 링크가 복사되었어요!");
+  // };
+
+
   const handleShare = async () => {
     if (!result) return;
 
@@ -131,15 +160,29 @@ export default function TestResultPage() {
       .single();
 
     if (error) {
-      console.error("공유 저장 실패:", error);
       alert("공유에 실패했어요 😢");
       return;
     }
 
     const shareUrl = `${window.location.origin}/share/${data.id}`;
 
-    await navigator.clipboard.writeText(shareUrl);
-    alert("결과 링크가 복사되었어요!");
+    // ✅ 모바일 (iOS Safari / Android Chrome)
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: "나의 인테리어 MBTI 결과",
+          text: `내 인테리어 취향은 "${myInteriorText}"`,
+          url: shareUrl,
+        });
+      } catch (e) {
+        console.log("공유 취소");
+      }
+    } 
+    // ✅ PC (클립보드)
+    else {
+      await navigator.clipboard.writeText(shareUrl);
+      alert("결과 링크가 복사되었어요!");
+    }
   };
 
 
