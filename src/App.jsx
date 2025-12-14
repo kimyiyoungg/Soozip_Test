@@ -9,6 +9,7 @@ import StylingInfoPage3 from "./StylingInfoPage3";
 import LoadingPage from "./LoadingPage";
 import TestResultPage from "./TestResultPage";
 import SetUpStylingInfo from "./SetUpStylingInfo";
+import ShareResultPage from "./ShareResultPage";
 
 export default function App() {
   // function setVh() {
@@ -42,6 +43,11 @@ export default function App() {
       <Route path="/styling-info2" element={<StylingInfoPage2 />} />
       <Route path="/styling-info3" element={<StylingInfoPage3 />} />
       <Route path="/setup-styling" element={<SetUpStylingInfo />} />
+
+      {/* 공유 페이지*/}
+      <Route path="/share/:id" element={<ShareResultPage/>}/> 
+
+
     </Routes>
   );
 }
