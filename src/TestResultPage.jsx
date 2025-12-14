@@ -12,6 +12,13 @@ export default function TestResultPage() {
   const navigate = useNavigate();
   const location = useLocation();
 
+  useEffect(() => {
+    if (!session_id) {
+      navigate("/", { replace: true });
+    }
+  }, [session_id, navigate]);
+
+
 
   
  //   // ===== 여기서 navigate로 전달된 session_id를 가져옵니다 =====
