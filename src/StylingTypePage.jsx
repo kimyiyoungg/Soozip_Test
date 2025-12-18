@@ -11,25 +11,19 @@ export default function StylingTypePage() {
       id: 1,
       title: "배치 솔루션",
       subtitle: "가구만 배치하고 싶어요!",
-      url: "/",
-      imgSrc:
-        "https://mmfurloptocazvhfmcvk.supabase.co/storage/v1/object/public/roombti/image02.jpg",
+      url: "/styling-info1",
     },
     {
       id: 2,
       title: "소품 솔루션",
       subtitle: "공간에 어울리는 소품을 찾고 싶어요!",
-      url: "/",
-      imgSrc:
-        "https://mmfurloptocazvhfmcvk.supabase.co/storage/v1/object/public/roombti/image02.jpg",
+      url: "/styling-info2",
     },
     {
       id: 3,
       title: "풀 스타일링",
       subtitle: "이제 입주해서 다 해주세요",
-      url: "/",
-      imgSrc:
-        "https://mmfurloptocazvhfmcvk.supabase.co/storage/v1/object/public/roombti/image02.jpg",
+      url: "/styling-info3",
     },
   ];
 
@@ -78,24 +72,6 @@ export default function StylingTypePage() {
             fillOpacity="0.42"
           />
         </svg>
-        {/* <svg
-          onClick={() => navigate("/TestResult")}
-          width={14}
-          height={16}
-          viewBox="0 0 14 16"
-          fill="none"
-          style={{
-            cursor: "pointer",
-            alignSelf: "flex-start",
-            marginBottom: "1.8rem",
-          }}
-        >
-          <path
-            d="M0.292893 7.29289C-0.0976314 7.68342 -0.0976315 8.31658 0.292893 8.70711L6.65685 15.0711C7.04738 15.4616 7.68054 15.4616 8.07107 15.0711C8.46159 14.6805 8.46159 14.0474 8.07107 13.6569L2.41421 8L8.07107 2.34315C8.46159 1.95262 8.46159 1.31946 8.07107 0.928932C7.68054 0.538407 7.04738 0.538407 6.65685 0.928932L0.292893 7.29289ZM14 8L14 7L1 7L1 8L1 9L14 9L14 8Z"
-            fill="black"
-            fillOpacity="0.42"
-          />
-        </svg> */}
 
         {/* 상단 타이틀 */}
         <div

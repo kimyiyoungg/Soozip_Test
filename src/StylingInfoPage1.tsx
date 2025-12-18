@@ -14,7 +14,7 @@ export default function StylingInfoPage1() {
   return (
     <div
       style={{
-        width: 408,
+        width: "100vw",
         // 기기에 맞게 가로 폭 자동
         // maxWidth: 408,         // PC에서도 모바일처럼 보이게 제한
         height: "100dvh", // 기기 높이 100% (주소창 대응)
@@ -147,7 +147,10 @@ export default function StylingInfoPage1() {
               color: "#000",
             }}
           >
-            공간을 바꾸는 배치솔루션
+            곧 입주하실 공간 또는 입주중인 공간에 기존 가구들을 실제 사이즈로
+            반영하여 라이프스타일에 맞게 2~3가지 배치 시안을 전달 드리드리고
+            있으며, 추가로 필요하신 가구가 있다면 완성될 배치에 함께
+            반영해드리고 있습니다.
           </p>
           <p
             style={{
@@ -213,7 +216,9 @@ export default function StylingInfoPage1() {
             marginTop: 20,
           }}
         >
-          일단, 이렇게 이렇게 해요
+          - 1:1 맞춤 상담 - 원하시는 공간에 대한 상담 후 3D 모델링 작업을 위한
+          실제 공간 자료, 기존 가구들에 대한 정보를 주실 수 있도록 상담을
+          도와드립니다.
         </p>
         <svg width={298} height={164} viewBox="0 0 298 164" fill="none">
           <path
@@ -248,7 +253,10 @@ export default function StylingInfoPage1() {
             marginTop: 20,
           }}
         >
-          이단, 이렇게 이렇게 이렇게 해요
+          -배치 시안 전달 - 라이프스타일이나 니즈를 반영하여 개인 맞춤형 3D
+          배치안을 제작합니다. 원하시는 배치를 선택하실 수 있도록 기본적으로
+          2~3가지 시안을 함께 제공하고 있습니다. (사진과 같이 가구 및 공간의
+          실제 사이즈만 반영됩니다)
         </p>
         <svg width={298} height={164} viewBox="0 0 298 164" fill="none">
           <path
@@ -283,7 +291,9 @@ export default function StylingInfoPage1() {
             marginTop: 20,
           }}
         >
-          삼단, 이렇게 이렇게 이렇게 해요
+          - 피드백 및 가구리스트 전달 - 배치 시안에 따라 피드백을 주시면 최대
+          1회 수정 도와드리고 있으며, 기존 가구 이외에 추가된 가구나 제품이 있을
+          경우 구매링크를 정리하여 전달 드립니다.
         </p>
         <svg width={298} height={164} viewBox="0 0 298 164" fill="none">
           <path
