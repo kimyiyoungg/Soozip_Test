@@ -1,4 +1,4 @@
-import { useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { createClient } from "@supabase/supabase-js";
 import downloadIcon from "./assets/download.svg";
@@ -12,19 +12,9 @@ export default function TestResultPage() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  useEffect(() => {
-    if (!session_id) {
-      navigate("/", { replace: true });
-    }
-  }, [session_id, navigate]);
-
-
-
-  
- //   // ===== 여기서 navigate로 전달된 session_id를 가져옵니다 =====
+  //   // ===== 여기서 navigate로 전달된 session_id를 가져옵니다 =====
   const { session_id, myInterior, myInteriorImage } = location.state || {};
-  
-  
+
   console.log("받은 session_id:", session_id);
   console.log("받은 myInteriorImage:", myInteriorImage);
 
@@ -48,7 +38,6 @@ export default function TestResultPage() {
   const [result, setResult] = useState(null);
 
   const [imageLoaded, setImageLoaded] = useState(false);
-  
 
   // ⭐ 메인 이미지 flip 상태 추가
   const [flipMain, setFlipMain] = useState(false);
@@ -57,14 +46,13 @@ export default function TestResultPage() {
     if (!session_id) return;
 
     const fetchResult = async () => {
-
       if (!session_id) return;
 
       const { data, error } = await supabase
         .from("resulttype")
         .select("*")
         .eq("session_id", session_id)
-         .maybeSingle();  // ← 이거!!!
+        .maybeSingle(); // ← 이거!!!
 
       if (error) {
         console.error("결과 불러오기 실패:", error);
@@ -77,30 +65,30 @@ export default function TestResultPage() {
     fetchResult();
   }, [session_id]);
 
-    // 2) 뒤로 가기 시 localStorage에서 복구
-      useEffect(() => {
-      if (!result) {
+  // 2) 뒤로 가기 시 localStorage에서 복구
+  useEffect(() => {
+    if (!result) {
       const saved = localStorage.getItem("lastResult");
       if (saved) setResult(JSON.parse(saved));
-      }
-      }, [result]);
+    }
+  }, [result]);
 
-      // 3) 이미지 로드 후 session 삭제  ← ★ 여기에 넣으면 됨
-      useEffect(() => {
-        if (!imageLoaded || !session_id) return;
+  // 3) 이미지 로드 후 session 삭제  ← ★ 여기에 넣으면 됨
+  useEffect(() => {
+    if (!imageLoaded || !session_id) return;
 
-        const deleteSession = async () => {
-          const { error } = await supabase
-            .from("sessionuser")
-            .delete()
-            .eq("session_id", session_id);
+    const deleteSession = async () => {
+      const { error } = await supabase
+        .from("sessionuser")
+        .delete()
+        .eq("session_id", session_id);
 
-          if (error) console.error("session 삭제 실패:", error);
-          else console.log("session 삭제 완료");
-        };
+      if (error) console.error("session 삭제 실패:", error);
+      else console.log("session 삭제 완료");
+    };
 
-        deleteSession();
-      }, [imageLoaded, session_id]);  // ← 이미지가 로드되면 실행됨
+    deleteSession();
+  }, [imageLoaded, session_id]); // ← 이미지가 로드되면 실행됨
 
   const downloadImage = async (imageUrl) => {
     try {
@@ -149,7 +137,6 @@ export default function TestResultPage() {
   //   alert("결과 링크가 복사되었어요!");
   // };
 
-
   const handleShare = async () => {
     if (!result) return;
 
@@ -184,14 +171,13 @@ export default function TestResultPage() {
       } catch (e) {
         console.log("공유 취소");
       }
-    } 
+    }
     // ✅ PC (클립보드)
     else {
       await navigator.clipboard.writeText(shareUrl);
       alert("결과 링크가 복사되었어요!");
     }
   };
-
 
   // ⭐ Flip 공통 스타일
   const flipContainer = {
@@ -230,22 +216,20 @@ export default function TestResultPage() {
     fontWeight: "600",
   };
 
-  
-
-
   return (
     <div
       style={{
-        width: 408,
+        width: "100vw",
         height: "100vh",
         minHeight: 1300,
         background: "#fbf2d5",
         display: "flex",
-        flexDirection: "column",
+        // flexDirection: "column",
         position: "relative",
+        // justifyContent: "center",
       }}
     >
-      <div style={{ flex: 1, padding: "115px 0 0 0", position: "relative" }}>
+      <div style={{ flex: 1, padding: "115px 0 0 0", position: "flex" }}>
         <svg
           onClick={() => navigate("/")}
           width={14}
@@ -263,61 +247,8 @@ export default function TestResultPage() {
           />
         </svg>
 
-        {/* <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "flex-end",
-            padding: "0 25px",
-          }}
-        >
-          <p
-            style={{
-              fontSize: 16,
-              fontWeight: 700,
-              color: "#000",
-              margin: 10,
-            }}
-          >
-            SOOZIP
-          </p>
-
-          <img
-            src="src/assets/bear2.png"
-            style={{ width: 148, height: 96, objectFit: "cover" }}
-          />
-        </div> */}
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "flex-end",
-            padding: "0 25px",
-          }}
-        >
-          {/* 왼쪽 텍스트 */}
-          {/* <img
-            src="src/assets/soozip_logo.png"
-            alt="로고"
-            style={{
-              width: "20px", // 작게!
-              height: "20px",
-              // objectFit: "contain",
-              marginBottom: "10px",
-            }}
-          />
-          <p
-            style={{
-              fontSize: 16,
-              fontWeight: 700,
-              color: "#000",
-              margin: 10,
-            }}
-          >
-            SOOZIP
-          </p> */}
-          {/* 왼쪽: 로고 + 텍스트 */}
-          <div style={{ display: "flex", alignItems: "flex-end", gap: 5 }}>
+        {/* 로고 부분 */}
+        {/* <div style={{ display: "flex", alignItems: "center", gap: 5 , justifyContent: "center", marginBottom:"30px"}}>
             <img
               //src="src/assets/soozip_logo.png"
               src="https://mmfurloptocazvhfmcvk.supabase.co/storage/v1/object/public/roombti/soozip_logo.png"
@@ -341,43 +272,53 @@ export default function TestResultPage() {
             >
               SOOZIP
             </p>
-          </div>
+        </div> */}
 
-          {/* 오른쪽 이미지 */}
-          {/* <img
-            src="src/assets/bear2.png"
-            style={{ width: 148, height: 96, objectFit: "cover" }}
-          /> */}
-          <div  style={{
-                fontSize: 18,
-                fontWeight: 1000,
-                width: 130,
-                height: 20,
-                borderRadius: 100,
-                textAlign:"center",
-                //alignItems: "center",
-                justifyContent: "center",
-                background: "#c59b72ff",
-                color: "#fff",
-                margin: 10, // margin 제거
-                // lineHeight: 3, // 글씨 바닥 맞춤
-              }}>카드를 터치해보세요 !</div>
-
-              
-
-        </div>
-
-        {/* ⭐ 메인 이미지 → 클릭 시 뒤집히는 카드 */}
+        {/* </div> */}
         {result ? (
           <div
             style={{
               display: "flex",
               justifyContent: "center",
               marginBottom: 20,
+              position: "relative", // ⭐ 기준점
             }}
             onClick={() => setFlipMain(!flipMain)}
           >
             <div style={flipContainer}>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 5,
+                  justifyContent: "flex-start",
+                  marginBottom: "5px",
+                }}
+              >
+                <img
+                  //src="src/assets/soozip_logo.png"
+                  src="https://mmfurloptocazvhfmcvk.supabase.co/storage/v1/object/public/roombti/soozip_logo.png"
+                  alt="로고"
+                  style={{
+                    width: 20,
+                    height: 20,
+                    marginBottom: 10,
+                    marginLeft: 10,
+                    // marginTop:0
+                  }}
+                />
+                <p
+                  style={{
+                    fontSize: 35,
+                    fontWeight: 700,
+                    color: "#000",
+                    margin: 0, // margin 제거
+                    lineHeight: 1, // 글씨 바닥 맞춤
+                  }}
+                >
+                  SOOZIP
+                </p>
+              </div>
               <div style={flipInner(flipMain)}>
                 {/* front */}
                 <div style={flipFace}>
@@ -410,92 +351,139 @@ export default function TestResultPage() {
                   />
                 </div>
               </div>
+              {/* <div
+                style={{
+                  fontSize: 18,
+                  fontWeight: 800,
+                  width: 130,
+                  height: 25,
+                  borderRadius: 100,
+                  background: "#c59b72ff",
+                  color: "#fff",
+                  display: "flex",
+                  alignItems: "center",
+                  // gap: 24, // 버튼 간 간격
+                  float:"left",
+                  marginTop:"20px"
+                }}
+              >
+                카드를 터치해보세요 !
+              </div>
+
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "flex-end",
+                  gap: 24, // 버튼 간 간격
+                  marginBottom: 20,
+                  width: "100%", // 전체 폭 기준
+                  maxWidth: 408, // 카드와 동일 폭
+                  // margin: "0 auto 20px",
+                  float:"right",
+                }}
+              >
+                
+                <img
+                  src={downloadIcon}
+                  alt="이미지 저장"
+                  style={{ cursor: "pointer", width: 30, height: 30 }}
+                  onClick={() => downloadImage(result.result_image)}
+                  onMouseEnter={(e) =>
+                    (e.currentTarget.style.filter = "brightness(0.7)")
+                  }
+                  onMouseLeave={(e) =>
+                    (e.currentTarget.style.filter = "brightness(1)")
+                  }
+                />
+                <img
+                  src={shareIcon}
+                  alt="테스트 공유"
+                  style={{ cursor: "pointer", width: 24, height: 24 }}
+                  onClick={handleShare}
+                />
+              </div> */}
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  width: "100%",
+                  maxWidth: 408,
+                  margin: "20px auto",
+                  padding: "0 8px",
+                }}
+              >
+                <div
+                  style={{
+                    fontSize: 18,
+                    fontWeight: 800,
+                    padding: "4px 12px",
+                    borderRadius: 100,
+                    background: "#c59b72ff",
+                    color: "#fff",
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  카드를 터치해보세요 !
+                </div>
+
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 24,
+                  }}
+                >
+                  <img
+                    src={downloadIcon}
+                    alt="이미지 저장"
+                    style={{ cursor: "pointer", width: 30, height: 30 }}
+                    onClick={() => downloadImage(result.result_image)}
+                  />
+                  <img
+                    src={shareIcon}
+                    alt="테스트 공유"
+                    style={{ cursor: "pointer", width: 24, height: 24 }}
+                    onClick={handleShare}
+                  />
+                </div>
+              </div>
             </div>
           </div>
         ) : (
           <p>결과 불러오는 중...</p>
         )}
 
-
         {/* 아래 두 개 카드는 그대로 유지 */}
         {/* 이미지 저장 / 테스트 공유 */}
-        <div
+        {/* <div
           style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "flex-end",
-            flexDirection: "row",
-            gap: 20,
-            marginBottom: 20,
-            marginRight: 40,
+            fontSize: 18,
+            fontWeight: 800,
+            width: 130,
+            height: 25, // ✅ 높이 늘리기 (중요)
+            borderRadius: 100,
+            background: "#c59b72ff",
+            color: "#fff",
+            display: "flex", // ✅ 필수
+            alignItems: "center", // 세로 가운데
+            // justifyContent: "flex-start", // ✅ 안쪽 왼쪽
+            float:"left",
+            //paddingLeft: 8, // ✅ 안쪽 여백
+            //marginLeft: 10/// ✅ 왼쪽/로 붙이기
+            // margin: "10px auto",
+            boxSizing: "border-box",
           }}
         >
-          {/* <p
-            style={{
-              fontSize: 16,
-              fontWeight: 700,
-              color: "#000",
-              cursor: "pointer",
-              margin: 0,
-            }}
-            onClick={() => downloadImage(result.result_image)}
-            onMouseEnter={(e) => (e.currentTarget.style.color = "#555")}
-            onMouseLeave={(e) => (e.currentTarget.style.color = "#000")}
-          >
-            이미지 저장
-          </p> */}
-          <img
-            src={downloadIcon}
-            alt="이미지 저장"
-            style={{ cursor: "pointer", width: 30, height: 30 }}
-            onClick={() => downloadImage(result.result_image)}
-            onMouseEnter={(e) =>
-              (e.currentTarget.style.filter = "brightness(0.7)")
-            }
-            onMouseLeave={(e) =>
-              (e.currentTarget.style.filter = "brightness(1)")
-            }
-          />
-
-          {/* <p
-            style={{
-              fontSize: 16,
-              fontWeight: 700,
-              color: "#000",
-              cursor: "pointer",
-            }}
-            onClick={() => alert("테스트 공유 기능 준비 중입니다")}
-            onMouseEnter={(e) => (e.currentTarget.style.color = "#555")}
-            onMouseLeave={(e) => (e.currentTarget.style.color = "#000")}
-          >
-            테스트 공유
-          </p> */}
-
-          {/* <img
-            src={shareIcon}
-            alt="테스트 공유"
-            style={{ cursor: "pointer", width: 24, height: 24 }}
-            onClick={() => alert("테스트 공유 기능 준비 중입니다")}
-            onMouseEnter={(e) =>
-              (e.currentTarget.style.filter = "brightness(0.7)")
-            }
-            onMouseLeave={(e) =>
-              (e.currentTarget.style.filter = "brightness(1)")
-            }
-          /> */}
-          <img
-            src={shareIcon}
-            alt="테스트 공유"
-            style={{ cursor: "pointer", width: 24, height: 24 }}
-            onClick={handleShare}
-          />
-
-        </div>
+          카드를 터치해보세요 !
+        </div> */}
+        {/*  */}
         <hr
           style={{
             border: "1px solid #D9D9D9",
             width: 354,
-            marginTop: 30,
+            marginTop: 150,
             marginBottom: 50,
           }}
         />
@@ -535,7 +523,8 @@ export default function TestResultPage() {
             marginBottom: 30,
           }}
         >
-          나에게 어울리는 인테리어는?<br/>
+          나에게 어울리는 인테리어는?
+          <br />
           (아직 개발 진행 중입니다.)
         </p>
 
@@ -577,7 +566,8 @@ export default function TestResultPage() {
                   marginTop: 8,
                 }}
               >
-                내가 선택한 <br/>{myInteriorText}
+                내가 선택한 <br />
+                {myInteriorText}
               </p>
             </div>
           </div>
@@ -615,12 +605,13 @@ export default function TestResultPage() {
       <div
         style={{
           width: "100%",
-          maxWidth: 408,
+          // maxWidth: 408,
           height: 120,
           position: "fixed",
           bottom: 0,
-          // background: "#fff",
-          background: "linear-gradient(to top, #fff 85%, rgba(255,255,255,0) 100%)",
+          left: "50%", // ✅ 추가
+          transform: "translateX(-50%)",
+          background: "#fbf2d5",
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
@@ -648,7 +639,7 @@ export default function TestResultPage() {
             borderRadius: 12,
             background: "#000",
             border: "1px solid #ddd9d9",
-            color: "#fff",
+            color: "#fbf2d5",
             fontWeight: 600,
             display: "flex",
             alignItems: "center",
