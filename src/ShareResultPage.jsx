@@ -31,10 +31,13 @@ export default function ShareResultPage() {
 
   if (!data) return <p>결과 불러오는 중...</p>;
 
+  
+
+
   return (
     <>
       <style>
-        {`
+      {`
       @keyframes ctaPulse {
         0% {
           transform: translateY(0);
@@ -71,7 +74,7 @@ export default function ShareResultPage() {
             alignItems: "center",
             gap: 6,
             padding: "24px 0",
-            marginTop: "30px",
+            marginTop: "30px"
           }}
         >
           <img
@@ -92,7 +95,7 @@ export default function ShareResultPage() {
         </div>
 
         {/* 제목 */}
-        <h2 style={{ marginBottom: 20, fontSize: "25px" }}>
+        <h2 style={{ marginBottom: 20, fontSize:"25px" }}>
           <span class="magnifying-glass">&#x1F50D;</span>
           공유한 친구의
           <span style={{ marginLeft: 2 }} /> {/* 한 칸 띄우기 */}
@@ -103,10 +106,10 @@ export default function ShareResultPage() {
               backgroundRepeat: "no-repeat",
               backgroundSize: "100% 0.3em",
               backgroundPosition: "0 0.5em",
-              fontSize: "25px",
+              fontSize:"25px"
             }}
           >
-            인테리어 MBTI 결과
+             인테리어 MBTI 결과
           </span>
         </h2>
 
@@ -123,7 +126,7 @@ export default function ShareResultPage() {
         />
 
         {/* 텍스트 */}
-        <p style={{ marginBottom: 12, fontSize: "25px" }}>
+        <p style={{ marginBottom: 12 , fontSize: "25px"}}>
           친구가 좋아하는 스타일: <b>{data.interior_text}</b>
         </p>
 
@@ -162,7 +165,7 @@ export default function ShareResultPage() {
             fontSize: 18,
             fontWeight: 500,
             marginBottom: 6,
-            color: " #000",
+            color:" #000",
           }}
         >
           나도 인테리어 MBTI 결과가 궁금하다면?
@@ -179,7 +182,8 @@ export default function ShareResultPage() {
             ...ctaPulse, // ⭐ 이 줄만 추가
           }}
           onClick={() => {
-            window.location.href = "https://soozip-bangbti.pages.dev";
+            window.location.href =
+              "https://soozip-bangbti.pages.dev";
           }}
         >
           방BTI 테스트 시작
@@ -256,7 +260,7 @@ export default function ShareResultPage() {
 //           방BTI 테스트 시작
 //         </button>
 //         {/* </div> */}
-
+        
 //       </div>
 //       <div style={{ display: "flex", alignItems: "center", gap: 5, padding:"30px"}}>
 //             <img
@@ -291,6 +295,7 @@ export default function ShareResultPage() {
 //         alt="result"
 //         style={{ width: "80%",borderRadius: 12 }}
 //       />
+
 
 //       <p>
 //         선택한 스타일: <b>{data.interior_text}</b>

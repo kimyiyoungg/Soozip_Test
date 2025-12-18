@@ -247,7 +247,7 @@ export default function TestResultPage() {
           />
         </svg>
 
-        {/* 로고 부분 */}
+       {/* 로고 부분 */}
         {/* <div style={{ display: "flex", alignItems: "center", gap: 5 , justifyContent: "center", marginBottom:"30px"}}>
             <img
               //src="src/assets/soozip_logo.png"
@@ -273,7 +273,7 @@ export default function TestResultPage() {
               SOOZIP
             </p>
         </div> */}
-
+         
         {/* </div> */}
         {result ? (
           <div
@@ -285,40 +285,33 @@ export default function TestResultPage() {
             }}
             onClick={() => setFlipMain(!flipMain)}
           >
+
             <div style={flipContainer}>
-              <div
+            <div style={{ display: "flex", alignItems: "center", gap: 5 , justifyContent: "flex-start", marginBottom:"5px"}}>
+              <img
+                //src="src/assets/soozip_logo.png"
+                src="https://mmfurloptocazvhfmcvk.supabase.co/storage/v1/object/public/roombti/soozip_logo.png"
+                alt="로고"
                 style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 5,
-                  justifyContent: "flex-start",
-                  marginBottom: "5px",
+                  width: 20,
+                  height: 20,
+                  marginBottom: 10,
+                  marginLeft: 10,
+                  // marginTop:0
+                }}
+              />
+              <p
+                style={{
+                  fontSize: 35,
+                  fontWeight: 700,
+                  color: "#000",
+                  margin: 0, // margin 제거
+                  lineHeight: 1, // 글씨 바닥 맞춤
                 }}
               >
-                <img
-                  //src="src/assets/soozip_logo.png"
-                  src="https://mmfurloptocazvhfmcvk.supabase.co/storage/v1/object/public/roombti/soozip_logo.png"
-                  alt="로고"
-                  style={{
-                    width: 20,
-                    height: 20,
-                    marginBottom: 10,
-                    marginLeft: 10,
-                    // marginTop:0
-                  }}
-                />
-                <p
-                  style={{
-                    fontSize: 35,
-                    fontWeight: 700,
-                    color: "#000",
-                    margin: 0, // margin 제거
-                    lineHeight: 1, // 글씨 바닥 맞춤
-                  }}
-                >
-                  SOOZIP
-                </p>
-              </div>
+                SOOZIP
+              </p>
+            </div>
               <div style={flipInner(flipMain)}>
                 {/* front */}
                 <div style={flipFace}>
@@ -449,6 +442,8 @@ export default function TestResultPage() {
                   />
                 </div>
               </div>
+
+
             </div>
           </div>
         ) : (
