@@ -12,11 +12,6 @@ export default function TestResultPage() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  useEffect(() => {
-    if (!session_id) {
-      navigate("/", { replace: true });
-    }
-  }, [session_id, navigate]);
 
 
 
