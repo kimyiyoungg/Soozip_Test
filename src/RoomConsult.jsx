@@ -59,7 +59,7 @@ export default function RoomConsult() {
       >
         {/* 뒤로가기 버튼 */}
         <svg
-          onClick={() => navigate("/TestResult")}
+          onClick={() => navigate("/room-counsult")}
           width={14}
           height={16}
           viewBox="0 0 14 16"
