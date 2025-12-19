@@ -308,6 +308,7 @@ export default function RoombtiTest() {
   const progressStep = Math.min(step, questions.length - 1);
   const progressPercent = progressStep / (questions.length - 1);
   const progressWidth = `${progressPercent * 280}px`;
+  const isLastQuestion = step === questions.length - 1;
 
   return (
     <div
@@ -413,21 +414,33 @@ export default function RoombtiTest() {
       >
         {current.question_text}
       </p>
+      
 
       {/* 선택 옵션 */}
       <div
+      
         style={{
           display: "grid",
           gap: "1.5rem",
-          gridTemplateColumns:
-            current.questionoption.length === 4 ? "1fr 1fr" : "1fr",
+          // gridTemplateColumns:
+          //   current.questionoption.length === 4 ? "1fr 1fr" : "1fr",
+          gridTemplateColumns: isLastQuestion
+            ? "1fr 1fr"                        // ✅ 마지막 질문 → 가로 배치
+            : current.questionoption.length === 4
+            ? "1fr 1fr"                        // 기존 4개
+            : "1fr",                           // 기존 2개(세로)
           justifyItems: "center",
-          marginTop: "1rem",
+          // justifyContent: isLastQuestion ? "center" : "start",
+          // marginTop: "1rem",
+          marginTop: isLastQuestion ? "8rem" : "1rem",
+          marginBottom: isLastQuestion ? "5rem" : "0",
         }}
       >
         {current.questionoption.map((opt, i) => {
           const isImage = opt.option_text?.toLowerCase().endsWith(".png");
           const isTouchDevice = "ontouchstart" in window;
+          const isLastQuestion = step === questions.length - 1;
+          const optionCount = current.questionoption.length;
 
           return (
             <div
@@ -442,7 +455,12 @@ export default function RoombtiTest() {
                 if (!isTouchDevice) setHoveredIndex(null); // ← 모바일에서는 hover 무시
               }}
               style={{
-                width: current.questionoption.length === 4 ? 150 : 312,
+                //width: current.questionoption.length === 4 ? 150 : 312,
+                width: isLastQuestion
+                  ? 150                // ✅ 마지막 질문은 무조건 150
+                  : optionCount === 4
+                  ? 150                // 기존 4개
+                  : 312,               // 기존 2개
                 height: 170,
                 borderRadius: 12,
                 background: "#fff",
