@@ -7,24 +7,22 @@ import { useNavigate } from "react-router-dom";
 export default function StylingInfoPage3() {
   const navigate = useNavigate();
   const images = [
-    "src/assets/image1.jpg",
-    "src/assets/image2.png",
-    "src/assets/image3.png",
+    "https://mmfurloptocazvhfmcvk.supabase.co/storage/v1/object/public/roombti/styling_info/arr_1.png",
+    "https://mmfurloptocazvhfmcvk.supabase.co/storage/v1/object/public/roombti/styling_info/arr_1.png",
+    "https://mmfurloptocazvhfmcvk.supabase.co/storage/v1/object/public/roombti/styling_info/arr_1.png",
   ];
   return (
     <div
       style={{
-        width: 408,
-        // 기기에 맞게 가로 폭 자동
-        // maxWidth: 408,         // PC에서도 모바일처럼 보이게 제한
-        height: "100dvh", // 기기 높이 100% (주소창 대응)
-        minHeight: 2100,
+        width: "100%",
+        maxWidth: "100vw",
+        minHeight: "100svh",
         background: "#fff",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         overflowX: "hidden",
-        gap: 20,
+        fontFamily: "NanumSquare, system-ui, sans-serif",
       }}
     >
       {/* 상단 배경 */}
@@ -32,13 +30,13 @@ export default function StylingInfoPage3() {
         style={{
           width: "100%",
           height: 800,
-          //   marginTop: -20,
-          borderRadius: 30,
           background: "#fbf2d5",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
           paddingTop: 36,
+          paddingBottom: 36,
+          position: "relative",
         }}
       >
         {/* 상단 SVG */}
@@ -49,12 +47,18 @@ export default function StylingInfoPage3() {
             justifyContent: "flex-start",
             paddingLeft: 38.5,
             paddingTop: 67.5,
+            position: "relative", // ⭐ 중요
+            zIndex: 10,
           }}
         >
           <svg
             onClick={() => navigate("/styling-type")}
             width={14}
             height={16}
+            style={{
+              cursor: "pointer",
+              zIndex: 11,
+            }}
             viewBox="0 0 14 16"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -84,7 +88,7 @@ export default function StylingInfoPage3() {
             style={{
               fontSize: 15,
               textAlign: "center",
-              color: "#000",
+              color: "#7e7b7b",
               zIndex: 1, // 이미지 위로 올라오도록
             }}
           >
@@ -93,15 +97,20 @@ export default function StylingInfoPage3() {
         </div>
 
         <p
-          style={{ marginTop: 1, fontSize: 32, fontWeight: 700, color: "#000" }}
+          style={{
+            marginTop: 1,
+            fontSize: 45,
+            fontWeight: 800,
+            color: "#000",
+          }}
         >
-          풀 스타일링
+          풀 스타일링(오프라인)
         </p>
         {/* 이미지 */}
         <div
           style={{
             width: "100%",
-            height: 230,
+            height: 300,
             borderRadius: 20,
             overflow: "hidden",
           }}
@@ -139,25 +148,36 @@ export default function StylingInfoPage3() {
             gap: 10,
           }}
         >
-          <p
+          {/* <p
             style={{
-              margin: 0,
-              fontSize: 20,
+              margin: "30px auto 10px",
+              fontSize: 24,
+              fontWeight: 600,
               textAlign: "center",
               color: "#000",
-            }}
-          >
-            공간을 바꾸는 풀스타일링
-          </p>
-          <p
-            style={{
-              margin: 0,
-              fontSize: 20,
-              textAlign: "center",
-              color: "#000",
+              letterSpacing: "-0.3px",
             }}
           >
             방을 최적의 배치로 꾸며주는 서비스
+          </p> */}
+
+          <p
+            style={{
+              margin: "0 auto",
+              fontSize: 18,
+              lineHeight: 1.7,
+              textAlign: "center",
+              color: "#4f4e4e",
+              maxWidth: 720,
+              wordBreak: "keep-all",
+              padding: "0 16px",
+            }}
+          >
+            라이프스타일에 맞는 적절한 배치와, 소품 선정 등 고객님이 상상만
+            하셨던 공간을 3D 모델링을 활용하여 전체적인 스타일링을 도와드립니다.
+            무료/유료 타입으로 나뉘어 진행되고 있으며 지역에 따라 출장비가
+            별도로 발생합니다. (3가지 동의사항에 동의가 가능하실 경우 무료 진행
+            가능합니다)
           </p>
         </div>
       </div>
@@ -178,14 +198,11 @@ export default function StylingInfoPage3() {
             fontSize: 20,
             fontWeight: 600,
             color: "#000",
-            marginBottom: 4,
+            marginBottom: 150,
           }}
         >
           배치솔루션 GUIDE
         </p>
-        <svg width={207} height={1} viewBox="0 0 207 1" fill="none">
-          <line x1="0" y1="0.5" x2={207} y2="0.5" stroke="black" />
-        </svg>
 
         {/* 버튼 1 */}
         <div
@@ -195,27 +212,53 @@ export default function StylingInfoPage3() {
             borderRadius: 100,
             background: "#2f2f2f",
             color: "#fff",
-            fontSize: 20,
+            fontSize: 18,
             fontWeight: 500,
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            marginTop: 20,
+            marginTop: 10,
+            marginBottom: 16,
           }}
         >
           하나
         </div>
         <p
           style={{
-            fontSize: 20,
+            fontSize: 30,
             textAlign: "center",
             color: "#000",
-            marginTop: 20,
+            fontWeight: 800,
+            marginBottom: 1,
           }}
         >
-          일단, 이렇게 이렇게 이렇게 해요
+          1:1 맞춤 상담
         </p>
-        <svg width={298} height={164} viewBox="0 0 298 164" fill="none">
+        <p
+          style={{
+            margin: "0px auto 24px",
+            fontSize: "clamp(15px, 2.8vw, 18px)", // PC/모바일 자동
+            lineHeight: 1.7,
+            textAlign: "center",
+            color: "#4f4e4e",
+            maxWidth: 720,
+            padding: "0 16px",
+            wordBreak: "keep-all",
+          }}
+        >
+          공간을 직접 방문하여 원하시는 공간에 대한 상담 및 디테일한 공간 실측을
+          도와드립니다.
+        </p>
+
+        <svg
+          width={298}
+          height={164}
+          viewBox="0 0 298 164"
+          fill="none"
+          style={{
+            marginTop: 70,
+          }}
+        >
           <path
             d="M0 20C0 8.95431 8.9543 0 20 0H278C289.046 0 298 8.95431 298 20V144C298 155.046 289.046 164 278 164H20C8.95431 164 0 155.046 0 144V20Z"
             fill="#D9D9D9"
@@ -230,27 +273,54 @@ export default function StylingInfoPage3() {
             borderRadius: 100,
             background: "#2f2f2f",
             color: "#fff",
-            fontSize: 20,
+            fontSize: 18,
             fontWeight: 500,
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            marginTop: 20,
+            marginTop: 200,
+            marginBottom: 16,
           }}
         >
           둘
         </div>
         <p
           style={{
-            fontSize: 20,
+            fontSize: 30,
             textAlign: "center",
             color: "#000",
-            marginTop: 20,
+            fontWeight: 800,
+            marginBottom: 1,
           }}
         >
-          이단, 이렇게 이렇게 이렇게 해요
+          스타일링 3D 시안 전달
         </p>
-        <svg width={298} height={164} viewBox="0 0 298 164" fill="none">
+        <p
+          style={{
+            margin: "0px auto 24px",
+            fontSize: "clamp(15px, 2.8vw, 18px)", // PC/모바일 자동
+            lineHeight: 1.7,
+            textAlign: "center",
+            color: "#4f4e4e",
+            maxWidth: 720,
+            padding: "0 16px",
+            wordBreak: "keep-all",
+          }}
+        >
+          라이프스타일이나 니즈를 반영하여 개인 맞춤형 3D 시안을 제작합니다.
+          기존가구와 새로운 가구를 조합하거나 새로운 가구들로 가구를 배치한 후,
+          공간에 어울리는 소품까지 더해 전체적인 스타일링을 도와드립니다.
+        </p>
+
+        <svg
+          width={298}
+          height={164}
+          viewBox="0 0 298 164"
+          fill="none"
+          style={{
+            marginTop: 70,
+          }}
+        >
           <path
             d="M0 20C0 8.95431 8.9543 0 20 0H278C289.046 0 298 8.95431 298 20V144C298 155.046 289.046 164 278 164H20C8.95431 164 0 155.046 0 144V20Z"
             fill="#D9D9D9"
@@ -265,27 +335,114 @@ export default function StylingInfoPage3() {
             borderRadius: 100,
             background: "#2f2f2f",
             color: "#fff",
-            fontSize: 20,
+            fontSize: 18,
             fontWeight: 500,
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            marginTop: 20,
+            marginTop: 200,
+            marginBottom: 16,
           }}
         >
           셋
         </div>
         <p
           style={{
-            fontSize: 20,
+            fontSize: 30,
             textAlign: "center",
             color: "#000",
-            marginTop: 20,
+            fontWeight: 800,
+            marginBottom: 1,
           }}
         >
-          삼단, 이렇게 이렇게 이렇게 해요
+          피드백 및 가구리스트 전달
         </p>
-        <svg width={298} height={164} viewBox="0 0 298 164" fill="none">
+        <p
+          style={{
+            margin: "0px auto 24px",
+            fontSize: "clamp(15px, 2.8vw, 18px)", // PC/모바일 자동
+            lineHeight: 1.7,
+            textAlign: "center",
+            color: "#4f4e4e",
+            maxWidth: 720,
+            padding: "0 16px",
+            wordBreak: "keep-all",
+          }}
+        >
+          스타일링 시안에 따라 피드백을 주시면 최대 2회 수정 도와드리고 있으며,
+          3D 모델링에 활용된 전 제품 리스트를 바로 구매하실 수 있도록 제품
+          상세옵션과 링크를 정리하여 전달 드립니다.
+        </p>
+        <svg
+          width={298}
+          height={164}
+          viewBox="0 0 298 164"
+          fill="none"
+          style={{
+            marginTop: 70,
+          }}
+        >
+          <path
+            d="M0 20C0 8.95431 8.9543 0 20 0H278C289.046 0 298 8.95431 298 20V144C298 155.046 289.046 164 278 164H20C8.95431 164 0 155.046 0 144V20Z"
+            fill="#D9D9D9"
+          />
+        </svg>
+        <div
+          style={{
+            width: 77,
+            height: 31,
+            borderRadius: 100,
+            background: "#2f2f2f",
+            color: "#fff",
+            fontSize: 18,
+            fontWeight: 500,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            marginTop: 200,
+            marginBottom: 16,
+          }}
+        >
+          넷
+        </div>
+        <p
+          style={{
+            fontSize: 30,
+            textAlign: "center",
+            color: "#000",
+            fontWeight: 800,
+            marginBottom: 1,
+          }}
+        >
+          방문 세팅
+        </p>
+        <p
+          style={{
+            margin: "0px auto 24px",
+            fontSize: "clamp(15px, 2.8vw, 18px)", // PC/모바일 자동
+            lineHeight: 1.7,
+            textAlign: "center",
+            color: "#4f4e4e",
+            maxWidth: 720,
+            padding: "0 16px",
+            wordBreak: "keep-all",
+          }}
+        >
+          제품이 전체적으로 배송이 완료된 후, 직접 방문드려 최종 세팅을
+          도와드리고 있습니다. 최종 세팅에는 아래의 내용들이 해당되며 모두
+          원상복구가 가능하도록 세팅 해드립니다. - 커튼 또는 블라인드 설치 -
+          전구 또는 전등 교체 - 벽지 또는 타일 세팅 작업 - 가구 조립 및 소품
+          위치 선정
+        </p>
+        <svg
+          width={298}
+          height={164}
+          viewBox="0 0 298 164"
+          fill="none"
+          style={{
+            marginTop: 70,
+          }}
+        >
           <path
             d="M0 20C0 8.95431 8.9543 0 20 0H278C289.046 0 298 8.95431 298 20V144C298 155.046 289.046 164 278 164H20C8.95431 164 0 155.046 0 144V20Z"
             fill="#D9D9D9"
@@ -296,10 +453,10 @@ export default function StylingInfoPage3() {
         <a href="https://open.kakao.com/o/sHCcxOnh">
           <p
             style={{
-              fontSize: 16,
+              fontSize: 20,
               textAlign: "center",
               color: "#2f2f2f",
-              marginTop: 20,
+              marginTop: 100,
             }}
           >
             <u>1:1 상담톡 연결하기</u> ▶

@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 export default function StylingInfoPage1() {
   const navigate = useNavigate();
   const images = [
-    "src/assets/image1.jpg",
+    "src/assets/arr1.png",
     "src/assets/image2.png",
     "src/assets/image3.png",
   ];
@@ -151,7 +151,7 @@ export default function StylingInfoPage1() {
           <p
             style={{
               margin: "30px auto 10px",
-              fontSize: 28,
+              fontSize: 24,
               fontWeight: 600,
               textAlign: "center",
               color: "#000",
