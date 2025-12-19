@@ -14,13 +14,14 @@ export default function StylingInfoPage1() {
   return (
     <div
       style={{
-        minHeight: "100dvh",
+        width: "100%",
+        maxWidth: "100vw",
+        minHeight: "100svh",
         background: "#fff",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         overflowX: "hidden",
-        gap: 20,
       }}
     >
       {/* 상단 배경 */}
@@ -149,7 +150,7 @@ export default function StylingInfoPage1() {
           <p
             style={{
               margin: "30px auto 10px",
-              fontSize: 26, // ⭐ 크기 업
+              fontSize: 28, // ⭐ 크기 업
               fontWeight: 500, // ⭐ 살짝만 두껍게
               textAlign: "center",
               color: "#000",
@@ -162,7 +163,7 @@ export default function StylingInfoPage1() {
           <p
             style={{
               margin: "0 auto",
-              fontSize: 20,
+              fontSize: 18,
               lineHeight: 1.7,
               textAlign: "center",
               color: "#000",
