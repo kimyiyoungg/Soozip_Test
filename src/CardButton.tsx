@@ -39,7 +39,7 @@ export default function CardButton({
         background: "#fff",
         border: `2px solid ${borderColor}`,
         display: "flex",
-        justifyContent: "space-between",
+        justifyContent: "center",
         alignItems: "center",
         // alignItems: "flex-start",
         padding: "20px",
@@ -54,13 +54,13 @@ export default function CardButton({
           flexDirection: "column",
           justifyContent: "space-between",
           height: "90%", // ← 전체 카드 높이에 맞춤
-          textAlign: "left",
+          textAlign: "center",
         }}
       >
-        <p style={{ fontSize: 18, fontWeight: 600, color: "#000", margin: 8 }}>
+        <p style={{ fontSize: 23, fontWeight: 600, color: "#000", margin: 8 }}>
           {subtitle}
         </p>
-        <p style={{ fontSize: 35, fontWeight: 800, color: "#000", margin: 8 }}>
+        <p style={{ fontSize: 50, fontWeight: 800, color: "#000", margin: 8 }}>
           {title}
         </p>
       </div>

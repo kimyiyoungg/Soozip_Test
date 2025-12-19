@@ -10,7 +10,7 @@ export default function StylingTypePage() {
     {
       id: 1,
       title: "배치 솔루션",
-      subtitle: "가구만 배치하고 싶어요!",
+      subtitle: "가구만 재배치하고 싶어요!",
       url: "/styling-info1",
     },
     {
@@ -22,7 +22,7 @@ export default function StylingTypePage() {
     {
       id: 3,
       title: "풀 스타일링",
-      subtitle: "이제 입주해서 다 해주세요",
+      subtitle: "곧 입주라 처음부터 끝까지 다 해주세요!",
       url: "/styling-info3",
     },
   ];
@@ -90,6 +90,15 @@ export default function StylingTypePage() {
           }}
         >
           스타일링 타입
+        </div>
+
+        <div style={{ textAlign: "center" }}>
+          <p style={{ fontSize: 25, fontWeight: 600, color:"#000", marginBottom:"-10px"}}>
+            <b>나에게 필요한 솔루션을 찾아보세요</b>
+          </p>
+          <p style={{ fontSize: 20, fontWeight: 600, color: "#b8b1b1" ,marginTop:"20px" , marginBottom:"40px"}}>
+            솔루션을 클릭하여 자세히 알아볼 수 있습니다.
+          </p>
         </div>
 
         {/* 버튼 리스트 */}
