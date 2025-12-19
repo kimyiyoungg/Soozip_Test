@@ -437,7 +437,7 @@ export default function TestResultPage() {
                   <img
                     src={shareIcon}
                     alt="테스트 공유"
-                    style={{ cursor: "pointer", width: 24, height: 24 }}
+                    style={{ cursor: "pointer", width: 24, height: 24, marginRight:"30px" }}
                     onClick={handleShare}
                   />
                 </div>
