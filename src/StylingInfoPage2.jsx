@@ -93,7 +93,12 @@ export default function StylingInfoPage2() {
         </div>
 
         <p
-          style={{ marginTop: 1, fontSize: 32, fontWeight: 700, color: "#000" }}
+          style={{
+            marginTop: 1,
+            fontSize: 100,
+            fontWeight: 700,
+            color: "#000",
+          }}
         >
           배치 솔루션
         </p>

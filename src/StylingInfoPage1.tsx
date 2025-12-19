@@ -14,11 +14,7 @@ export default function StylingInfoPage1() {
   return (
     <div
       style={{
-        width: "100vw",
-        // 기기에 맞게 가로 폭 자동
-        // maxWidth: 408,         // PC에서도 모바일처럼 보이게 제한
-        height: "100dvh", // 기기 높이 100% (주소창 대응)
-        minHeight: 2100,
+        minHeight: "100dvh",
         background: "#fff",
         display: "flex",
         flexDirection: "column",
@@ -32,13 +28,13 @@ export default function StylingInfoPage1() {
         style={{
           width: "100%",
           height: 800,
-          //   marginTop: -20,
-          borderRadius: 30,
           background: "#fbf2d5",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
           paddingTop: 36,
+          paddingBottom: 36,
+          position: "relative",
         }}
       >
         {/* 상단 SVG */}
@@ -49,12 +45,18 @@ export default function StylingInfoPage1() {
             justifyContent: "flex-start",
             paddingLeft: 38.5,
             paddingTop: 67.5,
+            position: "relative", // ⭐ 중요
+            zIndex: 10,
           }}
         >
           <svg
             onClick={() => navigate("/styling-type")}
             width={14}
             height={16}
+            style={{
+              cursor: "pointer",
+              zIndex: 11,
+            }}
             viewBox="0 0 14 16"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -93,7 +95,12 @@ export default function StylingInfoPage1() {
         </div>
 
         <p
-          style={{ marginTop: 1, fontSize: 32, fontWeight: 700, color: "#000" }}
+          style={{
+            marginTop: 1,
+            fontSize: 45,
+            fontWeight: 500,
+            color: "#000",
+          }}
         >
           배치 솔루션
         </p>
@@ -141,26 +148,33 @@ export default function StylingInfoPage1() {
         >
           <p
             style={{
-              margin: 0,
-              fontSize: 20,
+              margin: "30px auto 10px",
+              fontSize: 26, // ⭐ 크기 업
+              fontWeight: 500, // ⭐ 살짝만 두껍게
               textAlign: "center",
               color: "#000",
-            }}
-          >
-            곧 입주하실 공간 또는 입주중인 공간에 기존 가구들을 실제 사이즈로
-            반영하여 라이프스타일에 맞게 2~3가지 배치 시안을 전달 드리드리고
-            있으며, 추가로 필요하신 가구가 있다면 완성될 배치에 함께
-            반영해드리고 있습니다.
-          </p>
-          <p
-            style={{
-              margin: 0,
-              fontSize: 20,
-              textAlign: "center",
-              color: "#000",
+              letterSpacing: "-0.3px",
             }}
           >
             방을 최적의 배치로 꾸며주는 서비스
+          </p>
+
+          <p
+            style={{
+              margin: "0 auto",
+              fontSize: 20,
+              lineHeight: 1.7,
+              textAlign: "center",
+              color: "#000",
+              maxWidth: 720,
+              wordBreak: "keep-all",
+              padding: "0 16px",
+            }}
+          >
+            곧 입주하실 공간 또는 입주중인 공간에 기존 가구들을 실제 사이즈로
+            반영하여 라이프스타일에 맞게 2~3가지 배치 시안을 전달 드리고 있으며,
+            추가로 필요하신 가구가 있다면 완성될 배치에 함께 반영해드리고
+            있습니다.
           </p>
         </div>
       </div>
@@ -210,16 +224,30 @@ export default function StylingInfoPage1() {
         </div>
         <p
           style={{
-            fontSize: 20,
+            fontSize: 30,
             textAlign: "center",
             color: "#000",
-            marginTop: 20,
+            marginTop: 10,
           }}
         >
-          - 1:1 맞춤 상담 - 원하시는 공간에 대한 상담 후 3D 모델링 작업을 위한
-          실제 공간 자료, 기존 가구들에 대한 정보를 주실 수 있도록 상담을
-          도와드립니다.
+          1:1 맞춤 상담
         </p>
+        <p
+          style={{
+            margin: "12px auto 0",
+            fontSize: "clamp(15px, 2.8vw, 18px)", // PC/모바일 자동
+            lineHeight: 1.7,
+            textAlign: "center",
+            color: "#000",
+            maxWidth: 760,
+            padding: "0 16px",
+            wordBreak: "keep-all",
+          }}
+        >
+          원하시는 공간에 대한 상담 후 3D 모델링 작업을 위한 실제 공간 자료,
+          기존 가구들에 대한 정보를 주실 수 있도록 상담을 도와드립니다.
+        </p>
+
         <svg width={298} height={164} viewBox="0 0 298 164" fill="none">
           <path
             d="M0 20C0 8.95431 8.9543 0 20 0H278C289.046 0 298 8.95431 298 20V144C298 155.046 289.046 164 278 164H20C8.95431 164 0 155.046 0 144V20Z"
@@ -240,24 +268,39 @@ export default function StylingInfoPage1() {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            marginTop: 20,
+            marginTop: 100,
           }}
         >
           둘
         </div>
         <p
           style={{
-            fontSize: 20,
+            fontSize: 30,
             textAlign: "center",
             color: "#000",
-            marginTop: 20,
+            marginTop: 10,
           }}
         >
-          -배치 시안 전달 - 라이프스타일이나 니즈를 반영하여 개인 맞춤형 3D
-          배치안을 제작합니다. 원하시는 배치를 선택하실 수 있도록 기본적으로
-          2~3가지 시안을 함께 제공하고 있습니다. (사진과 같이 가구 및 공간의
-          실제 사이즈만 반영됩니다)
+          배치 시안 전달
         </p>
+        <p
+          style={{
+            margin: "16px auto 0",
+            fontSize: "clamp(15px, 2.8vw, 18px)", // ⭐ PC/모바일 자동 조절
+            lineHeight: 1.7, // ⭐ 가독성 핵심
+            textAlign: "center",
+            color: "#000",
+            maxWidth: 760, // ⭐ 줄 길이 제한
+            padding: "0 16px", // ⭐ 모바일 여백
+            wordBreak: "keep-all", // ⭐ 한글 줄바꿈
+          }}
+        >
+          라이프스타일이나 니즈를 반영하여 개인 맞춤형 3D 배치안을 제작합니다.
+          원하시는 배치를 선택하실 수 있도록 기본적으로 2~3가지 시안을 함께
+          제공하고 있습니다. (사진과 같이 가구 및 공간의 실제 사이즈만
+          반영됩니다)
+        </p>
+
         <svg width={298} height={164} viewBox="0 0 298 164" fill="none">
           <path
             d="M0 20C0 8.95431 8.9543 0 20 0H278C289.046 0 298 8.95431 298 20V144C298 155.046 289.046 164 278 164H20C8.95431 164 0 155.046 0 144V20Z"
@@ -278,22 +321,36 @@ export default function StylingInfoPage1() {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            marginTop: 20,
+            marginTop: 100,
           }}
         >
           셋
         </div>
         <p
           style={{
-            fontSize: 20,
+            fontSize: 30,
             textAlign: "center",
             color: "#000",
-            marginTop: 20,
+            marginTop: 10,
           }}
         >
-          - 피드백 및 가구리스트 전달 - 배치 시안에 따라 피드백을 주시면 최대
-          1회 수정 도와드리고 있으며, 기존 가구 이외에 추가된 가구나 제품이 있을
-          경우 구매링크를 정리하여 전달 드립니다.
+          피드백 및 가구리스트 전달
+        </p>
+        <p
+          style={{
+            margin: "16px auto 0",
+            fontSize: "clamp(15px, 2.8vw, 18px)", // ⭐ PC/모바일 자동 조절
+            lineHeight: 1.7, // ⭐ 가독성 핵심
+            textAlign: "center",
+            color: "#000",
+            maxWidth: 760, // ⭐ 줄 길이 제한
+            padding: "0 16px", // ⭐ 모바일 여백
+            wordBreak: "keep-all", // ⭐ 한글 줄바꿈
+          }}
+        >
+          배치 시안에 따라 피드백을 주시면 최대 1회 수정 도와드리고 있으며, 기존
+          가구 이외에 추가된 가구나 제품이 있을 경우 구매링크를 정리하여 전달
+          드립니다.
         </p>
         <svg width={298} height={164} viewBox="0 0 298 164" fill="none">
           <path
@@ -306,10 +363,10 @@ export default function StylingInfoPage1() {
         <a href="https://open.kakao.com/o/sHCcxOnh">
           <p
             style={{
-              fontSize: 16,
+              fontSize: 20,
               textAlign: "center",
               color: "#2f2f2f",
-              marginTop: 20,
+              marginTop: 100,
             }}
           >
             <u>1:1 상담톡 연결하기</u> ▶
