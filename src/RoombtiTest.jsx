@@ -1,33 +1,48 @@
-// 예린 코드
+/**
+ * RoombtiTest.jsx
+ *
+ * 방BTI 테스트의 핵심 로직을 담당하는 페이지
+ *
+ * 역할:
+ * - Supabase에서 질문 데이터 불러오기
+ * - 사용자 선택을 단계별로 상태 관리
+ * - 추가 질문(extra question) 동적 생성
+ * - 테스트 결과를 DB에 저장
+ * - dimension 점수 계산 → 최종 방BTI 결과 도출
+ * - 결과 페이지(TestResult)로 이동
+ * 
+ **/
+
 import { useState, useEffect } from "react";
-//import React from "react";
 import { useNavigate } from "react-router-dom";
 import { createClient } from "@supabase/supabase-js";
-import progressIcon from "./assets/loading_bear.png"; // 이미지 import
+import progressIcon from "./assets/loading_bear.png";
 import LoadingPage from "./LoadingPage";
 
+// Supabase 설정
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseKey = import.meta.env.VITE_SUPABASE_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 export default function RoombtiTest() {
+  // 페이지 이동을 위한 navigate 함수
   const navigate = useNavigate();
 
-  const [questions, setQuestions] = useState([]);
-  const [choices, setChoices] = useState({});
-  const [step, setStep] = useState(0);
-  const [selected, setSelected] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [submitted, setSubmitted] = useState(false); // submit 중복 방지
+  // 상태 관리
+  const [loading, setLoading] = useState(true); //질문 로딩 여부
+  const [questions, setQuestions] = useState([]); // 전체 질문 목록（DB 질문 + extra 질문)
+  const [choices, setChoices] = useState({}); // 사용자의 선택 저장
+  const [step, setStep] = useState(0); // 현재 질문 단계
+  const [selected, setSelected] = useState(null); // 현재 질문에서 선택된 옵션
+  const [submitted, setSubmitted] = useState(false); // 제출 중복 방지
+  const [loadingSubmit, setLoadingSubmit] = useState(false); // 제출 로딩팝업 표시 여부
+  const [hoveredIndex, setHoveredIndex] = useState(null); // 마우스 상태(PC만)
 
-  const [loadingSubmit, setLoadingSubmit] = useState(false);
-
-  // 🔹 추가: hover 상태 관리
-  const [hoveredIndex, setHoveredIndex] = useState(null);
-
+  // ===================== 질문 구성 =====================
   // DB에서 질문 불러오기
   useEffect(() => {
     async function fetchQuestions() {
+      setLoading(true);
       const { data, error } = await supabase
         .from("question")
         .select(
@@ -44,6 +59,8 @@ export default function RoombtiTest() {
         console.error("DB 연결 실패:", error);
         return;
       }
+
+      // 추가 질문 : 사용자의 인테리어 취향 테스트(사진)
       const extraQuestions = [
         {
           question_id: "extra1",
@@ -68,45 +85,40 @@ export default function RoombtiTest() {
         {
           question_id: "extra3",
           question_text: "최종 선택! 어떤 스타일이 더 좋아?",
-          questionoption: [], // 🔥 step이 14일 때 수정해서 채우기
+          questionoption: [], // 이후 step 14에서 동적 생성
         },
       ];
 
-      setQuestions([...data, ...extraQuestions]);
+      setQuestions([...data, ...extraQuestions]); // DB 질문 + extra 질문 합치기
       setLoading(false);
     }
     fetchQuestions();
   }, []);
 
-  
-
+  // 현재 질문
   const current = questions[step];
-
-  // 답변 선택
+ 
+  // ===================== 답변 선택 =====================
   const handleAnswer = (option_id, index) => {
     setSelected(index);
 
-    // 선택지를 업데이트
+    // 선택 결과 저장
     const updatedChoices = { ...choices, [current.question_id]: option_id };
     setChoices(updatedChoices);
 
+    // 마지막 질문이면 제출
     if (step === questions.length - 1) {
-      // 마지막 문항이면 setState 외부에서 submit 호출
       handleSubmit(updatedChoices);
     } else {
-      // 다음 문항으로 이동
+      // 마지막 질문 아니면 다음 질문으로 이동
       setStep(step + 1);
       setSelected(null);
     }
   };
 
-  // 예린 : 선택한 인테리어 저장 부분 시작
+  // extra1과 extra2에서 고른 이미지로 extra3 이미지 생성
       useEffect(() => {
         if (step === 14) {
-          // const pick1 = choices['extra1'];
-          // const pick2 = choices['extra2'];
-
-          // extra1과 extra2 질문 객체 가져오기
           const extra1Question = questions[12];
           const extra2Question = questions[13];
 
@@ -123,7 +135,7 @@ export default function RoombtiTest() {
            
             questionoption: [
               {
-                option_id: pick1,       // A, B, C, D (DB 저장용)
+                option_id: pick1,       // A, B, C, D
                 option_text: pick1Image // extra1에서의 이미지 그대로
               },
               {
@@ -138,20 +150,17 @@ export default function RoombtiTest() {
           setQuestions(newQs);
         }
       }, [step]);
-          
-          // 예린 : 선택한 인테리어 저장 부분 끝
 
   
 
-  // 제출
+  // ===================== 제출 & 결과 계산 =====================
   const handleSubmit = async (finalChoices) => {
     if (submitted) return; // 이미 제출되었으면 아무것도 안 함
     setSubmitted(true); // 제출 시작 표시
-
-    setLoadingSubmit(true);
+    setLoadingSubmit(true); //제출 로딩 페이지 표시
 
     try {
-      // sessionuser 테이블 이름 소문자
+      // 1. sessionuser 테이블에 세션 id 생성
       const { data: sessionData, error: sessionError } = await supabase
         .from("sessionuser")
         .insert([{ session_uuid: crypto.randomUUID() }])
@@ -162,29 +171,14 @@ export default function RoombtiTest() {
 
       const session_id = sessionData.session_id;
 
-      // // choice 테이블에 12개 선택지만 정확히 insert
-      // const choiceInserts = Object.entries(finalChoices).map(
-      //   ([qId, optionId]) => ({
-      //     session_id,
-      //     option_id: optionId,
-      //   })
-      // );
-
-      // 🔥 DB 질문만 저장하도록 필터링
+      // 2. DB 질문만 필터링 (extra 질문 제외)
       const dbOnlyChoices = Object.entries(finalChoices)
         .filter(([qId, _]) => !qId.startsWith("extra"));
 
-
-      // const choiceInserts = dbChoices.map(([qId, optionId]) => ({
-      //   session_id,
-      //   option_id: optionId,
-      // }));
       const choiceInserts = dbOnlyChoices.map(([qId, optionId]) => ({
         session_id,
         option_id: optionId,
       }));
-
-
 
       const { error: choiceError } = await supabase
         .from("choice")
@@ -192,15 +186,11 @@ export default function RoombtiTest() {
 
       if (choiceError) throw choiceError;
 
-      // 3. sessionresultdetail 계산 (dimension_value_id 기준 점수 누적)
-      //const onlyDbOptionIds = dbChoicesEntries.map(([_, optionId]) => optionId);
+      // 3. dimension_value 점수 계산
       const onlyDbOptionIds = dbOnlyChoices.map(([_, optionId]) => optionId);
-
-      const valueScores = {}; // { dimension_value_id: { dimension_id, score } }
-
-      //for (let option_id of Object.values(finalChoices)) {
+      const valueScores = {};
+      
       for (let option_id of onlyDbOptionIds) {
-      // option_id → dimension_value_id
         const { data: optionData, error: optionErr } = await supabase
           .from("questionoption")
           .select("dimension_value_id")
@@ -208,7 +198,6 @@ export default function RoombtiTest() {
           .single();
         if (optionErr) throw optionErr;
 
-        // dimension_value_id → dimension_id
         const { data: dimValueData, error: dimErr } = await supabase
           .from("dimensionvalue")
           .select("dimension_id")
@@ -219,7 +208,6 @@ export default function RoombtiTest() {
         const dim_id = dimValueData.dimension_id;
         const value_id = optionData.dimension_value_id;
 
-        // 동일 dimension_value_id이면 점수 누적
         if (!valueScores[value_id]) {
           valueScores[value_id] = { dimension_id: dim_id, score: 1 };
         } else {
@@ -227,7 +215,7 @@ export default function RoombtiTest() {
         }
       }
 
-      // 4. sessionresultdetail upsert
+      // 4. 결과 상세 저장
       const resultInserts = Object.entries(valueScores).map(
         ([value_id, { dimension_id, score }]) => ({
           session_id,
@@ -245,17 +233,15 @@ export default function RoombtiTest() {
 
       if (resultError) throw resultError;
 
-      
 
-      // 5. 최종 MBTI/방BTI 계산 및 ResultType 저장
+      // 5. 방BTI 계산 및 ResultType 저장
       const { data: details, error: detailErr } = await supabase
         .from("sessionresultdetail")
         .select("dimension_id, dimension_value_id, score")
         .eq("session_id", session_id);
       if (detailErr) throw detailErr;
 
-      // dimension별 최고 score 선택
-      const bestValues = {}; // { dimension_id: dimension_value_id }
+      const bestValues = {}; // dimension별 최고 score 선택
       details.forEach(({ dimension_id, dimension_value_id, score }) => {
         if (
           !bestValues[dimension_id] ||
@@ -265,11 +251,9 @@ export default function RoombtiTest() {
         }
       });
 
-      
       const dimensionOrder = [1, 2, 3, 4]; // 실제 dimension_id 순서에 맞게 수정
-      
-
       let result_code = "";
+
       for (let dim_id of dimensionOrder) {
         const valueEntry = bestValues[dim_id];
         if (!valueEntry) continue;
@@ -289,39 +273,26 @@ export default function RoombtiTest() {
         result_code += valueData.dimension_value; // dimension_value 컬럼 사용
       }
 
+      // 6. resulttype 저장
       const result_text = `${result_code} 유형입니다!`;
-      // const result_image = `src/assets/${result_code}.png`;
-      // const result_info_image = `src/assets/${result_code}_info.png`;
       const result_image = `https://mmfurloptocazvhfmcvk.supabase.co/storage/v1/object/public/roombti/${result_code}.png`;
       const result_info_image = `https://mmfurloptocazvhfmcvk.supabase.co/storage/v1/object/public/roombti/${result_code}_info.png`;
-
-      
-
-
-          
       const { error: resultTypeErr } = await supabase
         .from("resulttype")
         .insert([{ session_id, result_code, result_text, result_image, result_info_image }]);
       if (resultTypeErr) throw resultTypeErr;
 
-      // 🔥 extra3 질문 객체
-      const extra3Question = questions[14];
-
-      // 🔥 최종 선택한 이미지 ID
+      //  7. 결과 페이지로 이동
       const finalPick = finalChoices["extra3"];
-
       const finalImage = questions[14].questionoption.find(
         o => o.option_id === finalPick
       )?.option_text;
 
-
-      // TestResult 페이지로 이동
-      navigate("/TestResult", {
+      navigate("/TestResult", { // TestResult 페이지로 이동 
          state: {
           session_id,
-          // myInterior: finalChoices['extra3']  // 🔥 최종 인테리어 결과 추가
-          myInterior: finalPick,        // A 또는 E 같은 선택된 ID
-          myInteriorImage: finalImage // 🔥 서버 이미지 링크 전달!
+          myInterior: finalPick,        // 최종 선택한 인테리어 ID
+          myInteriorImage: finalImage // 최종 선택한 인테리어 이미지 링크
         } });
     } catch (err) {
       console.error("제출 오류:", err);
@@ -330,6 +301,7 @@ export default function RoombtiTest() {
     }
   };
 
+  // ===================== 렌더링 분기 =====================
   if (loading) return <LoadingPage/>;
   if (!current) return <p>질문이 없습니다.</p>;
 
@@ -340,10 +312,6 @@ export default function RoombtiTest() {
   return (
     <div
       style={{
-        // width: 408,
-        // //height: 852,
-        // minHeight: 700,
-        // height: "100dvh",
         width: "100vw", // 화면 가로 전체
         minHeight: "100vh", // 화면 세로 전체
         height: "100dvh", // 세로 꽉 차게
@@ -458,19 +426,15 @@ export default function RoombtiTest() {
         }}
       >
         {current.questionoption.map((opt, i) => {
-          //const [hoveredIndex, setHoveredIndex] = useState(null);
           const isImage = opt.option_text?.toLowerCase().endsWith(".png");
           const isTouchDevice = "ontouchstart" in window;
 
-          
           return (
             <div
               key={opt.option_id}
               onClick={() => {handleAnswer(opt.option_id, i);
                 setHoveredIndex(null);}
               }
-              // onMouseEnter={() => setHoveredIndex(i)}
-              // onMouseLeave={() => setHoveredIndex(null)}
               onMouseEnter={() => {
                 if (!isTouchDevice) setHoveredIndex(i); // ← 모바일에서는 hover 무시
               }}
@@ -482,11 +446,6 @@ export default function RoombtiTest() {
                 height: 170,
                 borderRadius: 12,
                 background: "#fff",
-                //border: `2px solid ${selected === i ? "#fe6a0f" : "#ddd9d9"}`,
-                // 🔹 수정: 선택 또는 hover 상태에 따라 border 색상 변경
-                // border: `2px solid ${
-                //   selected === i ? "#fe6a0f" : hoveredIndex === i ? "#fe6a0f" : "#ddd9d9"
-                // }`,
                 border: `2px solid ${
                   selected === i
                     ? "#fe6a0f"
@@ -499,7 +458,6 @@ export default function RoombtiTest() {
                 justifyContent: "center",
                 cursor: "pointer",
                 textAlign: "center",
-                //padding: "10px",
               }}
             >
 

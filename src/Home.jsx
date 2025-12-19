@@ -1,6 +1,20 @@
+/**
+ * Home.jsx
+ *
+ * 방BTI 서비스의 첫 진입 화면(Home)
+ *
+ * 역할:
+ * - 수집 로고와 서비스명 노출
+ * - 메인 일러스트(곰 이미지) 표시
+ * - 테스트 시작 버튼 제공
+ *
+ **/
+
 import { useNavigate } from "react-router-dom";
 
 export default function Home() {
+
+  // 페이지 이동을 위한 navigate 함수
   const navigate = useNavigate();
 
   return (
@@ -14,13 +28,13 @@ export default function Home() {
         justifyContent: "space-between",
         background: "#fbf2d5",
         padding: "2rem 1rem",
-        paddingTop: "calc(env(safe-area-inset-top) + 1.2rem)",
-        paddingBottom: "calc(env(safe-area-inset-bottom) + 1.5rem)",
+        paddingTop: "calc(env(safe-area-inset-top) + 1.2rem)", // iOS 노치 영역 대응 (상단 상태바)
+        paddingBottom: "calc(env(safe-area-inset-bottom) + 1.5rem)",  // iOS 하단 홈바 영역 대응
         boxSizing: "border-box",
         overflow: "hidden", // 스크롤 완전 제거
       }}
     >
-      {/* 상단 로고 + 텍스트 */}
+      {/* ================= 수집 로고 및 서비스명 영역 ================= */}
       <div style={{ textAlign: "center" }}>
         <div
           style={{
@@ -28,9 +42,10 @@ export default function Home() {
             alignItems: "center",
             justifyContent: "center",
             gap: "6px",
-            margin: "20px 0 4px 0", // 기존보다 살짝 줄임(정확히 맞추기 위해)
+            margin: "20px 0 4px 0",
           }}
         >
+          {/* 수집 로고 이미지 */}
           <img
             src="https://mmfurloptocazvhfmcvk.supabase.co/storage/v1/object/public/roombti/soozip_logo.png"
             alt="로고"
@@ -39,33 +54,38 @@ export default function Home() {
               height: "20px",
               objectFit: "contain",
               position: "relative",
-              top: "28px", // 기존 40px보다 줄임 — 화면 넘김 방지
+              top: "28px",
             }}
           />
+          {/* 서비스명 텍스트 */}
           <p
             style={{
               fontSize: 34,
               fontWeight: 600,
-              color: "rgba(0,0,0,0.68)",
+              color: "#000",
               margin: 0,
               position: "relative",
-              top: "28px", // 동일하게 조정
+              top: "28px",
             }}
           >
             수집 방BTI
           </p>
         </div>
 
+        {/* 메인 질문 문구 */}
+
         <p
           style={{
-            fontSize: 48, // 기존보다 2px만 줄임 (디자인 유지)
+            fontSize: 48,
             fontWeight: 800,
             color: "#000",
-            marginTop: 50, // 기존 70 → 최적화
+            marginTop: 50,
             marginBottom: 0,
           }}
         >
           나의{" "}
+
+          {/* 형광펜 느낌의 강조 텍스트 */}
           <span
             style={{
               backgroundImage:
@@ -77,11 +97,12 @@ export default function Home() {
           >
             집꾸 스타일
           </span>
+
           은?
         </p>
       </div>
 
-      {/* 중앙 이미지 */}
+      {/* ================= 중앙 메인 이미지 ================= */}
       <img
         src="https://mmfurloptocazvhfmcvk.supabase.co/storage/v1/object/public/roombti/main_bear.png"
         alt="main"
@@ -93,7 +114,7 @@ export default function Home() {
         }}
       />
 
-      {/* 하단 버튼 */}
+      {/* ================= 하단 시작 버튼 ================= */}
       <button
         style={{
           width: "100%",
@@ -109,9 +130,13 @@ export default function Home() {
           alignItems: "center",
           justifyContent: "center",
           cursor: "pointer",
-          flexShrink: 0, // 버튼 절대 줄어들지 않게(중요!)
+          flexShrink: 0, // 버튼 절대 줄어들지 않게
         }}
-        onClick={() => navigate("/loading")}
+
+        // 테스트 시작 → 로딩 페이지로 이동
+        // onClick={() => navigate("/loading")}
+        
+        onClick={() => navigate("/RoombtiTest")}
       >
         방BTI 알아보기
       </button>
