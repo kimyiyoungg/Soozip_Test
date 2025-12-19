@@ -31,7 +31,9 @@ export default function StylingTypePage() {
     <div
       style={{
         width: "100vw",
-        height: "calc(var(--vh, 1vh) * 100)",
+        //height: "calc(var(--vh, 1vh) * 100)",
+        minHeight: "100svh",
+        overflowY: "auto",
         background: "#fbf2d5",
         display: "flex",
         justifyContent: "center",
