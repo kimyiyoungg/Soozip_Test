@@ -22,6 +22,7 @@ export default function StylingInfoPage1() {
         flexDirection: "column",
         alignItems: "center",
         overflowX: "hidden",
+        fontFamily: "NanumSquare, system-ui, sans-serif",
       }}
     >
       {/* 상단 배경 */}
@@ -87,7 +88,7 @@ export default function StylingInfoPage1() {
             style={{
               fontSize: 15,
               textAlign: "center",
-              color: "#000",
+              color: "#7e7b7b",
               zIndex: 1, // 이미지 위로 올라오도록
             }}
           >
@@ -99,7 +100,7 @@ export default function StylingInfoPage1() {
           style={{
             marginTop: 1,
             fontSize: 45,
-            fontWeight: 500,
+            fontWeight: 800,
             color: "#000",
           }}
         >
@@ -109,7 +110,7 @@ export default function StylingInfoPage1() {
         <div
           style={{
             width: "100%",
-            height: 230,
+            height: 300,
             borderRadius: 20,
             overflow: "hidden",
           }}
@@ -150,8 +151,8 @@ export default function StylingInfoPage1() {
           <p
             style={{
               margin: "30px auto 10px",
-              fontSize: 28, // ⭐ 크기 업
-              fontWeight: 500, // ⭐ 살짝만 두껍게
+              fontSize: 28,
+              fontWeight: 600,
               textAlign: "center",
               color: "#000",
               letterSpacing: "-0.3px",
@@ -166,7 +167,7 @@ export default function StylingInfoPage1() {
               fontSize: 18,
               lineHeight: 1.7,
               textAlign: "center",
-              color: "#000",
+              color: "#4f4e4e",
               maxWidth: 720,
               wordBreak: "keep-all",
               padding: "0 16px",
@@ -196,14 +197,11 @@ export default function StylingInfoPage1() {
             fontSize: 20,
             fontWeight: 600,
             color: "#000",
-            marginBottom: 4,
+            marginBottom: 150,
           }}
         >
           배치솔루션 GUIDE
         </p>
-        <svg width={207} height={1} viewBox="0 0 207 1" fill="none">
-          <line x1="0" y1="0.5" x2={207} y2="0.5" stroke="black" />
-        </svg>
 
         {/* 버튼 1 */}
         <div
@@ -213,12 +211,13 @@ export default function StylingInfoPage1() {
             borderRadius: 100,
             background: "#2f2f2f",
             color: "#fff",
-            fontSize: 20,
+            fontSize: 18,
             fontWeight: 500,
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            marginTop: 20,
+            marginTop: 10,
+            marginBottom: 16,
           }}
         >
           하나
@@ -228,19 +227,20 @@ export default function StylingInfoPage1() {
             fontSize: 30,
             textAlign: "center",
             color: "#000",
-            marginTop: 10,
+            fontWeight: 800,
+            marginBottom: 1,
           }}
         >
           1:1 맞춤 상담
         </p>
         <p
           style={{
-            margin: "12px auto 0",
+            margin: "0px auto 24px",
             fontSize: "clamp(15px, 2.8vw, 18px)", // PC/모바일 자동
             lineHeight: 1.7,
             textAlign: "center",
-            color: "#000",
-            maxWidth: 760,
+            color: "#4f4e4e",
+            maxWidth: 720,
             padding: "0 16px",
             wordBreak: "keep-all",
           }}
@@ -249,7 +249,15 @@ export default function StylingInfoPage1() {
           기존 가구들에 대한 정보를 주실 수 있도록 상담을 도와드립니다.
         </p>
 
-        <svg width={298} height={164} viewBox="0 0 298 164" fill="none">
+        <svg
+          width={298}
+          height={164}
+          viewBox="0 0 298 164"
+          fill="none"
+          style={{
+            marginTop: 70,
+          }}
+        >
           <path
             d="M0 20C0 8.95431 8.9543 0 20 0H278C289.046 0 298 8.95431 298 20V144C298 155.046 289.046 164 278 164H20C8.95431 164 0 155.046 0 144V20Z"
             fill="#D9D9D9"
@@ -264,12 +272,13 @@ export default function StylingInfoPage1() {
             borderRadius: 100,
             background: "#2f2f2f",
             color: "#fff",
-            fontSize: 20,
+            fontSize: 18,
             fontWeight: 500,
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            marginTop: 100,
+            marginTop: 200,
+            marginBottom: 16,
           }}
         >
           둘
@@ -279,21 +288,22 @@ export default function StylingInfoPage1() {
             fontSize: 30,
             textAlign: "center",
             color: "#000",
-            marginTop: 10,
+            fontWeight: 800,
+            marginBottom: 1,
           }}
         >
           배치 시안 전달
         </p>
         <p
           style={{
-            margin: "16px auto 0",
-            fontSize: "clamp(15px, 2.8vw, 18px)", // ⭐ PC/모바일 자동 조절
-            lineHeight: 1.7, // ⭐ 가독성 핵심
+            margin: "0px auto 24px",
+            fontSize: "clamp(15px, 2.8vw, 18px)", // PC/모바일 자동
+            lineHeight: 1.7,
             textAlign: "center",
-            color: "#000",
-            maxWidth: 760, // ⭐ 줄 길이 제한
-            padding: "0 16px", // ⭐ 모바일 여백
-            wordBreak: "keep-all", // ⭐ 한글 줄바꿈
+            color: "#4f4e4e",
+            maxWidth: 720,
+            padding: "0 16px",
+            wordBreak: "keep-all",
           }}
         >
           라이프스타일이나 니즈를 반영하여 개인 맞춤형 3D 배치안을 제작합니다.
@@ -302,7 +312,15 @@ export default function StylingInfoPage1() {
           반영됩니다)
         </p>
 
-        <svg width={298} height={164} viewBox="0 0 298 164" fill="none">
+        <svg
+          width={298}
+          height={164}
+          viewBox="0 0 298 164"
+          fill="none"
+          style={{
+            marginTop: 70,
+          }}
+        >
           <path
             d="M0 20C0 8.95431 8.9543 0 20 0H278C289.046 0 298 8.95431 298 20V144C298 155.046 289.046 164 278 164H20C8.95431 164 0 155.046 0 144V20Z"
             fill="#D9D9D9"
@@ -317,12 +335,13 @@ export default function StylingInfoPage1() {
             borderRadius: 100,
             background: "#2f2f2f",
             color: "#fff",
-            fontSize: 20,
+            fontSize: 18,
             fontWeight: 500,
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            marginTop: 100,
+            marginTop: 200,
+            marginBottom: 16,
           }}
         >
           셋
@@ -332,28 +351,37 @@ export default function StylingInfoPage1() {
             fontSize: 30,
             textAlign: "center",
             color: "#000",
-            marginTop: 10,
+            fontWeight: 800,
+            marginBottom: 1,
           }}
         >
           피드백 및 가구리스트 전달
         </p>
         <p
           style={{
-            margin: "16px auto 0",
-            fontSize: "clamp(15px, 2.8vw, 18px)", // ⭐ PC/모바일 자동 조절
-            lineHeight: 1.7, // ⭐ 가독성 핵심
+            margin: "0px auto 24px",
+            fontSize: "clamp(15px, 2.8vw, 18px)", // PC/모바일 자동
+            lineHeight: 1.7,
             textAlign: "center",
-            color: "#000",
-            maxWidth: 760, // ⭐ 줄 길이 제한
-            padding: "0 16px", // ⭐ 모바일 여백
-            wordBreak: "keep-all", // ⭐ 한글 줄바꿈
+            color: "#4f4e4e",
+            maxWidth: 720,
+            padding: "0 16px",
+            wordBreak: "keep-all",
           }}
         >
           배치 시안에 따라 피드백을 주시면 최대 1회 수정 도와드리고 있으며, 기존
           가구 이외에 추가된 가구나 제품이 있을 경우 구매링크를 정리하여 전달
           드립니다.
         </p>
-        <svg width={298} height={164} viewBox="0 0 298 164" fill="none">
+        <svg
+          width={298}
+          height={164}
+          viewBox="0 0 298 164"
+          fill="none"
+          style={{
+            marginTop: 70,
+          }}
+        >
           <path
             d="M0 20C0 8.95431 8.9543 0 20 0H278C289.046 0 298 8.95431 298 20V144C298 155.046 289.046 164 278 164H20C8.95431 164 0 155.046 0 144V20Z"
             fill="#D9D9D9"
