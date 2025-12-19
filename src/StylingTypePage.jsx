@@ -15,13 +15,13 @@ export default function StylingTypePage() {
     },
     {
       id: 2,
-      title: "소품 솔루션",
-      subtitle: "공간에 어울리는 소품을 찾고 싶어요!",
+      title: "풀 스타일링(온라인)",
+      subtitle: "곧 입주라 처음부터 끝까지 비대면으로 해주세요!",
       url: "/styling-info2",
     },
     {
       id: 3,
-      title: "풀 스타일링",
+      title: "풀 스타일링(오프라인)",
       subtitle: "곧 입주라 처음부터 끝까지 다 해주세요!",
       url: "/styling-info3",
     },

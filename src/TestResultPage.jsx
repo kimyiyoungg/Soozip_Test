@@ -415,8 +415,6 @@ export default function TestResultPage() {
           }}
         >
           나에게 어울리는 인테리어는?
-          <br />
-          (아직 개발 진행 중입니다.)
         </p>
 
         {/* ⭐ 아래 2개 카드는 아무 변화 없이 그대로 유지됨 */}
@@ -465,22 +463,35 @@ export default function TestResultPage() {
                 alignItems: "center",
               }}
             >
-              <svg width="100%" height="auto" viewBox="0 0 164 164">
+              {/* <svg width="100%" height="auto" viewBox="0 0 164 164">
                 <path
                   d="M0 20C0 8.95 8.95 0 20 0H144C155.05 0 164 8.95 164 20V144C164 155.05 155.05 164 144 164H20C8.95 164 0 155.05 0 144V20Z"
                   fill="#D9D9D9"
                 />
-              </svg>
-              <p
-                style={{
-                  fontSize: 16,
-                  textAlign: "center",
-                  color: "#000",
-                  marginTop: 8,
-                }}
-              >
-                BBB 스타일
-              </p>
+              </svg> */}
+              {result?.result_code && (
+                <>
+                  <img
+                    src={`https://mmfurloptocazvhfmcvk.supabase.co/storage/v1/object/public/roombti/recommend_interier/${result.result_code}.png`}
+                    alt={myInterior}
+                    style={{ width: 160, height: 160, borderRadius: 12 }}
+                  />
+
+                  <p
+                    style={{
+                      fontSize: 16,
+                      textAlign: "center",
+                      color: "#000",
+                      marginTop: 8,
+                    }}
+                  >
+                    수집이 추천하는 <br />
+                    {result.result_code} 스타일
+                  </p>
+                </>
+              )}
+
+              
             </div>
           </div>
         </div>
