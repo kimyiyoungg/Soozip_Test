@@ -135,7 +135,7 @@ export default function ShareResultPage() {
           src={data.interior_image}
           alt="interior"
           style={{
-            width: "80%",
+            width: "90%",
             maxWidth: 360,
             borderRadius: 12,
           }}
@@ -178,6 +178,8 @@ export default function ShareResultPage() {
             fontSize: 24,
             padding: "12px 0",
             borderRadius: 12,
+            backgroundColor: "#000",
+            color:"#fff",
             cursor: "pointer",
             ...ctaPulse, // ⭐ 이 줄만 추가
           }}
