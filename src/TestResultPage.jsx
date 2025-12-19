@@ -13,10 +13,36 @@ export default function TestResultPage() {
   const location = useLocation();
 
   //   // ===== 여기서 navigate로 전달된 session_id를 가져옵니다 =====
-  const { session_id, myInterior, myInteriorImage } = location.state || {};
+  //const { session_id, myInterior, myInteriorImage } = location.state || {};
+
+  
+  const state = location.state;
+  
+  useEffect(() => {
+    if (!state) return;
+
+    if (state.session_id) {
+      localStorage.setItem("session_id", state.session_id);
+      localStorage.setItem("myInterior", state.myInterior);
+      localStorage.setItem("myInteriorImage", state.myInteriorImage);
+    }
+  }, [state]);
+
+
+
+
+  const session_id =
+    state?.session_id || localStorage.getItem("session_id");
+
+  const myInterior =
+    state?.myInterior || localStorage.getItem("myInterior");
+
+  const myInteriorImage =
+    state?.myInteriorImage || localStorage.getItem("myInteriorImage");
 
   console.log("받은 session_id:", session_id);
   console.log("받은 myInteriorImage:", myInteriorImage);
+
 
   // myInterior 값에 따른 텍스트 정의
   const interiorTextMap = {
@@ -73,22 +99,22 @@ export default function TestResultPage() {
     }
   }, [result]);
 
-  // 3) 이미지 로드 후 session 삭제  ← ★ 여기에 넣으면 됨
-  useEffect(() => {
-    if (!imageLoaded || !session_id) return;
+  // // 3) 이미지 로드 후 session 삭제  ← ★ 여기에 넣으면 됨
+  // useEffect(() => {
+  //   if (!imageLoaded || !session_id) return;
 
-    const deleteSession = async () => {
-      const { error } = await supabase
-        .from("sessionuser")
-        .delete()
-        .eq("session_id", session_id);
+  //   const deleteSession = async () => {
+  //     const { error } = await supabase
+  //       .from("sessionuser")
+  //       .delete()
+  //       .eq("session_id", session_id);
 
-      if (error) console.error("session 삭제 실패:", error);
-      else console.log("session 삭제 완료");
-    };
+  //     if (error) console.error("session 삭제 실패:", error);
+  //     else console.log("session 삭제 완료");
+  //   };
 
-    deleteSession();
-  }, [imageLoaded, session_id]); // ← 이미지가 로드되면 실행됨
+  //   deleteSession();
+  // }, [imageLoaded, session_id]); // ← 이미지가 로드되면 실행됨
 
   const downloadImage = async (imageUrl) => {
     try {
@@ -108,34 +134,6 @@ export default function TestResultPage() {
       console.error("이미지 다운로드 실패:", error);
     }
   };
-
-  // const handleShare = async () => {
-  //   if (!result) return;
-
-  //   const { data, error } = await supabase
-  //     .from("share_result")
-  //     .insert({
-  //       mbti: result.mbti,
-  //       result_type: result.result_type,
-  //       result_image: result.result_image,
-  //       interior_code: myInterior,
-  //       interior_text: myInteriorText,
-  //       interior_image: myInteriorImage,
-  //     })
-  //     .select()
-  //     .single();
-
-  //   if (error) {
-  //     console.error("공유 저장 실패:", error);
-  //     alert("공유에 실패했어요 😢");
-  //     return;
-  //   }
-
-  //   const shareUrl = `${window.location.origin}/share/${data.id}`;
-
-  //   await navigator.clipboard.writeText(shareUrl);
-  //   alert("결과 링크가 복사되었어요!");
-  // };
 
   const handleShare = async () => {
     if (!result) return;
@@ -247,34 +245,6 @@ export default function TestResultPage() {
           />
         </svg>
 
-       {/* 로고 부분 */}
-        {/* <div style={{ display: "flex", alignItems: "center", gap: 5 , justifyContent: "center", marginBottom:"30px"}}>
-            <img
-              //src="src/assets/soozip_logo.png"
-              src="https://mmfurloptocazvhfmcvk.supabase.co/storage/v1/object/public/roombti/soozip_logo.png"
-              alt="로고"
-              style={{
-                width: 20,
-                height: 20,
-                marginBottom: 10,
-                marginLeft: 10,
-                // marginTop:0
-              }}
-            />
-            <p
-              style={{
-                fontSize: 35,
-                fontWeight: 700,
-                color: "#000",
-                margin: 0, // margin 제거
-                lineHeight: 1, // 글씨 바닥 맞춤
-              }}
-            >
-              SOOZIP
-            </p>
-        </div> */}
-         
-        {/* </div> */}
         {result ? (
           <div
             style={{
@@ -344,58 +314,7 @@ export default function TestResultPage() {
                   />
                 </div>
               </div>
-              {/* <div
-                style={{
-                  fontSize: 18,
-                  fontWeight: 800,
-                  width: 130,
-                  height: 25,
-                  borderRadius: 100,
-                  background: "#c59b72ff",
-                  color: "#fff",
-                  display: "flex",
-                  alignItems: "center",
-                  // gap: 24, // 버튼 간 간격
-                  float:"left",
-                  marginTop:"20px"
-                }}
-              >
-                카드를 터치해보세요 !
-              </div>
-
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "flex-end",
-                  gap: 24, // 버튼 간 간격
-                  marginBottom: 20,
-                  width: "100%", // 전체 폭 기준
-                  maxWidth: 408, // 카드와 동일 폭
-                  // margin: "0 auto 20px",
-                  float:"right",
-                }}
-              >
-                
-                <img
-                  src={downloadIcon}
-                  alt="이미지 저장"
-                  style={{ cursor: "pointer", width: 30, height: 30 }}
-                  onClick={() => downloadImage(result.result_image)}
-                  onMouseEnter={(e) =>
-                    (e.currentTarget.style.filter = "brightness(0.7)")
-                  }
-                  onMouseLeave={(e) =>
-                    (e.currentTarget.style.filter = "brightness(1)")
-                  }
-                />
-                <img
-                  src={shareIcon}
-                  alt="테스트 공유"
-                  style={{ cursor: "pointer", width: 24, height: 24 }}
-                  onClick={handleShare}
-                />
-              </div> */}
+            
               <div
                 style={{
                   display: "flex",
@@ -418,7 +337,7 @@ export default function TestResultPage() {
                     whiteSpace: "nowrap",
                   }}
                 >
-                  카드를 터치해보세요 !
+                  👆카드를 터치해보세요 !
                 </div>
 
                 <div
@@ -450,30 +369,7 @@ export default function TestResultPage() {
           <p>결과 불러오는 중...</p>
         )}
 
-        {/* 아래 두 개 카드는 그대로 유지 */}
-        {/* 이미지 저장 / 테스트 공유 */}
-        {/* <div
-          style={{
-            fontSize: 18,
-            fontWeight: 800,
-            width: 130,
-            height: 25, // ✅ 높이 늘리기 (중요)
-            borderRadius: 100,
-            background: "#c59b72ff",
-            color: "#fff",
-            display: "flex", // ✅ 필수
-            alignItems: "center", // 세로 가운데
-            // justifyContent: "flex-start", // ✅ 안쪽 왼쪽
-            float:"left",
-            //paddingLeft: 8, // ✅ 안쪽 여백
-            //marginLeft: 10/// ✅ 왼쪽/로 붙이기
-            // margin: "10px auto",
-            boxSizing: "border-box",
-          }}
-        >
-          카드를 터치해보세요 !
-        </div> */}
-        {/*  */}
+       
         <hr
           style={{
             border: "1px solid #D9D9D9",
@@ -541,16 +437,10 @@ export default function TestResultPage() {
                 alignItems: "center",
               }}
             >
-              {/* <svg width="100%" height="auto" viewBox="0 0 164 164">
-                <path
-                  d="M0 20C0 8.95 8.95 0 20 0H144C155.05 0 164 8.95 164 20V144C164 155.05 155.05 164 144 164H20C8.95 164 0 155.05 0 144V20Z"
-                  fill="#D9D9D9"
-                />
-              </svg> */}
+           
               <img
                 src={myInteriorImage}
                 alt={myInterior}
-                // alt={myInteriorImage}
                 style={{ width: 160, height: 160, borderRadius: 12 }}
               />
               <p
@@ -606,7 +496,9 @@ export default function TestResultPage() {
           bottom: 0,
           left: "50%", // ✅ 추가
           transform: "translateX(-50%)",
-          background: "#fbf2d5",
+          // background: "#fbf2d5",
+          background:
+            "linear-gradient(to top, #fbf2d5 85%, rgba(255,255,255,0) 100%)",
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
