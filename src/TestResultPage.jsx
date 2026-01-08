@@ -295,11 +295,11 @@ export default function TestResultPage() {
               marginBottom: 20,
               position: "relative", // ⭐ 기준점
             }}
-            onClick={() => {
-              setFlipMain(!flipMain);
-              setShowFlipPreview(false);
-              setShowTextHint(false);
-            }}
+            // onClick={() => {
+            //   setFlipMain(!flipMain);
+            //   setShowFlipPreview(false);
+            //   setShowTextHint(false);
+            // }}
           >
 
             <div style={flipContainer}>
@@ -361,7 +361,15 @@ export default function TestResultPage() {
 
             </div>
 
-              <div style={flipInner(flipMain)}>
+              <div 
+                style={flipInner(flipMain)}
+                onClick={() => {
+                  setFlipMain(!flipMain);
+                  setShowFlipPreview(false);
+                  setShowTextHint(false);
+                }}
+              
+              >
                 {/* front */}
                 <div style={flipFace}>
                   <img
@@ -466,7 +474,11 @@ export default function TestResultPage() {
                       padding: "5px 40px",
                       boxShadow: "0 2px 6px rgba(0,0,0,0.15)",
                     }}
-                    onClick={() => downloadImage(result.result_image)}
+                    // onClick={() => downloadImage(result.result_image)}
+                    onClick={(e) => {
+                      e.stopPropagation(); // ⭐ 중요
+                      downloadImage(result.result_image);
+                    }}
                   >
                     <img
                       src={downloadIcon}
@@ -498,7 +510,11 @@ export default function TestResultPage() {
                       padding: "5px 40px",
                       boxShadow: "0 2px 6px rgba(0,0,0,0.15)",
                     }}
-                    onClick={handleShare}
+                    // onClick={handleShare}
+                    onClick={(e) => {
+                      e.stopPropagation(); // ⭐ 중요
+                      handleShare();
+                    }}
                   >
                     <img
                       src={shareIcon}
