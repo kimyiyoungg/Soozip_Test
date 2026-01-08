@@ -68,6 +68,11 @@ export default function TestResultPage() {
   // ⭐ 메인 이미지 flip 상태 추가
   const [flipMain, setFlipMain] = useState(false);
 
+  // ⭐ 카드 최초 1회 까딱 힌트용
+  const [showFlipPreview, setShowFlipPreview] = useState(true);
+
+  // 2️⃣ 글씨는 3번만 까딱
+  const [showTextHint, setShowTextHint] = useState(true);
   useEffect(() => {
     if (!session_id) return;
 
@@ -98,6 +103,31 @@ export default function TestResultPage() {
       if (saved) setResult(JSON.parse(saved));
     }
   }, [result]);
+
+    // ⭐ 카드 최초 1회 "까딱" 애니메이션
+  useEffect(() => {
+    const timer = setTimeout(() => {
+       setShowFlipPreview(false);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+    // const interval = setInterval(() => {
+    //   setShowFlipHint(true);
+    //   setTimeout(() => setShowFlipHint(false), 1200);
+    // }, 4000);
+
+    // return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowTextHint(false);
+    }, 2000); // 0.5s delay + 1.4s animation
+
+    return () => clearTimeout(timer);
+  }, []);
+
+
 
   // // 3) 이미지 로드 후 session 삭제  ← ★ 여기에 넣으면 됨
   // useEffect(() => {
@@ -191,6 +221,16 @@ export default function TestResultPage() {
     transformStyle: "preserve-3d",
     transition: "transform 0.6s",
     transform: flip ? "rotateY(180deg)" : "rotateY(0deg)",
+    animation: showFlipPreview ? "flipPreview 0.9s ease-out" : "none",
+    // transform: showFlipHint
+    //   ? "rotateY(28deg) scale(0.96)"
+    //   : flip
+    //   ? "rotateY(180deg)"
+    //   : "rotateY(0deg)",
+    // transition: showFlipHint
+    //   ? "transform 0.55s cubic-bezier(.25,.8,.25,1)"
+    //   : "transform 0.6s ease",
+
   });
 
   const flipFace = {
@@ -200,6 +240,7 @@ export default function TestResultPage() {
     backfaceVisibility: "hidden",
     borderRadius: "20px",
     overflow: "hidden",
+    boxShadow: "0 2px 6px rgba(0,0,0,0.15)",
   };
 
   const flipBack = {
@@ -212,6 +253,7 @@ export default function TestResultPage() {
     justifyContent: "center",
     fontSize: "20px",
     fontWeight: "600",
+    boxShadow: "0 2px 6px rgba(0,0,0,0.15)",
   };
 
   return (
@@ -253,35 +295,72 @@ export default function TestResultPage() {
               marginBottom: 20,
               position: "relative", // ⭐ 기준점
             }}
-            onClick={() => setFlipMain(!flipMain)}
+            onClick={() => {
+              setFlipMain(!flipMain);
+              setShowFlipPreview(false);
+              setShowTextHint(false);
+            }}
           >
 
             <div style={flipContainer}>
-            <div style={{ display: "flex", alignItems: "center", gap: 5 , justifyContent: "flex-start", marginBottom:"5px"}}>
-              <img
-                //src="src/assets/soozip_logo.png"
-                src="https://mmfurloptocazvhfmcvk.supabase.co/storage/v1/object/public/roombti/soozip_logo.png"
-                alt="로고"
-                style={{
-                  width: 20,
-                  height: 20,
-                  marginBottom: 10,
-                  marginLeft: 10,
-                  // marginTop:0
-                }}
-              />
-              <p
-                style={{
-                  fontSize: 35,
-                  fontWeight: 700,
-                  color: "#000",
-                  margin: 0, // margin 제거
-                  lineHeight: 1, // 글씨 바닥 맞춤
-                }}
-              >
-                SOOZIP
-              </p>
+            <div style={{
+                 display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  width: "100%",
+                  maxWidth: 408,
+                  margin: "20px auto",
+                  padding: "0 8px",}
+            }>
+              <div style={{ display: "flex", alignItems: "center", gap: 5 , justifyContent: "flex-start", marginBottom:"1px"}}>
+                <img
+                  //src="src/assets/soozip_logo.png"
+                  src="https://mmfurloptocazvhfmcvk.supabase.co/storage/v1/object/public/roombti/soozip_logo.png"
+                  alt="로고"
+                  style={{
+                    width: 20,
+                    height: 20,
+                    marginBottom: 10,
+                    marginLeft: 10,
+                    // marginTop:0
+                  }}
+                />
+                <p
+                  style={{
+                    fontSize: 35,
+                    fontWeight: 700,
+                    color: "#000",
+                    margin: 0, // margin 제거
+                    lineHeight: 1, // 글씨 바닥 맞춤
+                  }}
+                >
+                  SOOZIP
+                </p>
+              </div>
+              <div
+                    style={{
+                      fontSize: 18,
+                      fontWeight: 800,
+                      padding: "4px 12px",
+                      borderRadius: 100,
+                      background: "#c59b72ff",
+                      color: "#fff",
+                      whiteSpace: "nowrap",
+                      marginRight: "20px",
+                      animation: showTextHint
+                        ? "tapHint 2.0s ease-in-out"
+                        : "none",
+
+                      animationDelay: "0.5s",
+                      animationFillMode: "forwards",
+                    }}
+                  >
+                     카드를 터치해보세요 👇
+              </div>
+
+
             </div>
+
               <div style={flipInner(flipMain)}>
                 {/* front */}
                 <div style={flipFace}>
@@ -310,6 +389,7 @@ export default function TestResultPage() {
                       objectFit: "cover",
                       imageRendering: "crisp-edges",
                       borderRadius: 20,
+                      
                     }}
                   />
                 </div>
@@ -320,13 +400,15 @@ export default function TestResultPage() {
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "space-between",
+                  // justifyContent:"center",
                   width: "100%",
                   maxWidth: 408,
                   margin: "20px auto",
-                  padding: "0 8px",
+                  padding: "0 3px",
+                  // gap: 30,
                 }}
               >
-                <div
+                {/* <div
                   style={{
                     fontSize: 18,
                     fontWeight: 800,
@@ -338,9 +420,9 @@ export default function TestResultPage() {
                   }}
                 >
                   👆카드를 터치해보세요 !
-                </div>
+                </div> */}
 
-                <div
+                {/* <div
                   style={{
                     display: "flex",
                     alignItems: "center",
@@ -359,11 +441,89 @@ export default function TestResultPage() {
                     style={{ cursor: "pointer", width: 24, height: 24, marginRight:"30px" }}
                     onClick={handleShare}
                   />
-                </div>
-              </div>
+                </div> */}
+                {/* <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    
+                    // gap: 30,
+                  }}
+                >
+                  
+                </div> */}
+
+                {/* 저장 */}
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 10,
+                      cursor: "pointer",
+                      background:"#fff",
+                      borderRadius:"10px",
+                      padding: "5px 40px",
+                      boxShadow: "0 2px 6px rgba(0,0,0,0.15)",
+                    }}
+                    onClick={() => downloadImage(result.result_image)}
+                  >
+                    <img
+                      src={downloadIcon}
+                      alt="이미지 저장"
+                      style={{ width: 28, height: 28 }}
+                    />
+                    <span
+                      style={{
+                        fontSize: 23,
+                        fontWeight: "bold",
+                        color: "#000",
+                        marginTop: "5px",
+                      }}
+                    >
+                      저장하기
+                    </span>
+                  </div>
+
+                  {/* 공유 */}
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 10,
+                      cursor: "pointer",
+                      // marginRight: "30px",
+                      background:"#fff",
+                      borderRadius:"10px",
+                      padding: "5px 40px",
+                      boxShadow: "0 2px 6px rgba(0,0,0,0.15)",
+                    }}
+                    onClick={handleShare}
+                  >
+                    <img
+                      src={shareIcon}
+                      alt="테스트 공유"
+                      style={{ width: 22, height: 22
+
+                       }}
+                    />
+                    <span
+                      style={{
+                        fontSize: 23,
+                        fontWeight: 600,
+                        color: "#000",
+                        marginTop: "5px",
+                      }}
+                    >
+                      공유하기
+                    </span>
+                  </div>
+
+                              </div>
 
 
             </div>
+            
           </div>
         ) : (
           <p>결과 불러오는 중...</p>
@@ -374,7 +534,7 @@ export default function TestResultPage() {
           style={{
             border: "1px solid #D9D9D9",
             width: 354,
-            marginTop: 150,
+            marginTop: 180,
             marginBottom: 50,
           }}
         />
@@ -551,6 +711,42 @@ export default function TestResultPage() {
           </p>
         </div>
       </div>
+      <style>
+        {`
+        @keyframes flipPreview {
+          0% {
+            transform: rotateY(0deg);
+          }
+          35% {
+            transform: rotateY(180deg);
+          }
+          60% {
+            transform: rotateY(180deg);
+          }
+          100% {
+            transform: rotateY(0deg);
+          }
+        }
+
+       @keyframes tapHint {
+        0%   { transform: translateY(0); }
+        15%  { transform: translateY(6px); }
+        30%  { transform: translateY(0); }
+
+        45%  { transform: translateY(6px); }
+        60%  { transform: translateY(0); }
+
+        75%  { transform: translateY(6px); }
+        90%  { transform: translateY(0); }
+
+        100% { transform: translateY(0); }
+      }
+
+        `}
+        </style>
     </div>
+    
   );
 }
+
+
