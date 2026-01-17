@@ -151,6 +151,30 @@ export default function RoombtiTest() {
         }
       }, [step]);
 
+  const handlePrev = () => {
+    if (step === 0) return; // 첫 질문이면 막기
+
+    const prevStep = step - 1;
+    const prevQuestion = questions[prevStep];
+    const prevAnswer = choices[prevQuestion.question_id];
+
+    setStep(prevStep);
+
+    // 이전에 선택했던 옵션 index 복구
+    if (prevAnswer) {
+      const prevIndex = prevQuestion.questionoption.findIndex(
+        (opt) => opt.option_id === prevAnswer
+      );
+      setSelected(prevIndex);
+    } else {
+      setSelected(null);
+    }
+
+    // 혹시 마지막 질문에서 돌아오는 경우 submit 상태 해제
+    setSubmitted(false);
+  };
+
+
   
 
   // ===================== 제출 & 결과 계산 =====================
@@ -330,7 +354,14 @@ export default function RoombtiTest() {
     >
       {/* 뒤로가기 아이콘 */}
       <svg
-        onClick={() => navigate("/")}
+        // onClick={() => navigate("/")}
+        onClick={() => {
+          if (step === 0) {
+            navigate("/");
+          } else {
+            handlePrev();
+          }
+        }}
         width={14}
         height={16}
         viewBox="0 0 14 16"
