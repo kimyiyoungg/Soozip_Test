@@ -381,6 +381,30 @@ export default function RoombtiTest() {
         />
       </svg>
 
+      <div
+        style={{
+          width: "60px",
+          height: "25px",
+          borderRadius: 12,
+          background: "#000",
+          border: "1px solid #ddd9d9",
+          color: "#fff",
+          fontWeight: 600,
+          fontSize: 16,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          position: "absolute",
+          right: "38.5px",
+          top: "67.5px",
+          cursor: "pointer",
+        }}
+        onClick={() => setStep(0)}
+      >
+        처음으로
+      </div>
+
+
       {/* 진행바 */}
       <div
         style={{
