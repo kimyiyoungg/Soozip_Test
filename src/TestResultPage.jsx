@@ -40,8 +40,8 @@ export default function TestResultPage() {
   const myInteriorImage =
     state?.myInteriorImage || localStorage.getItem("myInteriorImage");
 
-  console.log("받은 session_id:", session_id);
-  console.log("받은 myInteriorImage:", myInteriorImage);
+  // console.log("받은 session_id:", session_id);
+  // console.log("받은 myInteriorImage:", myInteriorImage);
 
 
   // myInterior 값에 따른 텍스트 정의
