@@ -721,6 +721,7 @@ export default function TestResultPage() {
             cursor: "pointer",
           }}
           onClick={() => navigate("/room-counsult")}
+          
         >
           <p style={{ fontSize: 20, color: "#fff" }}>
             홈스타일링 상담 알아보기
